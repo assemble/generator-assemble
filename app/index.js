@@ -1,65 +1,24 @@
-'use strict';
-var util = require('util');
-var path = require('path');
-var yeoman = require('yeoman-generator');
+var fs = require('fs');
 
+var Generator = module.exports = function() {
+  var package = require(this.sourceRoot() + '/package.json');
+  var prompts = [];
+  var files   = this.expandFiles('**/*', { cwd: this.sourceRoot(), dot: true });
+  var ignores = [
+    '.git',
+    'LICENSE',
+    'README.md',
+  ];
 
-var AssembleGenerator = module.exports = function AssembleGenerator(args, options, config) {
-  yeoman.generators.Base.apply(this, arguments);
+  this.log.writeln('Generating from ' + 'Yeoman Assembler'.cyan + ' v' + package.version.cyan + '...');
 
-  this.on('end', function () {
-    this.installDependencies({ skipInstall: options['skip-install'] });
-  });
-
-  this.pkg = JSON.parse(this.readFileAsString(path.join(__dirname, '../package.json')));
-};
-
-util.inherits(AssembleGenerator, yeoman.generators.NamedBase);
-
-AssembleGenerator.prototype.askFor = function askFor() {
-  var cb = this.async();
-
-  // welcome message
-  var welcome =
-  '\n     _-----_' +
-  '\n    |       |' +
-  '\n    |' + '--(o)--'.red + '|   .--------------------------.' +
-  '\n   `---------´  |    ' + 'Welcome to Yeoman,'.yellow.bold + '    |' +
-  '\n    ' + '( '.yellow + '_' + '´U`'.yellow + '_' + ' )'.yellow + '   |   ' + 'ladies and gentlemen!'.yellow.bold + '  |' +
-  '\n    /___A___\\   \'__________________________\'' +
-  '\n     |  ~  |'.yellow +
-  '\n   __' + '\'.___.\''.yellow + '__' +
-  '\n ´   ' + '`  |'.red + '° ' + '´ Y'.red + ' `\n';
-
-  console.log(welcome);
-
-  var prompts = [{
-    name: 'someOption',
-    message: 'Would you like to enable this option?',
-    default: 'Y/n',
-    warning: 'Yes: Enabling this will be totally awesome!'
-  }];
-
-  this.prompt(prompts, function (err, props) {
-    if (err) {
-      return this.emit('error', err);
+  files.forEach(function(file) {
+    if (ignores.indexOf(file) !== -1) {
+      return;
     }
 
-    this.someOption = (/y/i).test(props.someOption);
-
-    cb();
-  }.bind(this));
+    this.copy(file, file);
+  }, this);
 };
 
-AssembleGenerator.prototype.app = function app() {
-  this.mkdir('app');
-  this.mkdir('app/templates');
-
-  this.copy('_package.json', 'package.json');
-  this.copy('_component.json', 'component.json');
-};
-
-AssembleGenerator.prototype.projectfiles = function projectfiles() {
-  this.copy('editorconfig', '.editorconfig');
-  this.copy('jshintrc', '.jshintrc');
-};
+Generator.name = "Yeoman Assembler";

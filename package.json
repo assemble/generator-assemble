@@ -3,7 +3,13 @@
   "version": "0.0.0",
   "description": "Yeoman generator for Assemble",
   "keywords": [
-    "yeoman-generator"
+    "yeoman-generator",
+    "framework",
+    "component",
+    "assemble",
+    "ui",
+    "css",
+    "less"
   ],
   "homepage": "https://github.com/hariadi/generator-assemble",
   "bugs": "https://github.com/hariadi/generator-assemble/issues",
