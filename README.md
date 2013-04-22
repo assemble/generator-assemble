@@ -7,7 +7,8 @@ Yeoman generator for Assemble.
 - Make sure you have [yo](https://github.com/yeoman/yo) installed:
     `npm install -g yo`
 - Install the generator **locally**: `npm install generator-assemble`
-- Run: `yo assemble`
+- `git submodule add https://github.com/assemble/assemble-examples-basic.git app/templates`
+- Run: `yo assemble:app`
 
 ## License
 [MIT License](http://en.wikipedia.org/wiki/MIT_License)
