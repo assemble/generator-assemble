@@ -1,5 +1,5 @@
 # Generator assemble
-[![Build Status](https://travis-ci.org/hariadi/generator-assemble.png?branch=dev)](https://travis-ci.org/hariadi/generator-assemble)
+[![Build Status](https://travis-ci.org/hariadi/generator-assemble.png)](https://travis-ci.org/hariadi/generator-assemble)
 
 Yeoman generator for Assemble.
 
