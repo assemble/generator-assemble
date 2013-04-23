@@ -6,7 +6,7 @@ var Generator = module.exports = function() {
   var files   = this.expandFiles('**/*', { cwd: this.sourceRoot(), dot: true });
   var ignores = [
     '.git',
-    'LICENSE',
+    'LICENSE-MIT',
     'README.md',
   ];
 

@@ -23,7 +23,10 @@ describe('assemble generator', function () {
     var expected = [
       // add files you expect to exist here.
       '.jshintrc',
-      '.editorconfig'
+      '_config.yml',
+      'Gruntfile.js',
+      'dist',
+      'src'
     ];
 
     helpers.mockPrompt(this.app, {
