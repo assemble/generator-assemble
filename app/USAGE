@@ -1,0 +1,13 @@
+Description:
+    Creates simple Assemble framework and choose between several flavors of Jekyll, Bootstrap including SASS, LESS, CSS..
+
+Options:
+    Twitter Bootstrap: SOON
+    RequireJS: SOON
+
+Example:
+    git submodule update --init 
+    yo assemble:app
+
+    This will create:
+        Clone Assemble basic example into app/template
