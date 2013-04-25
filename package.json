@@ -1,6 +1,6 @@
 {
   "name": "generator-assemble",
-  "version": "0.0.0",
+  "version": "0.1.2",
   "description": "Yeoman generator for Assemble",
   "keywords": [
     "yeoman-generator",
@@ -16,7 +16,7 @@
   "author": {
     "name": "hariadi",
     "email": "diperakui@gmail.com",
-    "url": "https://github.com/hariadi"
+    "url": "http://hariadi.org"
   },
   "main": "app/index.js",
   "repository": {
@@ -30,9 +30,7 @@
     "yeoman-generator": "~0.10.2"
   },
   "devDependencies": {
-    "mocha": "~1.9.0",
-    "grunt": "~0.4.1",
-    "grunt-release": "~0.3.3"
+    "mocha": "~1.9.0"
   },
   "engines": {
     "node": ">=0.8.0"
