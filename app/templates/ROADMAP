@@ -1,0 +1,9 @@
+v1.0.0:
+  eta: "Stardate 45047.2"
+  goals:
+    - Visit the uninhabited El-Adrel system. 
+    - Overcome social anxiety.
+v0.3.0:
+  eta: "2013-05-01"
+  goals:
+    - Use section helpers.

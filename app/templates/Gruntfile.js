@@ -1,6 +1,8 @@
 /*
- * assemble-jekyll
- * https://github.com/hariadi/
+ * Generated on <%= (new Date).toISOString().split('T')[0] %>  
+ *
+ * <%= pkg.name %> <%= pkg.version %>
+ * https://github.com/hariadi/generator-assemble
  *
  * Copyright (c) 2013 Hariadi Hinta
  * Licensed under the MIT license.
@@ -16,17 +18,16 @@ module.exports = function(grunt) {
 
     assemble: {
       options: {
-        assets: 'dist/assets',
-        //layout: 'src/templates/layouts/default.hbs',
-        partials: 'src/templates/partials/*.hbs',
         flatten: true,
+        assets: 'dist/assets',
+        layout: 'src/templates/layouts/default.hbs',
+        partials: 'src/templates/partials/*.hbs',
         data: 'src/data/*.{json,yml}'
       },
       pages: {
         files: {
-          'dist/': ['src/templates/pages/*.hbs'],
-          'dist/_include/': ['src/templates/pages/_includes/*.hbs'],
-          'dist/_layouts/': ['src/templates/pages/_layouts/*.hbs']
+          'dist/': ['src/templates/pages/*.hbs', '!**/index.hbs'],
+          './': ['src/templates/pages/index.hbs']
         }        
       }
     },
@@ -35,7 +36,7 @@ module.exports = function(grunt) {
     // remove any previously-created files.
     clean: {
       dest: {
-        src: [ 'dist/**/*.html' ]
+        pages: ['dist/*.html', 'index.html']
       }
     }
   });

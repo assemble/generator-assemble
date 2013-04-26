@@ -1,7 +1,0 @@
-node_modules
-npm-debug.log
-_site
-
-tmp
-*.sublime-project
-*.sublime-workspace

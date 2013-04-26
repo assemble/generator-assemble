@@ -1,5 +1,5 @@
 {
-  "strong": "External data example.",
+  "strong": "External data worked!",
   "modifier": "alert-info",
-  "message": "This alert was assembled from a partial and YAML data fron in './src/data/`"
+  "message": "You can find the data for this alert in the './src/data/` dir."
 }

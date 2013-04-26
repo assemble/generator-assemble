@@ -1,0 +1,21 @@
+v0.2.2:
+  date: "2013-04-19"
+  changes:
+    - Update repo description.
+v0.2.1:
+  date: "2013-04-18"
+  changes:
+    - Completely refactored. New custom helpers, examples and documentation.
+v0.1.2:
+  date: "2013-03-02"
+  changes:
+    - Changelog templates now add history to README
+v0.1.1:
+  date: "2013-03-01"
+  changes:
+    - Adds README example.
+    - Uses templates/data and partials for sections.
+v0.1.0:
+  date: "2013-02-28"
+  changes:
+    - First commit.
