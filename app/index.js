@@ -79,7 +79,7 @@ AssembleGenerator.prototype.packageJSON = function packageJSON() {
   this.template('_package.json', 'package.json');
 };
 
-AssembleGenerator.prototype.writeGruntFile = function writeGruntFile() {
+AssembleGenerator.prototype.gruntFile = function gruntFile() {
   this.copy('Gruntfile.js', 'Gruntfile.js');
 };
 
@@ -92,14 +92,14 @@ AssembleGenerator.prototype.common = function common() {
   this.copy('common/robots.txt', 'dist/robots.txt');
 };
 
-AssembleGenerator.prototype.writeSitemapConfig = function writeSitemapConfig() {
+AssembleGenerator.prototype.writeSitemapGruntfile = function writeSitemapGruntfile() {
   // TODO: Update Gruntfile - assemble-example-sitemap
   if (this.sitemap) {
     console.info('Updating Gruntfile with sitemap features configuration');
   }
 };
 
-AssembleGenerator.prototype.readmeGruntfile = function readmeGruntfile() {
+AssembleGenerator.prototype.writeReadmeGruntfile = function writeReadmeGruntfile() {
   // TODO: Update Gruntfile - assemble-example-readme
   if (this.readme) {
     //this.write('Gruntfile.js',
