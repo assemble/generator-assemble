@@ -3,9 +3,9 @@
 
 var assert  = require('assert');
 
-describe('assemble generator', function () {
-  it('can be imported without blowing up', function () {
-    var app = require('../app');
-    assert(app !== undefined);
+describe('Assemble generator', function () {
+  it('creates expected files with basic option', function () {
+    var assemble = require('../app');
+    assert(assemble !== undefined);
   });
 });

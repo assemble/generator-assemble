@@ -1,6 +1,5 @@
 /*
  * Generated on <%= (new Date).toISOString().split('T')[0] %>  
- *
  * <%= pkg.name %> <%= pkg.version %>
  * https://github.com/hariadi/generator-assemble
  *
@@ -10,6 +9,12 @@
 
 'use strict';
 
+// # Globbing
+// for performance reasons we're only matching one level down:
+// 'src/templates/pages/{,*/}*.hbs'
+// use this if you want to match all subfolders:
+// 'src/templates/pages/**/*.hbs'
+
 module.exports = function(grunt) {
 
   // Project configuration.
@@ -17,28 +22,39 @@ module.exports = function(grunt) {
     pkg: grunt.file.readJSON('package.json'),
 
     assemble: {
-      options: {
-        flatten: true,
-        assets: 'dist/assets',
-        layout: 'src/templates/layouts/default.hbs',
-        partials: 'src/templates/partials/*.hbs',
-        data: 'src/data/*.{json,yml}'
-      },
-      pages: {
+      
+      // Global configuration
+      options: grunt.file.readYAML('config/global.yml'),
+      
+      site: {
+        options: grunt.file.readYAML('config/site.yml'),
+        src:  'src/templates/pages/{,*/}*.hbs',
+        dest: 'dist/'
+      }<% if (includeReadMe) { %>,
+      
+      readme: {
+        options: grunt.file.readYAML('config/readme.yml'),
+        src:  'src/templates/readme.md.hbs',
+        dest: 'dist/'
+      }<% } %><% if (includeSitemap) { %>,
+      
+      sitemap: {
+        options: grunt.file.readYAML('config/sitemap.yml'),
         files: {
-          'dist/': ['src/templates/pages/*.hbs', '!**/index.hbs'],
-          './': ['src/templates/pages/index.hbs']
-        }        
-      }
+          'dist/sitemap.xml': ['src/templates/sitemap.hbs']
+        }
+      }<% } %><
+      
     },
 
     // Before generating any new files, 
     // remove any previously-created files.
     clean: {
       dest: {
-        pages: ['dist/*.html', 'index.html']
+        pages: ['dist/{,*/}*.html']
       }
     }
+    
   });
 
   // Load npm plugins to provide necessary tasks.

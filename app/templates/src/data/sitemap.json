@@ -1,0 +1,44 @@
+{
+  "domain": "https://github.com/assemble/assemble",
+  "lastmod": { "year": "2013", "month": "01", "day": "24" },
+  "filetype": "html",
+
+  "pages": [
+    {
+      "page": "home",
+      "update-frequency": "monthly",
+      "lastmod": { "year": "2013", "month": "01", "day": "24" },
+      "priority": "1"
+    },
+    {
+      "page": "about",
+      "update-frequency": "monthly",
+      "lastmod": {"year": "2013", "month": "01", "day": "24" },
+      "priority": "1"
+    },
+    {
+      "page": "portfolid",
+      "update-frequency": "monthly",
+      "lastmod": { "year": "2013", "month": "01", "day": "24" },
+      "priority": "1"
+    },
+    {
+      "page": "contact",
+      "update-frequency": "monthly",
+      "lastmod": { "year": "2013", "month": "01", "day": "24" },
+      "priority": "1"
+    },
+    {
+      "page": "legal",
+      "update-frequency": "monthly",
+      "lastmod": {"year": "2013", "month": "01", "day": "24" },
+      "priority": "1"
+    },
+    {
+      "page": "blog",
+      "update-frequency": "monthly",
+      "lastmod": { "year": "2013", "month": "01", "day": "24" },
+      "priority": "1"
+    }
+  ]
+}

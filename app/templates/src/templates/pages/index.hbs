@@ -1,17 +1,5 @@
----
-title: Home
-wiki: https://github.com/assemble/assemble/wiki/YAML-Front-Matter
----
-<div class="page-header">
-  <h1>{{ title }}</h1>
-</div>
-
-<p>In this example, at the top of each page you can use 
-  <a href="{{ wiki }}">YAML Front-Matter</a> for providing metadata and configuration data for the page
-</p>
-
-{{! content from the path specified }}
-{{{md 'src/content/code.md'}}}
+{{! grab the readme, turn it into HTML }}
+{{{md 'README.md'}}}
 
 
 

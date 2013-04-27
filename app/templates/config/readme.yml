@@ -1,4 +1,6 @@
 ---
+partials: src/templates/partials/readme/{,*/}*.hbs
+ext: ""
 username: <%= _.strLeft(pkg.name, "-") %>
 today: <%= grunt.template.today() %>
 travis: true
