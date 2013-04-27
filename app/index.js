@@ -44,8 +44,6 @@ AssembleGenerator.prototype.askFor = function askFor() {
     default: 'Y/n',
     warning: 'Yes: README config and files will be placed into the project directory.'
   }];
-  
-  
 
   this.prompt(prompts, function (err, props) {
     if (err) {
@@ -79,7 +77,7 @@ AssembleGenerator.prototype.packageJSON = function packageJSON() {
   this.template('_package.json', 'package.json');
 };
 
-AssembleGenerator.prototype.gruntFile = function gruntFile() {
+AssembleGenerator.prototype.writeGruntFile = function writeGruntFile() {
   this.copy('Gruntfile.js', 'Gruntfile.js');
 };
 
@@ -92,14 +90,14 @@ AssembleGenerator.prototype.common = function common() {
   this.copy('common/robots.txt', 'dist/robots.txt');
 };
 
-AssembleGenerator.prototype.writeSitemapGruntfile = function writeSitemapGruntfile() {
+AssembleGenerator.prototype.optionSitemap = function optionSitemap() {
   // TODO: Update Gruntfile - assemble-example-sitemap
   if (this.sitemap) {
     console.info('Updating Gruntfile with sitemap features configuration');
   }
 };
 
-AssembleGenerator.prototype.writeReadmeGruntfile = function writeReadmeGruntfile() {
+AssembleGenerator.prototype.optionReadme = function optionReadme() {
   // TODO: Update Gruntfile - assemble-example-readme
   if (this.readme) {
     //this.write('Gruntfile.js',

@@ -33,7 +33,7 @@ describe('assemble generator', function () {
     ];
 
     helpers.mockPrompt(this.app, {
-      'someOption': 'Y'
+      'readme': 'Y'
     });
 
     this.app.run({}, function () {
