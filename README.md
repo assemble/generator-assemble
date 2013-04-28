@@ -10,7 +10,7 @@ Yeoman generator for Assemble.
 - Make sure you have [yo](https://github.com/yeoman/yo) installed:
     `npm install -g yo`
 - Install the generator ***locally***: 
-    `npm install https://github.com/hariadi/generator-assemble.git`
+    `npm install generator-assemble`
 - Clone submodule:
     `git submodule add update --init`
 - Run: 
