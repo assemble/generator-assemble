@@ -3,16 +3,12 @@
 
 Yeoman generator for Assemble.
 
-**NOTE**: Currently the code here is probably dirty and various things may change.
-
 ## Getting started
 - `mkdir project && cd project`
 - Make sure you have [yo](https://github.com/yeoman/yo) installed:
     `npm install -g yo`
 - Install the generator ***locally***: 
     `npm install generator-assemble`
-- Clone submodule:
-    `git submodule add update --init`
 - Run: 
     `yo assemble`
 
