@@ -2,17 +2,16 @@
 'use strict';
 var path    = require('path');
 var helpers = require('yeoman-generator').test;
-var assert  = require('assert');
-
 
 describe('Assemble generator', function () {
+  var assemble;
   beforeEach(function (done) {
     helpers.testDirectory(path.join(__dirname, 'temp'), function (err) {
       if (err) {
         return done(err);
       }
 
-      this.assemble = helpers.createGenerator('assemble:app', [
+      assemble = helpers.createGenerator('assemble:app', [
         '../../app'
       ]);
       done();
@@ -45,12 +44,12 @@ describe('Assemble generator', function () {
       'src/data/sitemap.json'
     ];
 
-    helpers.mockPrompt(this.assemble, {
+    helpers.mockPrompt(assemble, {
       'includeReadMe': 'Y',
       'includeSitemap': 'Y'
     });
-    this.assemble.options['skip-install'] = true;
-    this.assemble.run({}, function () {
+    assemble.options['skip-install'] = true;
+    assemble.run({}, function () {
       helpers.assertFiles(expected);
       done();
     });

@@ -1,7 +1,14 @@
 # Generator assemble
 [![Build Status](https://travis-ci.org/hariadi/generator-assemble.png)](https://travis-ci.org/hariadi/generator-assemble)
 
-Yeoman generator for Assemble.
+> [Yeoman][yeoman] generator for [Assemble][assemble].
+
+**Table of Contents**
+
+- [Generator assemble](#generator-assemble)
+	- [Getting started](#getting-started)
+	- [Roadmap](#roadmap)
+	- [License](#license)
 
 ## Getting started
 - `mkdir project && cd project`
@@ -24,3 +31,6 @@ Yeoman generator for Assemble.
 
 ## License
 [MIT License](http://en.wikipedia.org/wiki/MIT_License)
+
+[yeoman]: http://yeoman.io/
+[assemble]: https://github.com/assemble/assemble/
