@@ -38,7 +38,6 @@ AssembleGenerator.prototype.askFor = function askFor() {
     '\n   __'+'\'.___.\''.yellow+'__' +'       '+'Assemble Generators'.yellow.bold+
     '\n ´   '+'`  |'.red+'° '+'´ Y'.red+' `\n' + separator.yellow + '\n'+ assembleInfo +'\n'.red.bold + separator.yellow;
     console.log(welcome);
-
   }
   
   var prompts = [{

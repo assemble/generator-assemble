@@ -1,2 +1,5 @@
 node_modules/
 temp/
+src/
+Gruntfile.js
+.jshintrc
