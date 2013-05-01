@@ -14,38 +14,41 @@ var AssembleGenerator = module.exports = function AssembleGenerator(args, option
   this.on('end', function () {
     this.installDependencies({ skipInstall: options['skip-install'] });
   });
-  
+  this.option('silent', { type: Boolean, required: false });
 };
 
 util.inherits(AssembleGenerator, yeoman.generators.NamedBase);
 
 AssembleGenerator.prototype.askFor = function askFor() {
   var cb = this.async();
+  
+  if(!this.options.silent){
 
-  // welcome message
-  var welcome =
-  '\n     _-----_' +
-  '\n    |       |' +
-  '\n    |' + '--(o)--'.red + '|   .--------------------------.' +
-  '\n   `---------´  |    ' + 'Welcome to Yeoman,'.yellow.bold + '    |' +
-  '\n    ' + '( '.yellow + '_' + '´U`'.yellow + '_' + ' )'.yellow + '   |   ' + 'ladies and gentlemen!'.yellow.bold + '  |' +
-  '\n    /___A___\\   \'__________________________\'' +
-  '\n     |  ~  |'.yellow +
-  '\n   __' + '\'.___.\''.yellow + '__' +
-  '\n ´   ' + '`  |'.red + '° ' + '´ Y'.red + ' `\n' +
-  '\n' +
-  '\n' + separator.yellow + '\nAssemble\n'.red.bold + separator.yellow +
-  '\nThis task will create one or more files in the current directory, ' +
-  'based on the environment and the answers to a few questions. ';
+    var assembleInfo = 'This task will create one or more files in the\n' +
+                        'current directory, based on the environment\n' +
+                        'and the answers to a few questions.';
+    var welcome =
+    '\n     _-----_' +
+    '\n    |       |' +
+    '\n    |'+'--(o)--'.red+'|   .--------------------------.' +
+    '\n   `---------´  |    '+'Welcome to Yeoman,'.yellow.bold+'    |' +
+    '\n    '+'( '.yellow+'_'+'´U`'.yellow+'_'+' )'.yellow+'   |   '+'ladies and gentlemen!'.yellow.bold+'  |' +
+    '\n    /___A___\\   \'__________________________\'' +
+    '\n     |  ~  |'.yellow +
+    '\n   __'+'\'.___.\''.yellow+'__' +'       '+'Assemble Generators'.yellow.bold+
+    '\n ´   '+'`  |'.red+'° '+'´ Y'.red+' `\n' + separator.yellow + '\n'+ assembleInfo +'\n'.red.bold + separator.yellow;
+    console.log(welcome);
+
+  }
   
   var prompts = [{
     name: 'includeReadMe',
-    message: 'Would you like to include automatic Assemble README configuration?',
+    message: 'Would you like to include Assemble README configuration?',
     default: 'Y/n',
     warning: 'Yes: README config and files will be placed into the project directory.'
   }, {
     name: 'includeSitemap',
-    message: 'Would you like to include automatic Assemble Sitemap configuration?',
+    message: 'Would you like to include Assemble Sitemap configuration?',
     default: 'Y/n',
     warning: 'Yes: Sitemap config and files will be placed into the project directory.'
   }];

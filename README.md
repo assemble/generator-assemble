@@ -18,6 +18,17 @@
     `npm install generator-assemble`
 - Run: 
     `yo assemble`
+    
+## Options
+
+* `--skip-install`
+
+  Skips the automatic execution of `bower` and `npm` after
+  scaffolding has finished.
+
+* `--silent`
+
+  Skips welcome message.
 
 ## Roadmap
 - Assemble options and features:
