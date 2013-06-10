@@ -43,7 +43,7 @@ module.exports = function(grunt) {
         files: {
           'dist/sitemap.xml': ['src/templates/sitemap.hbs']
         }
-      }<% } %><
+      }<% } %>
       
     },
 
