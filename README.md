@@ -7,18 +7,20 @@
 
 - [Generator assemble](#generator-assemble)
 	- [Getting started](#getting-started)
-	- [Roadmap](#roadmap)
+	- [Options](#options)
 	- [License](#license)
+
 
 ## Getting started
 - `mkdir project && cd project`
 - Make sure you have [yo](https://github.com/yeoman/yo) installed:
     `npm install -g yo`
-- Install the generator ***locally***: 
+- Install the generator ***locally***:
     `npm install generator-assemble`
-- Run: 
+- Run:
     `yo assemble`
-    
+
+
 ## Options
 
 * `--skip-install`
@@ -30,15 +32,6 @@
 
   Skips welcome message.
 
-## Roadmap
-- Assemble options and features:
-  - Engine
-  - Helper
-  - Example project:
-    - assemble-examples-basic
-    - assemble-examples-readme
-    - assemble-examples-sitemap
-- Grunt task
 
 ## License
 [MIT License](http://en.wikipedia.org/wiki/MIT_License)

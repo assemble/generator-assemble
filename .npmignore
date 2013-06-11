@@ -5,5 +5,4 @@
 .gitattributes
 test
 src/
-./Gruntfile.js
 .jshintrc
