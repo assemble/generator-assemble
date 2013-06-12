@@ -1,9 +1,0 @@
-# Metadata
-component:
-  name: <%= pkg.name %>
-  description: <%= pkg.description %>
-
-# Assemble Options 
-flatten: true
-data: src/sitemap.json
-ext: .xml

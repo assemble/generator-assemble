@@ -1,4 +1,0 @@
-flatten: true,
-assets: dist/assets
-partials: src/templates/partials/{,*/}*.hbs
-data: src/data/*.{json,yml}

@@ -2,6 +2,4 @@ node_modules/
 temp/
 *.sublime-project
 *.sublime-workspace
-src/
-Gruntfile.js
 .jshintrc

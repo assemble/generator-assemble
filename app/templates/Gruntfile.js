@@ -1,9 +1,9 @@
 /*
  * Generated on <%= (new Date).toISOString().split('T')[0] %>
  * <%= pkg.name %> <%= pkg.version %>
- * https://github.com/hariadi/generator-assemble
+ * <%= pkg.homepage %>
  *
- * Copyright (c) 2013 Hariadi Hinta
+ * Copyright (c) <%= (new Date).getFullYear() %> <%= pkg.author.name %>
  * Licensed under the MIT license.
  */
 
@@ -23,48 +23,69 @@ module.exports = function(grunt) {
 
     assemble: {
       // Global configuration
-      options: grunt.file.readYAML('config/global.yml'),
+      options: {
+        assets: 'dist/assets',
+        data: 'src/data/*.{json,yml}',
+        partials: [
+          'src/templates/partials/{,*/}*.hbs',
+          'src/content/*.hbs'
+        ],
+        registerFunctions: function(engine) {
+          var helpers = require('./helper/helpers');
+          engine.engine.registerFunctions(helpers);
+        }
+      },
 
       site: {
-        options: grunt.file.readYAML('config/site.yml'),
-        src:  'src/templates/pages/{,*/}*.hbs',
-        dest: 'dist/'
+        options: {
+          flatten: true,
+          layout: 'src/templates/layouts/default.hbs'
+        },
+        files: [
+          {
+            expand: true,
+            cwd: 'src/templates/pages',
+            src: ['*.hbs', '!index.hbs'],
+            dest: 'dist/'
+          },
+          {
+            expand: true,
+            cwd: 'src/templates/pages',
+            src: ['index.hbs'],
+            dest: './' }
+        ]
       }<% if (includeReadMe) { %>,
 
       readme: {
-        options: grunt.file.readYAML('config/readme.yml'),
+         options: {
+          flatten: true,
+          partials: 'src/templates/partials/readme/{,*/}*.hbs',
+          data: './package.json',
+          ext: ''
+        },
         src:  'src/templates/readme.md.hbs',
         dest: 'dist/'
       }<% } %><% if (includeSitemap) { %>,
 
       sitemap: {
-        options: grunt.file.readYAML('config/sitemap.yml'),
+        options: {
+          component: {
+            name: 'generator-assemble',
+            description: 'Yeoman generator for Assemble'
+          },
+          ext: '.xml',
+          data: 'src/sitemap.json',
+          flatten: true
+        },
         files: {
           'dist/sitemap.xml': ['src/templates/sitemap.hbs']
         }
-      }<% } %>,
-
-      helpers: {
-        options: {
-          flatten: true,
-          registerFunctions: function(engine) {
-            var helpers = require('./helper/custom-helpers');
-            engine.engine.registerFunctions(helpers);
-          }
-        },
-        files: [
-          { expand: true, cwd: 'src/templates/custom-helpers', src: ['helpers.hbs'], dest: 'dist/' }
-        ]
-      }
+      }<% } %>
     },
 
     // Before generating any new files,
     // remove any previously-created files.
-    clean: {
-      dest: {
-        pages: ['dist/{,*/}*.html']
-      }
-    }
+    clean: ['dist/**/*.{html,xml}']
 
   });
 

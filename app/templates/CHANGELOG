@@ -1,7 +1,7 @@
 v0.2.1:
   date: "2013-06-12"
   changes:
-    - Completely refactored. New custom helpers, examples and documentation.
+    - Update Assemble example basic, custom helpers, examples and documentation.
     - Update repo description.
 v0.1.1:
   date: "2013-03-01"
