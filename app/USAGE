@@ -2,12 +2,11 @@ Description:
     Creates simple Assemble framework and choose between several flavors of Jekyll, Bootstrap including SASS, LESS, CSS..
 
 Options:
-    README: SOON
-    Sitemap: SOON
+    README: Include Assemble to generate a markdown README
+    Sitemap: Include Assemble to generate .xml sitemap
 
 Example:
-    git submodule update --init 
     yo assemble
 
     This will create:
-        Generating Assemble basic example
+        Generating Assemble basic task
