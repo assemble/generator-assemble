@@ -7,17 +7,26 @@ See more [assemble examples][assemble-examples].
 ## Getting started
 {{> getting-started.md }}
 
-## The "assemble" task
+
+## Documentation
 {{> documentation.md }}
+
+
+## Configuration
+{{> configuration.md }}
+
 
 ## Contributing
 {{> contributing.md }}
 
+
 ## Authors
 {{ authors }}
 
+
 ## Release History
 {{ changelog }}
+
 
 ## Roadmap
 {{ roadmap }}
