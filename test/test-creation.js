@@ -72,7 +72,7 @@ describe('Assemble generator', function () {
       'src/templates/sitemap.hbs'
     ];
 
-    mockPrompt(this.app, {
+    helpers.mockPrompt(this.app, {
       'includeReadMe': 'Yes',
       'includeSitemap': 'Yes'
     });
