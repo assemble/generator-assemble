@@ -21,15 +21,12 @@ module.exports = function(grunt) {
       options: {
         jshintrc: '.jshintrc',
       }
-    },
-
-    clean: ['test/temp/**']
+    }
 
   });
 
   // These plugins provide necessary tasks.
   grunt.loadNpmTasks("grunt-contrib-jshint");
-  grunt.loadNpmTasks('grunt-contrib-clean');
 
   // By default, lint and run all tests.
   grunt.registerTask('default', ['jshint']);

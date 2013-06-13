@@ -30,8 +30,7 @@
     "yeoman-generator": "~0.10.5"
   },
   "devDependencies": {
-    "mocha": "~1.11.0",
-    "grunt-contrib-clean": "~0.4.0"
+    "mocha": "~1.11.0"
   },
   "engines": {
     "node": ">=0.8.0"
