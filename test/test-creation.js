@@ -24,7 +24,6 @@ describe('Assemble generator', function () {
     var expected = [
       // add files you expect to exist here.
       '.gitignore',
-      '.gitattributes',
       '.editorconfig',
       'Gruntfile.js',
       'package.json',
@@ -73,8 +72,8 @@ describe('Assemble generator', function () {
     ];
 
     helpers.mockPrompt(this.app, {
-      'includeReadMe': 'Yes',
-      'includeSitemap': 'Yes'
+      'includeReadMe': 'Y',
+      'includeSitemap': 'Y'
     });
 
     //this.app.checkInstallation = function () {};
