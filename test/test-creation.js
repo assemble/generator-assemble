@@ -15,12 +15,12 @@ describe('Assemble generator', function () {
       this.app = helpers.createGenerator('assemble:app', [
         '../../app'
       ]);
-      this.app.options['skip-install'] = true;
+
       done();
     }.bind(this));
   });
 
-  it('creates expected files with all option [readme, sitemap]' , function (done) {
+  it('creates expected files with all option' , function (done) {
     var expected = [
       // add files you expect to exist here.
       '.gitignore',
@@ -72,11 +72,14 @@ describe('Assemble generator', function () {
       'src/templates/sitemap.hbs'
     ];
 
-    helpers.mockPrompt(this.app, {
-      'includeReadMe': 'Y',
-      'includeSitemap': 'Y'
+    mockPrompt(this.app, {
+      'includeReadMe': 'Yes',
+      'includeSitemap': 'Yes'
     });
 
+    //this.app.checkInstallation = function () {};
+
+    this.app.options['skip-install'] = true;
     this.app.run({}, function () {
       helpers.assertFiles(expected);
       done();

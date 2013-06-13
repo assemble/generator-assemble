@@ -16,12 +16,42 @@ var AssembleGenerator = module.exports = function AssembleGenerator(args, option
     this.installDependencies({ skipInstall: options['skip-install'] });
   });
   this.option('silent', { type: Boolean, required: false });
+
+  this.files = this.expandFiles('**/*', { cwd: this.sourceRoot(), dot: true });
+
+  this.dotfiles = [
+    'editorconfig',
+    'gitignore',
+    'jshintrc'
+  ];
+
+  this._files = [ '_package.json' ];
+
+  this.readmefiles = [
+    'AUTHORS',
+    'CHANGELOG',
+    'ROADMAP',
+    'src/templates/readme.md.hbs',
+    'src/templates/partials/readme/contributing.md.hbs',
+    'src/templates/partials/readme/options.md.hbs',
+    'src/templates/partials/readme/documentation.md.hbs',
+    'src/templates/partials/readme/footer.md.hbs',
+    'src/templates/partials/readme/getting-started.md.hbs'
+  ];
+
+  this.sitemapfiles = [
+    'src/data/sitemap.json',
+    'src/templates/sitemap.hbs'
+  ];
+
+  this.ignores = this.dotfiles.concat(this._files, this.readmefiles, this.sitemapfiles, this.gruntfiles);
+
 };
 
 util.inherits(AssembleGenerator, yeoman.generators.NamedBase);
 
 AssembleGenerator.prototype.askFor = function askFor() {
-  var cb = this.async();
+  var done = this.async();
 
   if(!this.options.silent){
 
@@ -53,64 +83,33 @@ AssembleGenerator.prototype.askFor = function askFor() {
     default: true
   }];
 
-  this.files = this.expandFiles('**/*', { cwd: this.sourceRoot(), dot: true });
+  this.prompt(prompts, function (props) {
 
-  this.dotfiles = [
-    'editorconfig',
-    'gitattributes',
-    'gitignore',
-    'jshint'
-  ];
+    this.includeReadMe = props.includeReadMe;
+    this.includeSitemap = props.includeSitemap;
 
-  this._files = [ '_package.json' ];
-
-  this.readmefiles = [
-    'AUTHORS',
-    'CHANGELOG',
-    'ROADMAP',
-    'src/templates/readme.md.hbs',
-    'src/templates/partials/readme/contributing.md.hbs',
-    'src/templates/partials/readme/options.md.hbs',
-    'src/templates/partials/readme/documentation.md.hbs',
-    'src/templates/partials/readme/footer.md.hbs',
-    'src/templates/partials/readme/getting-started.md.hbs'
-  ];
-
-  this.sitemapfiles = [
-    'src/data/sitemap.json',
-    'src/templates/sitemap.hbs'
-  ];
-
-  this.gruntfiles = [ 'Gruntfile.js' ];
-
-  this.ignores = this.dotfiles.concat(this._files, this.readmefiles, this.sitemapfiles, this.gruntfiles);
-
-  //console.log('src/templates/partials/readme/contributing.md.hbs'.indexOf('/readme/'));
-
-  this.prompt(prompts, function (err, props) {
-    if (err) {
-      return this.emit('error', err);
-    }
-
-    this.includeReadMe = (/y/i).test(props.includeReadMe);
-    this.includeSitemap = (/y/i).test(props.includeSitemap);
-    cb();
+    done();
   }.bind(this));
+
 };
 
 AssembleGenerator.prototype.app = function app() {
   var files = this.files;
+
   files.forEach(function(file) {
-
-      if (!this.includeSitemap && this.readmefiles.indexOf(file) !== -1) {
-        return;
-      }
-
-      if (!this.includeSitemap && this.sitemapfiles.indexOf(file) !== -1) {
-        return;
-      }
-
-    this.copy(file, file);
+    if(!this.includeSitemap && this.readmefiles.indexOf(file) !== -1) {
+      return;
+    }
+    if(!this.includeSitemap && this.sitemapfiles.indexOf(file) !== -1) {
+      return;
+    }
+    if(this.dotfiles.indexOf(file) !== -1) {
+      this.copy(file, '.' + file);
+    } else if(this._files.indexOf(file) !== -1) {
+      this.template(file, file.substring(1));
+    } else {
+      this.copy(file, file);
+    }
 
   }, this);
 };
