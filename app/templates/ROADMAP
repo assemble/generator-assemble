@@ -1,9 +1,9 @@
 v1.0.0:
-  eta: "Stardate 45047.2"
+  eta: "No date"
   goals:
-    - Visit the uninhabited El-Adrel system. 
-    - Overcome social anxiety.
-v0.3.0:
+    - Complete site builder task
+v0.2.0:
   eta: "2013-05-01"
   goals:
-    - Use section helpers.
+    - Refactor
+    - Use custom helpers.

@@ -1,19 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ title }}</title>
-    <link rel="stylesheet" href="{{assets}}/bootstrap.css">
+    <link href="{{assets}}/css/bootstrap.css" rel="stylesheet">
+    <link href="{{assets}}/css/style.css" rel="stylesheet">
+    <link href="{{assets}}/css/pygments-manni.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="{{assets}}/js/html5shiv.js"></script>
+      <script src="{{assets}}/js/respond.min.js"></script>
+    <![endif]-->
   </head>
   <body>
     <!-- nav partial -->
     {{> nav }}
 
     <div class="container">
-      <!-- pages -->
+      <!-- body partial, used for adding pages to layout -->
       {{> body }}
-
-      <script src="{{assets}}/highlight.js"></script>
+      <script src="{{assets}}/js/jquery.js"></script>
+      <script src="{{assets}}/js/bootstrap.min.js"></script>
+      <script src="{{assets}}/js/highlight.js"></script>
     </div>
   </body>
 </html>

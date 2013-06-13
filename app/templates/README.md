@@ -1,67 +1,62 @@
-# assemble-examples
+# [generator-assemble v0.2.1](https://github.com/hariadi/generator-assemble) [![Build Status](https://travis-ci.org/hariadi/generator-assemble.png)](https://travis-ci.org/hariadi/generator-assemble)
 
-> A collection of example projects for working with [Assemble](https://github.com/assemble/)
-
-
-## Getting Started
-
-This repo provides an overview of some example projects for using Assemble. To get started:
-
-* Visit one of the example projects
-* **[Download this project][download]** and unzip it into a new folder.  
-* In the project folder, run `npm install` to install [Assemble][assemble], [Grunt](http://gruntjs.com/) and any other dependencies.
-* Once the dependencies are installed you may run `grunt assemble` to build the example project.
-
-If you haven't used [Grunt](http://gruntjs.com/) before, be sure to check out the [Getting Started](http://gruntjs.com/getting-started) guide, as it explains how to create a [Gruntfile][gruntfile], as well as install and use Grunt plugins. 
+> [Yeoman][yeoman] generator for [Assemble][assemble]. Demonstrates how to build a basic static site with Assemble. Example includes layouts, pages, partials, and markdown content.
 
 
+## Getting started
 
-## Examples
-Most of the example projects are pretty basic, and we try to incorporate examples for both templates and data in each project but you can get away with fewer files and less abstraction. 
-
-#### [assemble-examples-basic](http://github.com/assemble/assemble-examples-basic) [![Build Status](https://travis-ci.org/assemble/assemble-examples-basic.png)](https://travis-ci.org/assemble/assemble-examples-basic)
-
-> Assemble a basic site using:
-
-* Layouts
-* Pages
-* Partials
-* YAML Front-matter
-* Markdown content
-
-
-#### [assemble-examples-readme](http://github.com/assemble/assemble-examples-readme) [![Build Status](https://travis-ci.org/assemble/assemble-examples-readme.png)](https://travis-ci.org/assemble/assemble-examples-readme)
-
-> Assemble a GitHub README.md, with very basic:
-
-* `README.hbs` template
-* Handlebars Helpers for changelog, authors and roadmap
-* YAML data
-* Markdown content
+- `mkdir project && cd project`
+- Make sure you have [yo](https://github.com/yeoman/yo) installed:
+    `npm install -g yo`
+- Install the generator:
+    `npm install generator-assemble` [-g]
+- Run:
+    `yo assemble`
 
 
 
-#### [assemble-examples-sitemap](http://github.com/assemble/assemble-examples-sitemap) [![Build Status](https://travis-ci.org/assemble/assemble-examples-sitemap.png)](https://travis-ci.org/assemble/assemble-examples-sitemap)
+## Options
 
-> Use Assemble to generate a Sitemap.xml from:
+* `--skip-install`
 
-* `sitemap.hbs` template
-* Example data
+  Skips the automatic execution of `bower` and `npm` after
+  scaffolding has finished.
+
+* `--silent`
+
+  Skips welcome message.
+
+
+
+## Contributing
+In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Use [Assemble][assemble] to build and maintain your gh-pages, blog or documentation. Lint and test your code using [Grunt](http://gruntjs.com/).
+
+
+
+## Authors
+* [Hariadi Hinta](http://github.com/hariadi)
 
 
 
 ## Release History
+* 2013-06-12      v0.2.1      Update Assemble example basic, custom helpers, examples and documentation.  Update repo description.
+* 2013-03-01      v0.1.1      Adds Assemble README example.  Adds Assemble Sitemap example.  Uses templates/data and partials for sections.
+* 2013-02-28      v0.1.0      First commit. Copy from assemble-example-basic
 
- * 2013-04-24   v0.1.2   add assemble-examples-sitemap 
- * 2013-04-19   v0.1.1   add assemble-examples-readme 
- * 2013-04-19   v0.1.0   initial release
 
 
- 
+## Roadmap
+* No date     v1.0.0      Complete site builder task
+* 2013-05-01      v0.2.0      Refactor  Use custom helpers.
+
+
+---
+
+Project by [Hariadi Hinta](http://github.com/hariadi/)
+
+_This file was generated using the [Assemble][] Grunt.js plugin, on Wed Jun 12 2013 20:28:41 GMT+0800 (Malay Peninsula Standard Time)._
+
 [assemble]: https://github.com/assemble/assemble/
-[wiki]: https://github.com/assemble/assemble/wiki
-[download]: https://github.com/assemble/assemble-examples-basic/archive/master.zip
 [gruntfile]: http://gruntjs.com/sample-gruntfile
-[configuring tasks]: http://gruntjs.com/configuring-tasks
-[tasks-and-targets]: http://gruntjs.com/configuring-tasks#task-configuration-and-targets
-[files-object]: http://gruntjs.com/configuring-tasks#building-the-files-object-dynamically
+[yeoman]: http://yeoman.io/
+

@@ -14,7 +14,7 @@
   "homepage": "https://github.com/hariadi/generator-assemble",
   "bugs": "https://github.com/hariadi/generator-assemble/issues",
   "author": {
-    "name": "hariadi",
+    "name": "Hariadi Hinta",
     "email": "diperakui@yahoo.com",
     "url": "http://hariadi.org"
   },
@@ -27,10 +27,10 @@
     "test": "mocha --reporter spec"
   },
   "dependencies": {
-    "yeoman-generator": "~0.10.2"
+    "yeoman-generator": "~0.12.0"
   },
   "devDependencies": {
-    "mocha": "~1.9.0"
+    "mocha": "~1.11.0"
   },
   "engines": {
     "node": ">=0.8.0"

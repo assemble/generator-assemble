@@ -1,0 +1,292 @@
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:400,300,600|Oswald:400,300);
+
+body,
+input,
+button,
+select,
+textarea {
+  font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6,
+.navbar-brand {
+  font-family: "Oswald", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+/* Icons
+-------------------------------------------------- */
+
+.the-icons {
+  padding-bottom: 1px;
+  margin-left: 0;
+  list-style: none;
+  margin-bottom: 20px;
+  overflow: hidden;
+}
+.the-icons li {
+  float: left;
+  width: 100px;
+  height: 110px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  font-size: 12px;
+  line-height: 1.25;
+  text-align: center;
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+  margin: 0 -1px -1px 0;
+}
+.the-icons .glyphicon {
+  display: block;
+  margin: 5px auto;
+  vertical-align: middle;
+  margin-right: 3px;
+  font-size: 24px;
+}
+.the-icons li:hover {
+  background-color: rgba(255,0,0,.1);
+}
+
+/* Responsive variations
+-------------------------------------------------- */
+
+/* Hide code snippets on mobile devices */
+@media screen and (max-width: 480px) {
+  .bs-docs-example {
+    border-radius: 4px;
+  }
+  .highlight {
+    display: none;
+  }
+}
+
+/* Tablets and up */
+@media screen and (min-width: 768px) {
+
+  /* Back to top link */
+  .bs-docs-top {
+    float: left;
+    padding: 7px 15px;
+    font-weight: 500;
+    color: #999;
+    background-color: #eee;
+    border-radius: 4px;
+  }
+  .bs-docs-top:hover {
+    color: #fff;
+    text-decoration: none;
+    background-color: #999;
+  }
+  .bs-docs-top.affix {
+    position: fixed;
+    right:  15px;
+    bottom: 15px;
+  }
+
+  .bs-docs-section-header h1 {
+    font-size: 80px;
+    font-size: 8rem;
+    line-height: 1;
+  }
+
+  /* Account for fixed navbar (which is static to start) */
+  .bs-docs-docs {
+    padding-left: 260px;
+  }
+
+  /* Undo custom padding */
+  .bs-docs-container {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  /* Show the docs nav */
+  .bs-docs-sidebar {
+    display: block;
+  }
+
+  /* Tweak display of docs jumbotrons */
+  .masthead {
+    padding-top:    100px;
+    padding-bottom: 100px;
+  }
+  .masthead h1 {
+    font-size: 100px;
+  }
+  .masthead p {
+    margin-left: 15%;
+    margin-right: 15%;
+    font-size: 30px;
+  }
+  .subhead {
+    padding-top:    60px;
+    padding-bottom: 60px;
+    text-align: left;
+  }
+
+}
+
+/* Tablets/desktops and up */
+@media screen and (min-width: 992px) {
+
+  .bs-docs-docs {
+    padding-left: 280px;
+  }
+
+  /* Icons */
+  .the-icons li {
+    width: 12.5%;
+  }
+
+}
+
+/* Large desktops and up */
+@media screen and (min-width: 1200px) {
+  .bs-docs-docs {
+    padding-left: 300px;
+  }
+
+}
+
+
+
+/*
+
+github.com style (c) Vasily Polovnyov <vast@whiteants.net>
+
+*/
+pre { padding: 0 }
+pre code {
+  display: block;
+  padding: 1em;
+  color: #333;
+  background: #f8f8ff
+}
+
+pre .comment,
+pre .template_comment,
+pre .diff .header,
+pre .javadoc {
+  color: #998;
+  font-style: italic
+}
+
+pre .keyword,
+pre .css .rule .keyword,
+pre .winutils,
+pre .javascript .title,
+pre .nginx .title,
+pre .subst,
+pre .request,
+pre .status {
+  color: #333;
+  font-weight: bold
+}
+
+pre .number,
+pre .hexcolor,
+pre .ruby .constant {
+  color: #099;
+}
+
+pre .string,
+pre .tag .value,
+pre .phpdoc,
+pre .tex .formula {
+  color: #d14
+}
+
+pre .title,
+pre .id,
+pre .coffeescript .params,
+pre .scss .preprocessor {
+  color: #900;
+  font-weight: bold
+}
+
+pre .javascript .title,
+pre .lisp .title,
+pre .clojure .title,
+pre .subst {
+  font-weight: normal
+}
+
+pre .class .title,
+pre .haskell .type,
+pre .vhdl .literal,
+pre .tex .command {
+  color: #458;
+  font-weight: bold
+}
+
+pre .tag,
+pre .tag .title,
+pre .rules .property,
+pre .django .tag .keyword {
+  color: #000080;
+  font-weight: normal
+}
+
+pre .attribute,
+pre .variable,
+pre .lisp .body {
+  color: #008080
+}
+
+pre .regexp {
+  color: #009926
+}
+
+pre .class {
+  color: #458;
+  font-weight: bold
+}
+
+pre .symbol,
+pre .ruby .symbol .string,
+pre .lisp .keyword,
+pre .tex .special,
+pre .prompt {
+  color: #990073
+}
+
+pre .built_in,
+pre .lisp .title,
+pre .clojure .built_in {
+  color: #0086b3
+}
+
+pre .preprocessor,
+pre .pi,
+pre .doctype,
+pre .shebang,
+pre .cdata {
+  color: #999;
+  font-weight: bold
+}
+
+pre .deletion {
+  background: #fdd
+}
+
+pre .addition {
+  background: #dfd
+}
+
+pre .diff .change {
+  background: #0086b3
+}
+
+pre .chunk {
+  color: #aaa
+}
