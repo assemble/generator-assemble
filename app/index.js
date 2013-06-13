@@ -1,6 +1,7 @@
 'use strict';
 var util = require('util');
 var path = require('path');
+var spawn = require('child_process').spawn;
 var yeoman = require('yeoman-generator');
 
 var separator = '\n===============================================\n';
@@ -41,15 +42,15 @@ AssembleGenerator.prototype.askFor = function askFor() {
   }
 
   var prompts = [{
+    type: 'confirm',
     name: 'includeReadMe',
     message: 'Would you like to include Assemble README configuration?',
-    default: 'Y/n',
-    warning: 'Yes: README config and files will be placed into the project directory.'
+    default: true
   }, {
+    type: 'confirm',
     name: 'includeSitemap',
     message: 'Would you like to include Assemble Sitemap configuration?',
-    default: 'Y/n',
-    warning: 'Yes: Sitemap config and files will be placed into the project directory.'
+    default: true
   }];
 
   this.files = this.expandFiles('**/*', { cwd: this.sourceRoot(), dot: true });

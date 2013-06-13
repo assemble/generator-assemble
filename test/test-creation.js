@@ -1,19 +1,21 @@
 /*global describe, beforeEach, it*/
 'use strict';
+
 var path    = require('path');
 var helpers = require('yeoman-generator').test;
 
 describe('Assemble generator', function () {
-  var assemble;
+
   beforeEach(function (done) {
     helpers.testDirectory(path.join(__dirname, 'temp'), function (err) {
       if (err) {
         return done(err);
       }
 
-      assemble = helpers.createGenerator('assemble:app', [
+      this.app = helpers.createGenerator('assemble:app', [
         '../../app'
       ]);
+      this.app.options['skip-install'] = true;
       done();
     }.bind(this));
   });
@@ -48,39 +50,34 @@ describe('Assemble generator', function () {
       'src/posts/2013_05_10.md.hbs',
       'src/posts/2013_05_12.hbs',
       'src/posts/2013_05_12.md.hbs',
-
       'src/templates/layouts/default.hbs',
       'src/templates/layouts/post.hbs',
       'src/templates/layouts/post.md.hbs',
-
       'src/templates/pages/blog.hbs',
       'src/templates/pages/docs.hbs',
       'src/templates/pages/examples.hbs',
       'src/templates/pages/helpers.hbs',
       'src/templates/pages/index.hbs',
       'src/templates/pages/markdown.hbs',
-
       'src/templates/partials/readme/contributing.md.hbs',
       'src/templates/partials/readme/options.md.hbs',
       'src/templates/partials/readme/footer.md.hbs',
       'src/templates/partials/readme/getting-started.md.hbs',
-
       'src/templates/partials/alert.hbs',
       'src/templates/partials/button.hbs',
       'src/templates/partials/icons.hbs',
       'src/templates/partials/module.hbs',
       'src/templates/partials/nav.hbs',
-
       'src/templates/readme.md.hbs',
       'src/templates/sitemap.hbs'
     ];
 
-    helpers.mockPrompt(assemble, {
+    helpers.mockPrompt(this.app, {
       'includeReadMe': 'Y',
       'includeSitemap': 'Y'
     });
-    assemble.options['skip-install'] = true;
-    assemble.run({}, function () {
+
+    this.app.run({}, function () {
       helpers.assertFiles(expected);
       done();
     });
