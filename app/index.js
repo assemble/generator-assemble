@@ -97,7 +97,7 @@ AssembleGenerator.prototype.app = function app() {
   var files = this.files;
 
   files.forEach(function(file) {
-    if(!this.includeSitemap && this.readmefiles.indexOf(file) !== -1) {
+    if(!this.includeReadMe && this.readmefiles.indexOf(file) !== -1) {
       return;
     }
     if(!this.includeSitemap && this.sitemapfiles.indexOf(file) !== -1) {
