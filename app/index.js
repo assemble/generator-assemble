@@ -1,10 +1,7 @@
 'use strict';
 var util = require('util');
 var path = require('path');
-var spawn = require('child_process').spawn;
 var yeoman = require('yeoman-generator');
-
-var separator = '\n===============================================\n';
 
 var AssembleGenerator = module.exports = function AssembleGenerator(args, options, config) {
   yeoman.generators.Base.apply(this, arguments);
@@ -25,7 +22,7 @@ var AssembleGenerator = module.exports = function AssembleGenerator(args, option
     'jshintrc'
   ];
 
-  this._files = [ '_package.json' ];
+  this._package = [ '_package.json' ];
 
   this.readmefiles = [
     'AUTHORS',
@@ -44,8 +41,6 @@ var AssembleGenerator = module.exports = function AssembleGenerator(args, option
     'src/templates/sitemap.hbs'
   ];
 
-  this.ignores = this.dotfiles.concat(this._files, this.readmefiles, this.sitemapfiles, this.gruntfiles);
-
 };
 
 util.inherits(AssembleGenerator, yeoman.generators.NamedBase);
@@ -54,39 +49,36 @@ AssembleGenerator.prototype.askFor = function askFor() {
   var done = this.async();
 
   if(!this.options.silent){
-
-    var assembleInfo = 'This task will create one or more files in the\n' +
-                        'current directory, based on the environment\n' +
-                        'and the answers to a few questions.';
-    var welcome =
-    '\n     _-----_' +
-    '\n    |       |' +
-    '\n    |'+'--(o)--'.red+'|   .--------------------------.' +
-    '\n   `---------´  |    '+'Welcome to Yeoman,'.yellow.bold+'    |' +
-    '\n    '+'( '.yellow+'_'+'´U`'.yellow+'_'+' )'.yellow+'   |   '+'ladies and gentlemen!'.yellow.bold+'  |' +
-    '\n    /___A___\\   \'__________________________\'' +
-    '\n     |  ~  |'.yellow +
-    '\n   __'+'\'.___.\''.yellow+'__' +'       '+'Assemble Generators'.yellow.bold+
-    '\n ´   '+'`  |'.red+'° '+'´ Y'.red+' `\n' + separator.yellow + '\n'+ assembleInfo +'\n'.red.bold + separator.yellow;
-    console.log(welcome);
+    console.log(this.yeoman);
   }
 
-  var prompts = [{
+  var questions = [{
+    type: 'confirm',
+    name: 'change',
+    message:
+      'This Assemble configuration will be include:\n' +
+      '\n    - README'.cyan.bold +
+      '\n    - Sitemap'.cyan.bold +
+      '\n\nDo you want to make any changes to the above?',
+    default: false
+  }, {
+    when: function(answers) { return answers.change; },
     type: 'confirm',
     name: 'includeReadMe',
-    message: 'Would you like to include Assemble README configuration?',
+    message: 'Include README configuration?',
     default: true
   }, {
+    when: function(answers) { return answers.change; },
     type: 'confirm',
     name: 'includeSitemap',
-    message: 'Would you like to include Assemble Sitemap configuration?',
+    message: 'Include Sitemap configuration?',
     default: true
   }];
 
-  this.prompt(prompts, function (props) {
+  this.prompt(questions, function (answers) {
 
-    this.includeReadMe = props.includeReadMe;
-    this.includeSitemap = props.includeSitemap;
+    this.includeReadMe = answers.includeReadMe;
+    this.includeSitemap = answers.includeSitemap;
 
     done();
   }.bind(this));
@@ -105,7 +97,7 @@ AssembleGenerator.prototype.app = function app() {
     }
     if(this.dotfiles.indexOf(file) !== -1) {
       this.copy(file, '.' + file);
-    } else if(this._files.indexOf(file) !== -1) {
+    } else if(this._package.indexOf(file) !== -1) {
       this.template(file, file.substring(1));
     } else {
       this.copy(file, file);
@@ -113,6 +105,3 @@ AssembleGenerator.prototype.app = function app() {
 
   }, this);
 };
-
-
-
