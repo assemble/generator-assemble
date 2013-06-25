@@ -15,8 +15,8 @@
 - `mkdir project && cd project`
 - Make sure you have [yo](https://github.com/yeoman/yo) installed:
     `npm install -g yo`
-- Install the generator ***locally***:
-    `npm install generator-assemble`
+- Install the generator:
+    `npm install -g generator-assemble`
 - Run:
     `yo assemble`
 
