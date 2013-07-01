@@ -1,5 +1,5 @@
 Description:
-    Creates simple Assemble framework and choose between several flavors of Jekyll, Bootstrap including SASS, LESS, CSS..
+    Creates simple Assemble framework
 
 Options:
     README: Include Assemble to generate a markdown README
@@ -7,6 +7,3 @@ Options:
 
 Example:
     yo assemble
-
-    This will create:
-        Generating Assemble basic task
