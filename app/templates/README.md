@@ -1,4 +1,4 @@
-# [generator-assemble v0.2.1](https://github.com/hariadi/generator-assemble) [![Build Status](https://travis-ci.org/hariadi/generator-assemble.png)](https://travis-ci.org/hariadi/generator-assemble)
+# [generator-assemble v0.3.1](https://github.com/hariadi/generator-assemble) [![Build Status](https://travis-ci.org/hariadi/generator-assemble.png)](https://travis-ci.org/hariadi/generator-assemble)
 
 > [Yeoman][yeoman] generator for [Assemble][assemble]. Demonstrates how to build a basic static site with Assemble. Example includes layouts, pages, partials, and markdown content.
 
@@ -54,7 +54,7 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 
 Project by [Hariadi Hinta](http://github.com/hariadi/)
 
-_This file was generated using the [Assemble][] Grunt.js plugin, on Wed Jun 12 2013 20:28:41 GMT+0800 (Malay Peninsula Standard Time)._
+_This file was generated using the [Assemble][assemble] Grunt.js plugin, on Wed Jun 12 2013 20:28:41 GMT+0800 (Malay Peninsula Standard Time)._
 
 [assemble]: https://github.com/assemble/assemble/
 [gruntfile]: http://gruntjs.com/sample-gruntfile
