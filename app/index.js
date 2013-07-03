@@ -10,9 +10,10 @@ var AssembleGenerator = module.exports = function AssembleGenerator(args, option
   this.pkg = JSON.parse(this.readFileAsString(path.join(__dirname, '../package.json')));
 
   this.on('end', function () {
-    this.installDependencies({ skipInstall: options['skip-install'] });
+    this.installDependencies({ skipInstall: options['skip-install'] || options['s'] });
   });
-  this.option('silent', { type: Boolean, required: false });
+
+  this.option('silent', { desc: 'Skips question and welcome message', type: Boolean, required: false });
 
   this.files = this.expandFiles('**/*', { cwd: this.sourceRoot(), dot: true });
 
@@ -49,39 +50,46 @@ AssembleGenerator.prototype.askFor = function askFor() {
   var done = this.async();
 
   if(!this.options.silent){
+
     console.log(this.yeoman);
-  }
 
-  var questions = [{
-    type: 'confirm',
-    name: 'change',
-    message:
-      'This Assemble configuration will be include:\n' +
-      '\n    - README'.cyan.bold +
-      '\n    - Sitemap'.cyan.bold +
-      '\n\nDo you want to make any changes to the above?',
-    default: false
-  }, {
-    when: function(answers) { return answers.change; },
-    type: 'confirm',
-    name: 'includeReadMe',
-    message: 'Include README configuration?',
-    default: true
-  }, {
-    when: function(answers) { return answers.change; },
-    type: 'confirm',
-    name: 'includeSitemap',
-    message: 'Include Sitemap configuration?',
-    default: true
-  }];
+    var questions = [{
+      type: 'confirm',
+      name: 'change',
+      message:
+        'This Assemble configuration will be include:\n' +
+        '\n    - README'.cyan.bold +
+        '\n    - Sitemap'.cyan.bold +
+        '\n\nDo you want to make any changes to the above?',
+      default: false
+    }, {
+      when: function(answers) { return answers.change; },
+      type: 'confirm',
+      name: 'includeReadMe',
+      message: 'Include README configuration?',
+      default: true
+    }, {
+      when: function(answers) { return answers.change; },
+      type: 'confirm',
+      name: 'includeSitemap',
+      message: 'Include Sitemap configuration?',
+      default: true
+    }];
 
-  this.prompt(questions, function (answers) {
+    this.prompt(questions, function (answers) {
 
-    this.includeReadMe = answers.includeReadMe;
-    this.includeSitemap = answers.includeSitemap;
+      this.includeReadMe = answers.includeReadMe;
+      this.includeSitemap = answers.includeSitemap;
 
+      done();
+    }.bind(this));
+
+  } else {
+    //this.options['skip-install'] = true;
+    this.includeReadMe = true;
+    this.includeSitemap = true;
     done();
-  }.bind(this));
+  }
 
 };
 

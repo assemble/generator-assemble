@@ -17,16 +17,18 @@
     `npm install -g yo`
 - Install the generator:
     `npm install -g generator-assemble`
-- Run:
-    `yo assemble`
+
+
+## Usage:
+yo assemble [--skip-install] [--silent]
 
 
 ## Options
 
-* `--skip-install`
+* `--skip-install` or just `-s`
 
-  Skips the automatic execution of `bower` and `npm` after
-  scaffolding has finished.
+  Skips the automatic execution of `bower` and `npm` after scaffolding has finished.
+
 
 * `--silent`
 

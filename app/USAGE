@@ -1,9 +1,10 @@
 Description:
-    Creates simple Assemble framework
+    Creates a default Assemble app
 
 Options:
-    README: Include Assemble to generate a markdown README
-    Sitemap: Include Assemble to generate .xml sitemap
+    --skip-install: Skips the automatic execution of `bower` and `npm`
+      after scaffolding has finished.
+    --silent: Skips question and welcome message.
 
 Example:
-    yo assemble
+    yo assemble [--skip-install] [--silent]
