@@ -13,7 +13,7 @@
 
 
 
-## Usage:
+## Usage
 ```shell
 yo assemble [--skip-install] [--silent]
 ```
