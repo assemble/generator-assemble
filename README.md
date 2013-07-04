@@ -1,14 +1,7 @@
-# Generator assemble
-[![Build Status](https://travis-ci.org/hariadi/generator-assemble.png)](https://travis-ci.org/hariadi/generator-assemble)
+# Generator assemble [![Build Status](https://travis-ci.org/hariadi/generator-assemble.png)](https://travis-ci.org/hariadi/generator-assemble)
 
 > [Yeoman][yeoman] generator for [Assemble][assemble].
 
-**Table of Contents**
-
-- [Generator assemble](#generator-assemble)
-	- [Getting started](#getting-started)
-	- [Options](#options)
-	- [License](#license)
 
 
 ## Getting started
@@ -19,8 +12,12 @@
     `npm install -g generator-assemble`
 
 
+
 ## Usage:
+```shell
 yo assemble [--skip-install] [--silent]
+```
+
 
 
 ## Options
@@ -33,6 +30,7 @@ yo assemble [--skip-install] [--silent]
 * `--silent`
 
   Skips welcome message.
+
 
 
 ## License
