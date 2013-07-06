@@ -1,26 +1,30 @@
-# [generator-assemble v0.3.1](https://github.com/hariadi/generator-assemble) [![Build Status](https://travis-ci.org/hariadi/generator-assemble.png)](https://travis-ci.org/hariadi/generator-assemble)
+# [generator-assemble v0.3.2](https://github.com/hariadi/generator-assemble) [![Build Status](https://travis-ci.org/hariadi/generator-assemble.png)](https://travis-ci.org/hariadi/generator-assemble)
 
 > [Yeoman][yeoman] generator for [Assemble][assemble]. Demonstrates how to build a basic static site with Assemble. Example includes layouts, pages, partials, and markdown content.
 
 
 ## Getting started
-
 - `mkdir project && cd project`
 - Make sure you have [yo](https://github.com/yeoman/yo) installed:
     `npm install -g yo`
 - Install the generator:
-    `npm install generator-assemble` [-g]
-- Run:
-    `yo assemble`
+    `npm install -g generator-assemble`
+
+
+
+## Usage
+```shell
+yo assemble [--skip-install] [--silent]
+```
 
 
 
 ## Options
 
-* `--skip-install`
+* `--skip-install` or just `-s`
 
-  Skips the automatic execution of `bower` and `npm` after
-  scaffolding has finished.
+  Skips the automatic execution of `bower` and `npm` after scaffolding has finished.
+
 
 * `--silent`
 
