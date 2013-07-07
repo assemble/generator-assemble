@@ -3,7 +3,6 @@
 > [Yeoman][yeoman] generator for [Assemble][assemble].
 
 
-
 ## Getting started
 - `mkdir project && cd project`
 - Make sure you have [yo](https://github.com/yeoman/yo) installed:
@@ -12,11 +11,9 @@
     `npm install -g generator-assemble`
 
 
-
 ## Usage
 ```shell
 yo assemble [--skip-install] [--silent]
-```
 
 
 
@@ -32,9 +29,8 @@ yo assemble [--skip-install] [--silent]
   Skips welcome message.
 
 
-
 ## License
 [MIT License](http://en.wikipedia.org/wiki/MIT_License)
 
 [yeoman]: http://yeoman.io/
-[assemble]: https://github.com/assemble/assemble/
+[assemble]: http://assemble.io

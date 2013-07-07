@@ -1,7 +1,7 @@
 {
   "name": "<%= _.slugify(appname) %>",
  "description": "[Yeoman][yeoman] generator for [Assemble][assemble]. Demonstrates how to build a basic static site with Assemble. Example includes layouts, pages, partials, and markdown content.",
-  "version": "0.2.1",
+  "version": "0.3.2",
   "homepage": "https://github.com/hariadi/generator-assemble",
   "author": {
     "name": "Hariadi Hinta",
