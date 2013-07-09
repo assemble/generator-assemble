@@ -14,7 +14,7 @@
 ## Usage
 ```shell
 yo assemble [--skip-install] [--silent]
-
+```
 
 
 ## Options
@@ -27,6 +27,7 @@ yo assemble [--skip-install] [--silent]
 * `--silent`
 
   Skips welcome message.
+
 
 
 ## License
