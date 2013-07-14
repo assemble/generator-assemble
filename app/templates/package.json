@@ -1,7 +1,7 @@
 {
   "name": "<%= _.slugify(appname) %>",
- "description": "[Yeoman][yeoman] generator for [Assemble][assemble]. Demonstrates how to build a basic static site with Assemble. Example includes layouts, pages, partials, and markdown content.",
-  "version": "0.3.2",
+ "description": "[Yeoman][yeoman] generator for [Assemble][assemble]. Demonstrates how to build a basic static site with Assemble.",
+  "version": "0.3.3",
   "homepage": "https://github.com/hariadi/generator-assemble",
   "author": {
     "name": "Hariadi Hinta",
@@ -21,9 +21,9 @@
     "test": "grunt assemble"
   },
   "devDependencies": {
-    "grunt-contrib-clean": "~0.4.1",
-    "assemble": "~0.4.0",
-    "grunt": "~0.4.1"
+    "assemble": "~0.4.1",
+    "grunt": "~0.4.1",
+    "grunt-contrib-clean": "~0.4.1"
   },
   "licenses": [
     {
