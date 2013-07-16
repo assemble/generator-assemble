@@ -29,6 +29,10 @@ yo assemble [--skip-install] [--silent]
   Skips welcome message.
 
 
+## Alternative
+
+ * [grunt-init-assemble](https://github.com/assemble/grunt-init-assemble)
+
 
 ## License
 [MIT License](http://en.wikipedia.org/wiki/MIT_License)
