@@ -1,4 +1,4 @@
-# Generator assemble [![Build Status](https://travis-ci.org/hariadi/generator-assemble.png)](https://travis-ci.org/hariadi/generator-assemble)
+# Assemble generator [![Build Status](https://travis-ci.org/hariadi/generator-assemble.png)](https://travis-ci.org/hariadi/generator-assemble)
 
 > [Yeoman][yeoman] generator for [Assemble][assemble].
 
@@ -16,7 +16,6 @@
 ```shell
 yo assemble [--skip-install] [--silent]
 ```
-
 
 ## Options
 
