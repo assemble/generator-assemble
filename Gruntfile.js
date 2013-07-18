@@ -14,13 +14,13 @@ module.exports = function(grunt) {
   grunt.initConfig({
 
     jshint: {
+      options: {
+        jshintrc: '.jshintrc',
+      },
       all_files: [
         'Gruntfile.js',
         'test/*.js'
-      ],
-      options: {
-        jshintrc: '.jshintrc',
-      }
+      ]
     }
 
   });

@@ -19,68 +19,20 @@ module.exports = function(grunt) {
 
   // Project configuration.
   grunt.initConfig({
-    pkg: grunt.file.readJSON('package.json'),
 
     assemble: {
-      // Global configuration
-      options: {
-        assets: 'dist/assets',
-        data: 'src/data/*.{json,yml}',
-        partials: [
-          'src/templates/partials/{,*/}*.hbs',
-          'src/content/*.hbs'
-        ],
-        registerFunctions: function(engine) {
-          var helpers = require('./helper/helpers');
-          engine.engine.registerFunctions(helpers);
-        }
-      },
-
-      site: {
+      pages: {
         options: {
           flatten: true,
-          layout: 'src/templates/layouts/default.hbs'
-        },
-        files: [
-          {
-            expand: true,
-            cwd: 'src/templates/pages',
-            src: ['*.hbs', '!index.hbs'],
-            dest: 'dist/'
-          },
-          {
-            expand: true,
-            cwd: 'src/templates/pages',
-            src: ['index.hbs'],
-            dest: './' }
-        ]
-      }<% if (includeReadMe) { %>,
-
-      readme: {
-         options: {
-          flatten: true,
-          partials: 'src/templates/partials/readme/{,*/}*.hbs',
-          data: './package.json',
-          ext: ''
-        },
-        src:  'src/templates/readme.md.hbs',
-        dest: 'dist/'
-      }<% } %><% if (includeSitemap) { %>,
-
-      sitemap: {
-        options: {
-          component: {
-            name: 'generator-assemble',
-            description: 'Yeoman generator for Assemble'
-          },
-          ext: '.xml',
-          data: 'src/sitemap.json',
-          flatten: true
+          assets: 'dist/assets',
+          layout: 'src/templates/layouts/default.hbs',
+          data: 'src/data/*.{json,yml}',
+          partials: 'src/templates/partials/*.hbs'
         },
         files: {
-          'dist/sitemap.xml': ['src/templates/sitemap.hbs']
+          'dist/': ['src/templates/pages/*.hbs']
         }
-      }<% } %>
+      }
     },
 
     // Before generating any new files,

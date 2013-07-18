@@ -1,0 +1,43 @@
+{
+  "name": "<%= _.slugify(projectName) %>",
+ "description": "Assemble a website from templates and data.",
+  "version": "0.3.4",
+  "homepage": "https://github.com/<%= authorLogin %>/assemble-template",
+  "author": {
+    "name": "<%= authorName %>",
+    "email": "<%= authorEmail %>",
+    "url": "http://github.com/<%= authorLogin %>/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/<%= authorLogin %>/<%= _.slugify(projectName) %>.git"
+  },
+  "bugs": {
+    "url": "https://github.com/<%= authorLogin %>/<%= _.slugify(projectName) %>/issues"
+  },
+  "engines": {
+    "node": ">=0.8"
+  },
+  "scripts": {
+    "test": "grunt assemble"
+  },
+  "devDependencies": {
+    "assemble": "~0.4.1",
+    "grunt": "~0.4.1",
+    "grunt-contrib-clean": "~0.4.1"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/<%= authorLogin %>/<%= _.slugify(projectName) %>/blob/master/LICENSE-MIT"
+    }
+  ],
+  "keywords": [
+    "assemble",
+    "templates",
+    "handlebars",
+    "site generator",
+    "site builder",
+    "grunt"
+  ]
+}

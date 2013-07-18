@@ -1,9 +1,0 @@
-v1.0.0:
-  eta: "No date"
-  goals:
-    - Complete site builder task
-v0.2.0:
-  eta: "2013-05-01"
-  goals:
-    - Refactor
-    - Use custom helpers.
