@@ -1,20 +1,4 @@
-v0.3.2:
-  date: "2013-07-1"
-  changes:
-    - Update Yeoman generator
-    - New prompt system.
-v0.2.1:
-  date: "2013-06-12"
-  changes:
-    - Update Assemble example basic, custom helpers, examples and documentation.
-    - Update repo description.
-v0.1.1:
-  date: "2013-03-01"
-  changes:
-    - Adds Assemble README example.
-    - Adds Assemble Sitemap example.
-    - Uses templates/data and partials for sections.
 v0.1.0:
-  date: "2013-02-28"
+  date: "<%= (new Date).toISOString().split('T')[0] %>"
   changes:
-    - First commit. Copy from assemble-example-basic
+    - Generated from [Yeoman](http://yeoman.io) Generator for [Assemble](http://assemble.io)

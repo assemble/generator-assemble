@@ -1,14 +1,8 @@
 ---
 title: Blog
-posts: ['src/posts/2013_05_10.md.hbs', 'src/posts/2013_05_12.md.hbs']
+posts: ['README.md']
 ---
-<div class="page-header">
-  <h1>{{ title }}</h1>
-</div>
-
-
-<h1>This is a simple blog</h1>
-
+<h1>Posts</h1>
 {{#each posts}}
-{{md this}}
+  {{md this}}
 {{/each}}

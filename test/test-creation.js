@@ -23,27 +23,29 @@ describe('Assemble generator', function () {
   it('creates expected files with all option' , function (done) {
     var expected = [
       // add files you expect to exist here.
-      '.gitignore',
-      '.editorconfig',
-      'Gruntfile.js',
-      'package.json',
-      'dist/assets/assemble.css',
-      'dist/assets/css/github.css',
-      'dist/assets/highlight.css',
-      'lib/helpers.js',
       'AUTHORS',
       'CHANGELOG',
+      'Gruntfile.js',
       'LICENSE-MIT',
+      'README.md',
+      'package.json',
+      'dist/assets/assemble.css',
+      'dist/assets/github.css',
+      'dist/assets/highlight.js',
+      '.gitignore',
+      '.editorconfig',
       'src/content/markdown.md',
       'src/data/site.yml',
       'src/templates/layouts/default.hbs',
       'src/templates/pages/blog.hbs',
-      'src/templates/pages/helpers.hbs',
       'src/templates/pages/index.hbs',
       'src/templates/partials/navbar-fixed-top.hbs'
     ];
 
-    //this.app.checkInstallation = function () {};
+    helpers.mockPrompt(this.app, {
+      projectName: 'assemble',
+      githubUser: 'assemble'
+    });
 
     this.app.options['skip-install'] = true;
     this.app.run({}, function () {

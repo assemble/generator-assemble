@@ -1,29 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ title }}</title>
-    <link href="{{assets}}/css/bootstrap.css" rel="stylesheet">
-    <link href="{{assets}}/css/style.css" rel="stylesheet">
-    <link href="{{assets}}/css/pygments-manni.css" rel="stylesheet">
-
-    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-      <script src="{{assets}}/js/html5shiv.js"></script>
-      <script src="{{assets}}/js/respond.min.js"></script>
-    <![endif]-->
+    <meta charset="UTF-8">
+    <title>{{title}} | {{site.title}}</title>
+    <link rel="stylesheet" href="{{assets}}/assemble.css">
+    <link rel="stylesheet" href="{{assets}}/github.css">
   </head>
   <body>
-    <!-- nav partial -->
-    {{> nav }}
 
+    <!-- Navbar 
+    ================================================== -->
+    {{> navbar-fixed-top }}
+
+
+    <!-- Subhead
+    ================================================== -->
+    <header class="masthead subhead">
+      <div class="container">
+        <div class="row">
+          <div class="col col-lg-12">
+            <h1> {{ uppercase title }} </h1>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Page content
+    ================================================== -->
     <div class="container">
-      <!-- body partial, used for adding pages to layout -->
       {{> body }}
-      <script src="{{assets}}/js/jquery.js"></script>
-      <script src="{{assets}}/js/bootstrap.min.js"></script>
-      <script src="{{assets}}/js/highlight.js"></script>
     </div>
+
+    <script src="{{assets}}/js/highlight.js"></script>
   </body>
 </html>
