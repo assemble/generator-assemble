@@ -2,6 +2,7 @@
 
 > [Yeoman][yeoman] generator for [Assemble][assemble].
 
+[![NPM](https://nodei.co/npm/generator-assemble.png)](https://nodei.co/npm/generator-assemble/)
 
 ## Getting started
 - `mkdir project && cd project`
