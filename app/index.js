@@ -13,8 +13,6 @@ var AssembleGenerator = module.exports = function AssembleGenerator(args, option
     this.installDependencies({ skipInstall: options['skip-install'] || options['s'] });
   });
 
-  this.option('silent', { desc: 'Skips question and welcome message', type: Boolean, required: false });
-
   this.files = this.expandFiles('**/*', { cwd: this.sourceRoot(), dot: true });
 
   this.pkg = JSON.parse(this.readFileAsString(path.join(__dirname, '../package.json')));
@@ -35,9 +33,7 @@ util.inherits(AssembleGenerator, yeoman.generators.Base);
 AssembleGenerator.prototype.askFor = function askFor() {
   var done = this.async();
 
-  if(!this.silent) {
-    console.log(this.yeoman);
-  }
+  console.log(this.yeoman);
 
   var questions = [{
     type: 'input',

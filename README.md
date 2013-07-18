@@ -25,11 +25,6 @@ yo assemble [--skip-install] [--silent]
   Skips the automatic execution of `bower` and `npm` after scaffolding has finished.
 
 
-* `--silent`
-
-  Skips welcome message.
-
-
 ## Alternative
 
  * [grunt-init-assemble](https://github.com/assemble/grunt-init-assemble)
