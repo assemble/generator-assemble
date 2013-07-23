@@ -4,20 +4,18 @@
 
 ## Getting started
 - `mkdir project && cd project`
-- Make sure you have [yo](https://github.com/yeoman/yo) installed:
-    `npm install -g yo`
 - Install the generator:
     `npm install -g generator-assemble`
 
 
 ## Usage
 ```shell
-yo assemble [--skip-install] [--silent]
+yo assemble [--skip-install]
 ```
 
 ## Options
 
-* `--skip-install` or just `-s`
+* `--s` alias `--skip-install`
 
   Skips the automatic execution of `bower` and `npm` after scaffolding has finished.
 
