@@ -7,8 +7,6 @@ var yeoman = require('yeoman-generator');
 var AssembleGenerator = module.exports = function AssembleGenerator(args, options, config) {
   yeoman.generators.Base.apply(this, arguments);
 
-  //console.log(JSON.stringify(this.user));
-
   this.on('end', function () {
     this.installDependencies({ skipInstall: options['skip-install'] || options['s'] });
   });
