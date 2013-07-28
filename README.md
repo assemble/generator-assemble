@@ -3,13 +3,13 @@
 > [Yeoman][yeoman] generator for [Assemble][assemble].
 
 ## Getting started
-- `mkdir project && cd project`
 - Install the generator:
     `npm install -g generator-assemble`
 
 
 ## Usage
 ```shell
+mkdir project && cd project
 yo assemble [--skip-install]
 ```
 
