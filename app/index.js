@@ -47,9 +47,11 @@ AssembleGenerator.prototype.askFor = function askFor() {
 
   this.prompt(questions, function (answers) {
 
+
+
     this.projectName = answers.projectName;
     this.authorLogin = answers.githubUser;
-    this.authorName = this.user.git.username;
+    this.authorName = this.user.git.username || process.env.user || process.env.username;
     this.authorEmail = this.user.git.email;
 
     done();
