@@ -15,7 +15,7 @@ yo assemble [--skip-install]
 
 ## Options
 
-* `--s` alias `--skip-install`
+* `--skip-install`
 
   Skips the automatic execution of `bower` and `npm` after scaffolding has finished.
 

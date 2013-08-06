@@ -1,7 +1,7 @@
 {
   "name": "generator-assemble",
-  "version": "0.3.5",
-  "description": "Yeoman generator for Assemble",
+  "version": "0.3.6",
+  "description": "[Yeoman][yeoman] generator for [Assemble][assemble]",
   "keywords": [
     "yeoman-generator",
     "assemble",
