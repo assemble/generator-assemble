@@ -1,14 +1,14 @@
 {
   "name": "generator-assemble",
-  "version": "0.3.6",
-  "description": "[Yeoman][yeoman] generator for [Assemble][assemble]",
+  "version": "0.3.7",
+  "description": "Yeoman generator for Assemble",
   "keywords": [
     "yeoman-generator",
     "assemble",
     "grunt"
   ],
-  "homepage": "https://github.com/hariadi/generator-assemble",
-  "bugs": "https://github.com/hariadi/generator-assemble/issues",
+  "homepage": "https://github.com/assemble/generator-assemble",
+  "bugs": "https://github.com/assemble/generator-assemble/issues",
   "author": {
     "name": "Hariadi Hinta",
     "email": "diperakui@yahoo.com",
@@ -17,7 +17,7 @@
   "main": "app/index.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/hariadi/generator-assemble.git"
+    "url": "https://github.com/assemble/generator-assemble.git"
   },
   "scripts": {
     "test": "mocha --reporter spec"
