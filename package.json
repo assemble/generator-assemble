@@ -1,7 +1,7 @@
 {
   "name": "generator-assemble",
   "version": "0.3.7",
-  "description": "Yeoman generator for Assemble",
+  "description": "The scaffolding for Assemble",
   "keywords": [
     "yeoman-generator",
     "assemble",
@@ -37,7 +37,8 @@
   },
   "licenses": [
     {
-      "type": "MIT"
+      "type": "MIT",
+      "url": "https://github.com/assemble/assemble/blob/master/LICENSE-MIT"
     }
   ]
 }
