@@ -1,6 +1,6 @@
 {
   "name": "generator-assemble",
-  "version": "0.3.7",
+  "version": "0.3.8",
   "description": "The scaffolding for Assemble",
   "keywords": [
     "yeoman-generator",
