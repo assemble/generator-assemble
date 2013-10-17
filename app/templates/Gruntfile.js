@@ -11,41 +11,90 @@
 
 // # Globbing
 // for performance reasons we're only matching one level down:
-// 'src/templates/pages/{,*/}*.hbs'
+// '<%= config.src %>/templates/pages/{,*/}*.hbs'
 // use this if you want to match all subfolders:
-// 'src/templates/pages/**/*.hbs'
+// '<%= config.src %>/templates/pages/**/*.hbs'
 
 module.exports = function(grunt) {
 
   // Project configuration.
   grunt.initConfig({
 
+    config: {
+      src: 'src',
+      dist: 'dist'
+    },
+
+    watch: {
+      assemble: {
+        files: ['<%= config.src %>/{content,data,templates}/{,*/}*.{md,hbs,yml}'],
+        tasks: ['assemble']
+      },
+      livereload: {
+        options: {
+          livereload: '<%= connect.options.livereload %>'
+        },
+        files: [
+          '<%= config.dist %>/{,*/}*.html',
+          '<%= config.dist %>/assets/{,*/}*.css',
+          '<%= config.dist %>/assets/{,*/}*.js',
+          '<%= config.dist %>/assets/{,*/}*.{png,jpg,jpeg,gif,webp,svg}'
+        ]
+      }
+    },
+
+    connect: {
+      options: {
+        port: 9000,
+        livereload: 35729,
+        // change this to '0.0.0.0' to access the server from outside
+        hostname: 'localhost'
+      },
+      livereload: {
+        options: {
+          open: true,
+          base: [
+            '<%= config.dist %>'
+          ]
+        }
+      }
+    },
+
     assemble: {
       pages: {
         options: {
           flatten: true,
-          assets: 'dist/assets',
-          layout: 'src/templates/layouts/default.hbs',
-          data: 'src/data/*.{json,yml}',
-          partials: 'src/templates/partials/*.hbs'
+          assets: '<%= config.dist %>/assets',
+          layout: '<%= config.src %>/templates/layouts/default.hbs',
+          data: '<%= config.src %>/data/*.{json,yml}',
+          partials: '<%= config.src %>/templates/partials/*.hbs'
         },
         files: {
-          'dist/': ['src/templates/pages/*.hbs']
+          '<%= config.dist %>/': ['<%= config.src %>/templates/pages/*.hbs']
         }
       }
     },
 
     // Before generating any new files,
     // remove any previously-created files.
-    clean: ['dist/**/*.{html,xml}']
+    clean: ['<%= config.dist %>/**/*.{html,xml}']
 
   });
 
-  // Load npm plugins to provide necessary tasks.
-  grunt.loadNpmTasks('assemble');
-  grunt.loadNpmTasks('grunt-contrib-clean');
+  grunt.registerTask('server', [
+    'clean',
+    'assemble',
+    'connect:livereload',
+    'watch'
+  ]);
 
-  // Default task to be run.
-  grunt.registerTask('default', ['clean', 'assemble']);
+  grunt.registerTask('build', [
+    'clean',
+    'assemble'
+  ]);
+
+  grunt.registerTask('default', [
+    'build'
+  ]);
 
 };
