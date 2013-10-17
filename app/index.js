@@ -37,7 +37,6 @@ var AssembleGenerator = module.exports = function AssembleGenerator(args, option
       email     : this.user.git.email
     }
   });
-
 };
 
 util.inherits(AssembleGenerator, yeoman.generators.Base);
@@ -66,15 +65,19 @@ AssembleGenerator.prototype.askFor = function askFor() {
   (!this.config.get("githubUser") || force) && questions.push({
     type    : "input",
     name    : "githubUser",
-    message : "Would you mind telling me your username on Github",
+    message : "Would you mind telling me your username on Github?",
     default : this.config.get("githubUser")
   });
 
   (!this.config.get("plugin") || force) && questions.push({
     name    : "plugin",
-    type    : "list",
+    type    : "checkbox",
     message : "Which plugin do you want to use?",
-    choices : [ "permalinks", "sitemap", "related" ],
+    choices : [
+      { name: "permalinks" },
+      { name: "sitemap" },
+      { name: "related" }
+    ],
     filter  : function(v) { return v.toLowerCase(); }
   });
 
@@ -82,7 +85,7 @@ AssembleGenerator.prototype.askFor = function askFor() {
 
     this.projectName = answers.projectName;
     this.authorLogin = answers.githubUser;
-    this.plugins = answers.plugin;
+    this.plugin = answers.plugin;
     this.authorName = this.config.get("author").name;
     this.authorEmail = this.config.get("author").email;
 

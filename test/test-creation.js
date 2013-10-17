@@ -47,7 +47,7 @@ describe('Assemble generator', function () {
     helpers.mockPrompt(this.app, {
       projectName: 'assemble',
       githubUser: 'assemble',
-      plugin: 'permalinks'
+      plugin: ['permalinks', 'sitemap']
     });
 
     this.app.run({}, function () {
