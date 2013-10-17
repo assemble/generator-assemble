@@ -11,6 +11,13 @@ var AssembleGenerator = module.exports = function AssembleGenerator(args, option
     this.installDependencies({ skipInstall: options['skip-install'] || options['s'] });
   });
 
+  this.on('end', function () {
+    this.installDependencies({
+      skipInstall: options['skip-install'] || options['s'],
+      skipMessage: options['skip-install-message']
+    });
+  });
+
   this.files = this.expandFiles('**/*', { cwd: this.sourceRoot(), dot: true });
 
   this.pkg = JSON.parse(this.readFileAsString(path.join(__dirname, '../package.json')));
@@ -31,7 +38,9 @@ util.inherits(AssembleGenerator, yeoman.generators.Base);
 AssembleGenerator.prototype.askFor = function askFor() {
   var done = this.async();
 
-  console.log(this.yeoman);
+  if (!this.options['skip-welcome-message']) {
+    console.log(this.yeoman);
+  }
 
   var questions = [{
     type: 'input',
@@ -46,8 +55,6 @@ AssembleGenerator.prototype.askFor = function askFor() {
   }];
 
   this.prompt(questions, function (answers) {
-
-
 
     this.projectName = answers.projectName;
     this.authorLogin = answers.githubUser;
