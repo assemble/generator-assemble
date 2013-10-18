@@ -3,6 +3,11 @@ var util = require('util');
 var path = require('path');
 var yeoman = require('yeoman-generator');
 
+/**
+ * Module exports Assemble Generator constructor
+ * Extend Yeoman base generator
+ */
+
 var AssembleGenerator = module.exports = function AssembleGenerator(args, options, config) {
 
   yeoman.generators.Base.apply(this, arguments);
@@ -41,6 +46,11 @@ var AssembleGenerator = module.exports = function AssembleGenerator(args, option
 
 util.inherits(AssembleGenerator, yeoman.generators.Base);
 
+/**
+ * Command prompt questions
+ * Extend defaults and options based on user answers
+ */
+
 AssembleGenerator.prototype.askFor = function askFor() {
   var done = this.async();
 
@@ -69,7 +79,7 @@ AssembleGenerator.prototype.askFor = function askFor() {
     default : this.config.get("githubUser")
   });
 
-  (!this.config.get("plugin") || force) && questions.push({
+  questions.push({
     name    : "plugin",
     type    : "checkbox",
     message : "Which plugin do you want to use?",
@@ -77,14 +87,13 @@ AssembleGenerator.prototype.askFor = function askFor() {
       { name: "permalinks" },
       { name: "sitemap" },
       { name: "related" }
-    ],
-    filter  : function(v) { return v.toLowerCase(); }
+    ]
   });
 
   this.prompt(questions, function (answers) {
 
-    this.projectName = answers.projectName;
-    this.authorLogin = answers.githubUser;
+    this.projectName = answers.projectName || this.config.get("projectName");
+    this.authorLogin = answers.githubUser || this.config.get("githubUser");
     this.plugin = answers.plugin;
     this.authorName = this.config.get("author").name;
     this.authorEmail = this.config.get("author").email;
@@ -96,6 +105,10 @@ AssembleGenerator.prototype.askFor = function askFor() {
     done();
   }.bind(this));
 };
+
+/**
+ * Copy boilerplate main code
+ */
 
 AssembleGenerator.prototype.app = function app() {
   var files = this.files;
@@ -110,4 +123,15 @@ AssembleGenerator.prototype.app = function app() {
     }
 
   }, this);
+};
+
+/**
+ * Stringify an object and normalize whitespace with project preferences.
+ */
+
+AssembleGenerator.prototype.normalizeJSON = function() {
+  var pkgFile = path.join(this.destinationRoot(process.cwd()), 'package.json');
+  var pkgObj = this.read(pkgFile);
+  this.conflicter.force = true;
+  this.write('package.json', JSON.stringify(JSON.parse(pkgObj), null, 2));
 };
