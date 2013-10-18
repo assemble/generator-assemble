@@ -43,20 +43,6 @@ var AssembleGenerator = module.exports = function AssembleGenerator(args, option
     }
   });
 
-
-  this.plugins = {
-    // name: conf
-    'permalinks': {
-      structure: 'pretty'
-    },
-    'assemble-contrib-contextual': {
-      contextual: { dest: 'tmp/' }
-    },
-    'assemble-contrib-sitemap': {},
-    'assemble-markdown-data': {},
-    'assemble-related-pages': {}
-  };
-
 };
 
 util.inherits(AssembleGenerator, yeoman.generators.Base);

@@ -2,7 +2,7 @@
   "name": "<%= _.slugify(projectName) %>",
  "description": "Assemble a website from templates and data.",
   "version": "0.1.0",
-  "homepage": "https://github.com/<%= authorLogin %>/assemble-template",
+  "homepage": "http://assemble.io",
   "author": {
     "name": "<%= authorName %>",
     "email": "<%= authorEmail %>",

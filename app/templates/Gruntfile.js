@@ -73,7 +73,7 @@ module.exports = function(grunt) {
           plugins: [<% if(typeof plugin === 'object'){ _.each(plugin, function(name, i) { %>'<%= name %>'<% if(i < (plugin.length - 1)) { %>,<% } }); } else { %>'<%= name %>'<%} %>],<%}
           _.each(plugin, function(name, i) { if(name == 'permalinks') { %>
           permalinks: {
-            structure: 'pretty'
+            preset: 'pretty'
           },<% }
           if(name == 'assemble-contrib-contextual') { %>
           contextual: {
