@@ -42,6 +42,17 @@ var AssembleGenerator = module.exports = function AssembleGenerator(args, option
       email     : this.user.git.email
     }
   });
+  /*
+  this.plugins = {
+    // name => npm
+    'permalinks': 'permalinks',
+    'contextual': 'assemble-contrib-contextual',
+    'sitemap': 'assemble-contrib-sitemap',
+    'markdown': 'assemble-markdown-data',
+    'related': 'assemble-related-pages'
+  };
+  console.log(this);
+  */
 };
 
 util.inherits(AssembleGenerator, yeoman.generators.Base);
@@ -85,8 +96,10 @@ AssembleGenerator.prototype.askFor = function askFor() {
     message : "Which plugin do you want to use?",
     choices : [
       { name: "permalinks" },
-      { name: "sitemap" },
-      { name: "related" }
+      { name: "assemble-contrib-contextual" },
+      { name: "assemble-contrib-sitemap" },
+      { name: "assemble-markdown-data" },
+      { name: "assemble-related-pages" }
     ]
   });
 
