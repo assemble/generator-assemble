@@ -16,6 +16,8 @@ describe('Assemble generator', function () {
         '../../app'
       ]);
 
+      this.app.options['skip-install'] = true;
+
       done();
     }.bind(this));
   });
@@ -44,10 +46,10 @@ describe('Assemble generator', function () {
 
     helpers.mockPrompt(this.app, {
       projectName: 'assemble',
-      githubUser: 'assemble'
+      githubUser: 'assemble',
+      plugin: ['permalinks', 'sitemap']
     });
 
-    this.app.options['skip-install'] = true;
     this.app.run({}, function () {
       helpers.assertFiles(expected);
       done();

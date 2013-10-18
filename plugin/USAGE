@@ -1,0 +1,5 @@
+Description:
+    Creates Assemble plugin
+
+Example:
+    yo assemble:plugin <pluginName> <path>
