@@ -42,17 +42,21 @@ var AssembleGenerator = module.exports = function AssembleGenerator(args, option
       email     : this.user.git.email
     }
   });
-  /*
+
+
   this.plugins = {
-    // name => npm
-    'permalinks': 'permalinks',
-    'contextual': 'assemble-contrib-contextual',
-    'sitemap': 'assemble-contrib-sitemap',
-    'markdown': 'assemble-markdown-data',
-    'related': 'assemble-related-pages'
+    // name: conf
+    'permalinks': {
+      structure: 'pretty'
+    },
+    'assemble-contrib-contextual': {
+      contextual: { dest: 'tmp/' }
+    },
+    'assemble-contrib-sitemap': {},
+    'assemble-markdown-data': {},
+    'assemble-related-pages': {}
   };
-  console.log(this);
-  */
+
 };
 
 util.inherits(AssembleGenerator, yeoman.generators.Base);
@@ -95,9 +99,9 @@ AssembleGenerator.prototype.askFor = function askFor() {
     type    : "checkbox",
     message : "Which plugin do you want to use?",
     choices : [
-      { name: "permalinks" },
+      { name: "permalinks", checked: true },
       { name: "assemble-contrib-contextual" },
-      { name: "assemble-contrib-sitemap" },
+      { name: "assemble-contrib-sitemap", checked: true },
       { name: "assemble-markdown-data" },
       { name: "assemble-related-pages" }
     ]
@@ -133,7 +137,6 @@ AssembleGenerator.prototype.app = function app() {
       this.template(file, file.substring(1));
     } else {
       if (path.basename(file, '.js') === 'Gruntfile') {
-        console.log(path.basename(file, '.js'));
         this.template('Gruntfile.js');
       } else {
         this.copy(file, file);
