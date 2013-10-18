@@ -9,18 +9,22 @@
 
 ## Usage
 
-### Scaffolds out a new Assemble Boilerplate application.
+### Assemble app scaffolds.
 
 ```bash
 mkdir project && cd project
 yo assemble [--skip-install]
 ```
 
-## Options
+#### Options
 
-* `--skip-install`
+* `-s` alias `--skip-install`
 
   Skips the automatic execution of `bower` and `npm` after scaffolding has finished.
+
+* `-w` alias `--skip-welcome-message`
+
+  Skips app welcome message.
 
 ### Generate Plugin
 
@@ -31,7 +35,7 @@ yo assemble:plugin
 If needed, you can specify a name and location too:
 
 ```bash
-yo assemble:plugin <name> <path>`
+yo assemble:plugin <name> <path>
 ```
 
 ## Alternative

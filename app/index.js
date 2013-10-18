@@ -15,7 +15,7 @@ var AssembleGenerator = module.exports = function AssembleGenerator(args, option
   this.on('end', function () {
     this.installDependencies({
       skipInstall: options['skip-install'] || options['s'],
-      skipMessage: options['skip-welcome-message']
+      skipMessage: options['skip-welcome-message'] || options['w']
     });
   });
 
