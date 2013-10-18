@@ -1,6 +1,6 @@
 /**
 * Assemble Plugin: <%= _.titleize(pluginName) %>
-* https://github.com/<%= authorLogin %>/<%= _.underscored(pluginName) %>
+* https://github.com/<%= authorLogin %>/assemble-plugin-<%= _.underscored(pluginName) %>
 *
 * Copyright (c) <%= (new Date).getFullYear() %> <%= authorName %>
 * @author: https://github.com/<%= authorLogin %>

@@ -8,12 +8,15 @@ var PluginGenerator = module.exports = function PluginGenerator(args, options, c
 
   if(Object.keys(args).length === 0){
     args.push('my_plugin');
-    args.push('./plugins');
+    args.push('plugins');
   };
 
   yeoman.generators.NamedBase.apply(this, arguments);
   this.name = this.name || args[0];
   this.path = this.path || args[1];
+  if(this.path.indexOf('./') !== -1) {
+    this.path = this.path.replace('./', '');
+  }
 
 };
 
@@ -25,6 +28,9 @@ PluginGenerator.prototype.create = function create() {
   this.authorLogin = this.config.get("githubUser");
   this.authorName = this.config.get("author").name;
   this.authorEmail = this.config.get("author").email;
-  this.pluginPath = this.path;
-  this.template('plugin.js', this.pluginPath + '/assemble-plugin-'+ this._.dasherize(this.pluginName) +'.js');
+  this.pluginPath = this.destinationRoot() + this.path;
+
+  var plugin = this.pluginPath +   '/assemble-plugin-'+ this._.dasherize(this.pluginName) +'.js';
+
+  this.template('plugin.js', plugin);
 };
