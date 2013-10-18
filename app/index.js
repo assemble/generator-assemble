@@ -100,13 +100,13 @@ AssembleGenerator.prototype.askFor = function askFor() {
 
     //save config to .yo-rc.json
     this.config.set(answers);
-    this.pkg.name = this.config.get("name");
 
     done();
   }.bind(this));
 };
 
 /**
+ * TODO: Separate file generated with their own function. See test-creation.js
  * Copy boilerplate main code
  */
 
@@ -119,7 +119,12 @@ AssembleGenerator.prototype.app = function app() {
     } else if(this.pkgFiles.indexOf(file) !== -1) {
       this.template(file, file.substring(1));
     } else {
-      this.copy(file, file);
+      if (path.basename(file, '.js') === 'Gruntfile') {
+        console.log(path.basename(file, '.js'));
+        this.template('Gruntfile.js');
+      } else {
+        this.copy(file, file);
+      }
     }
 
   }, this);

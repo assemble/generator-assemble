@@ -1,6 +1,6 @@
 /*
  * Generated on <%= (new Date).toISOString().split('T')[0] %>
- * <%= pkg.name %> <%= pkg.version %>
+ * <%= pkg.name %> v<%= pkg.version %>
  * <%= pkg.homepage %>
  *
  * Copyright (c) <%= (new Date).getFullYear() %> <%= pkg.author.name %>
@@ -11,9 +11,9 @@
 
 // # Globbing
 // for performance reasons we're only matching one level down:
-// '<%= config.src %>/templates/pages/{,*/}*.hbs'
+// '<%%= config.src %>/templates/pages/{,*/}*.hbs'
 // use this if you want to match all subfolders:
-// '<%= config.src %>/templates/pages/**/*.hbs'
+// '<%%= config.src %>/templates/pages/**/*.hbs'
 
 module.exports = function(grunt) {
 
@@ -27,18 +27,18 @@ module.exports = function(grunt) {
 
     watch: {
       assemble: {
-        files: ['<%= config.src %>/{content,data,templates}/{,*/}*.{md,hbs,yml}'],
+        files: ['<%%= config.src %>/{content,data,templates}/{,*/}*.{md,hbs,yml}'],
         tasks: ['assemble']
       },
       livereload: {
         options: {
-          livereload: '<%= connect.options.livereload %>'
+          livereload: '<%%= connect.options.livereload %>'
         },
         files: [
-          '<%= config.dist %>/{,*/}*.html',
-          '<%= config.dist %>/assets/{,*/}*.css',
-          '<%= config.dist %>/assets/{,*/}*.js',
-          '<%= config.dist %>/assets/{,*/}*.{png,jpg,jpeg,gif,webp,svg}'
+          '<%%= config.dist %>/{,*/}*.html',
+          '<%%= config.dist %>/assets/{,*/}*.css',
+          '<%%= config.dist %>/assets/{,*/}*.js',
+          '<%%= config.dist %>/assets/{,*/}*.{png,jpg,jpeg,gif,webp,svg}'
         ]
       }
     },
@@ -54,7 +54,7 @@ module.exports = function(grunt) {
         options: {
           open: true,
           base: [
-            '<%= config.dist %>'
+            '<%%= config.dist %>'
           ]
         }
       }
@@ -64,20 +64,22 @@ module.exports = function(grunt) {
       pages: {
         options: {
           flatten: true,
-          assets: '<%= config.dist %>/assets',
-          layout: '<%= config.src %>/templates/layouts/default.hbs',
-          data: '<%= config.src %>/data/*.{json,yml}',
-          partials: '<%= config.src %>/templates/partials/*.hbs'
+          assets: '<%%= config.dist %>/assets',
+          layout: '<%%= config.src %>/templates/layouts/default.hbs',
+          data: '<%%= config.src %>/data/*.{json,yml}',
+          partials: '<%%= config.src %>/templates/partials/*.hbs'<% if(plugin && plugin.length > 0){ %>,
+          plugins: [<% if(typeof plugin === 'object'){ _.each(plugin, function(name, i) { %>'<%= name %>'<% if(i < (plugin.length - 1)) { %>,<% } }); } else { %>'<%= name %>'<%} } %>],
+
         },
         files: {
-          '<%= config.dist %>/': ['<%= config.src %>/templates/pages/*.hbs']
+          '<%%= config.dist %>/': ['<%%= config.src %>/templates/pages/*.hbs']
         }
       }
     },
 
     // Before generating any new files,
     // remove any previously-created files.
-    clean: ['<%= config.dist %>/**/*.{html,xml}']
+    clean: ['<%%= config.dist %>/**/*.{html,xml}']
 
   });
 
