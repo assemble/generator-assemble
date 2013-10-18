@@ -17,6 +17,8 @@
 
 module.exports = function(grunt) {
 
+  require('time-grunt')(grunt);
+
   // Project configuration.
   grunt.initConfig({
 
@@ -68,8 +70,16 @@ module.exports = function(grunt) {
           layout: '<%%= config.src %>/templates/layouts/default.hbs',
           data: '<%%= config.src %>/data/*.{json,yml}',
           partials: '<%%= config.src %>/templates/partials/*.hbs'<% if(plugin && plugin.length > 0){ %>,
-          plugins: [<% if(typeof plugin === 'object'){ _.each(plugin, function(name, i) { %>'<%= name %>'<% if(i < (plugin.length - 1)) { %>,<% } }); } else { %>'<%= name %>'<%} } %>],
-
+          plugins: [<% if(typeof plugin === 'object'){ _.each(plugin, function(name, i) { %>'<%= name %>'<% if(i < (plugin.length - 1)) { %>,<% } }); } else { %>'<%= name %>'<%} %>],<%}
+          _.each(plugin, function(name, i) { if(name == 'permalinks') { %>
+          permalinks: {
+            structure: 'pretty'
+          },<% }
+          if(name == 'assemble-contrib-contextual') { %>
+          contextual: {
+            dest: 'tmp/'
+          },<% }
+          }); %>
         },
         files: {
           '<%%= config.dist %>/': ['<%%= config.src %>/templates/pages/*.hbs']
@@ -82,6 +92,11 @@ module.exports = function(grunt) {
     clean: ['<%%= config.dist %>/**/*.{html,xml}']
 
   });
+
+  grunt.loadNpmTasks('assemble');
+  grunt.loadNpmTasks('grunt-contrib-clean');
+  grunt.loadNpmTasks('grunt-contrib-connect');
+  grunt.loadNpmTasks('grunt-contrib-watch');
 
   grunt.registerTask('server', [
     'clean',
