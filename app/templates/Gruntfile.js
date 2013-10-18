@@ -22,7 +22,8 @@ module.exports = function(grunt) {
 
     config: {
       src: 'src',
-      dist: 'dist'
+      dist: 'dist',
+      livereload: 35729
     },
 
     watch: {
@@ -32,7 +33,7 @@ module.exports = function(grunt) {
       },
       livereload: {
         options: {
-          livereload: '<%= connect.options.livereload %>'
+          livereload: '<%= config.livereload %>'
         },
         files: [
           '<%= config.dist %>/{,*/}*.html',
@@ -46,7 +47,7 @@ module.exports = function(grunt) {
     connect: {
       options: {
         port: 9000,
-        livereload: 35729,
+        livereload: '<%= config.livereload %>',
         // change this to '0.0.0.0' to access the server from outside
         hostname: 'localhost'
       },

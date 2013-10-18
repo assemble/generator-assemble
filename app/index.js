@@ -42,6 +42,17 @@ var AssembleGenerator = module.exports = function AssembleGenerator(args, option
       email     : this.user.git.email
     }
   });
+  /*
+  this.plugins = {
+    // name => npm
+    'permalinks': 'permalinks',
+    'contextual': 'assemble-contrib-contextual',
+    'sitemap': 'assemble-contrib-sitemap',
+    'markdown': 'assemble-markdown-data',
+    'related': 'assemble-related-pages'
+  };
+  console.log(this);
+  */
 };
 
 util.inherits(AssembleGenerator, yeoman.generators.Base);
@@ -85,8 +96,10 @@ AssembleGenerator.prototype.askFor = function askFor() {
     message : "Which plugin do you want to use?",
     choices : [
       { name: "permalinks" },
-      { name: "sitemap" },
-      { name: "related" }
+      { name: "assemble-contrib-contextual" },
+      { name: "assemble-contrib-sitemap" },
+      { name: "assemble-markdown-data" },
+      { name: "assemble-related-pages" }
     ]
   });
 
@@ -119,7 +132,13 @@ AssembleGenerator.prototype.app = function app() {
     } else if(this.pkgFiles.indexOf(file) !== -1) {
       this.template(file, file.substring(1));
     } else {
-      this.copy(file, file);
+      if (path.basename(file, '.js') === 'Gruntfile') {
+        console.log(path.basename(file, '.js'));
+        this.template('Gruntfile.js');
+      } else {
+        this.copy(file, file);
+      }
+
     }
 
   }, this);
@@ -135,3 +154,4 @@ AssembleGenerator.prototype.normalizeJSON = function() {
   this.conflicter.force = true;
   this.write('package.json', JSON.stringify(JSON.parse(pkgObj), null, 2));
 };
+
