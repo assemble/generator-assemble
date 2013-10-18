@@ -8,7 +8,10 @@
 
 
 ## Usage
-```shell
+
+### Scaffolds out a new Assemble Boilerplate application.
+
+```bash
 mkdir project && cd project
 yo assemble [--skip-install]
 ```
@@ -19,6 +22,17 @@ yo assemble [--skip-install]
 
   Skips the automatic execution of `bower` and `npm` after scaffolding has finished.
 
+### Generate Plugin
+
+```bash
+yo assemble:plugin
+```
+
+If needed, you can specify a name and location too:
+
+```bash
+yo assemble:plugin <name> <path>`
+```
 
 ## Alternative
 
