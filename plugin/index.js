@@ -30,7 +30,7 @@ PluginGenerator.prototype.create = function create() {
   this.authorEmail = this.config.get("author").email;
   this.pluginPath = this.destinationRoot() + this.path;
 
-  var plugin = this.pluginPath +   '/assemble-plugin-'+ this._.dasherize(this.pluginName) +'.js';
+  var plugin = this.pluginPath +   '/assemble-'+ this._.dasherize(this.pluginName) +'.js';
 
   this.template('plugin.js', plugin);
 };
