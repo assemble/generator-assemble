@@ -33,13 +33,13 @@ var AssembleGenerator = module.exports = function AssembleGenerator(args, option
   this.pkgFiles = ['_package.json'];
 
   this.config.defaults({
-    projectName : "",
-    githubUser  : "assemble",
-    plugin      : "permalinks",
+    projectName   : "",
+    githubUser    : "assemble",
+    installPlugin : true,
     author: {
-      name      : this.user.git.username || process.env.user || process.env.username,
-      login     : "assemble",
-      email     : this.user.git.email
+      name        : this.user.git.username || process.env.user || process.env.username,
+      login       : "assemble",
+      email       : this.user.git.email
     }
   });
 
@@ -80,6 +80,13 @@ AssembleGenerator.prototype.askFor = function askFor() {
     default : this.config.get("githubUser")
   });
 
+  (!this.config.get("installPlugin") || force) && questions.push({
+    type    : "confirm",
+    name    : "installPlugin",
+    message : "Would you want to install plugin?",
+    default : this.config.get("installPlugin")
+  });
+
   questions.push({
     name    : "plugin",
     type    : "checkbox",
@@ -90,7 +97,10 @@ AssembleGenerator.prototype.askFor = function askFor() {
       { name: "assemble-contrib-sitemap", checked: true },
       { name: "assemble-markdown-data" },
       { name: "assemble-related-pages" }
-    ]
+    ],
+    when: function( answers ) {
+      return answers.installPlugin;
+    }
   });
 
   this.prompt(questions, function (answers) {
