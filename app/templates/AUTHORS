@@ -1,1 +1,1 @@
-Hariadi Hinta (http://github.com/hariadi)
+<%= pkg.author.name %> (https://github.com/<%= authorLogin %>)
