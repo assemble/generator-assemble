@@ -12,3 +12,7 @@ insert_final_newline = true
 
 [Makefile]
 indent_style = tab
+
+# Trailing whitespace is significant in markdown files.
+[*.md]
+trim_trailing_whitespace = false

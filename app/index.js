@@ -83,20 +83,21 @@ AssembleGenerator.prototype.askFor = function askFor() {
   (!this.config.get("installPlugin") || force) && questions.push({
     type    : "confirm",
     name    : "installPlugin",
-    message : "Would you want to install plugin?",
+    message : "Do you want to install Assemble plugins?",
     default : this.config.get("installPlugin")
   });
 
   questions.push({
     name    : "plugin",
     type    : "checkbox",
-    message : "Which plugin do you want to use?",
+    message : "Which plugins would you like to include?",
     choices : [
-      { name: "permalinks", checked: true },
-      { name: "assemble-contrib-contextual" },
+      { name: "assemble-contrib-anchors", checked: true },
+      { name: "assemble-contrib-permalinks", checked: true },
       { name: "assemble-contrib-sitemap", checked: true },
+      { name: "assemble-contrib-toc", checked: true },
       { name: "assemble-markdown-data" },
-      { name: "assemble-related-pages" }
+      { name: "assemble-related-pages" },
     ],
     when: function( answers ) {
       return answers.installPlugin;

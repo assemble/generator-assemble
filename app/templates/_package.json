@@ -5,7 +5,6 @@
   "homepage": "http://assemble.io",
   "author": {
     "name": "<%= authorName %>",
-    "email": "<%= authorEmail %>",
     "url": "http://github.com/<%= authorLogin %>/"
   },
   "repository": {
@@ -22,7 +21,7 @@
     "test": "grunt assemble"
   },
   "devDependencies": {
-    "assemble": "~0.4.23",
+    "assemble": "~0.4.22",
     "grunt": "~0.4.1",
     "grunt-contrib-clean": "~0.5.0",
     "grunt-contrib-connect": "~0.5.0",
