@@ -12,8 +12,8 @@
 ### Assemble app scaffolds.
 
 ```bash
-mkdir project && cd project
-yo assemble [--skip-install]
+mkdir project && cd $_
+yo assemble
 ```
 
 #### Options
