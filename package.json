@@ -23,10 +23,10 @@
     "test": "mocha --reporter spec"
   },
   "dependencies": {
-    "yeoman-generator": "~0.14.2"
+    "yeoman-generator": "~0.15.0"
   },
   "devDependencies": {
-    "mocha": "~1.15.1"
+    "mocha": "~1.16.2"
   },
   "peerDependencies": {
     "yo": ">=1.0.4"
