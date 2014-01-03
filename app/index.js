@@ -93,7 +93,7 @@ AssembleGenerator.prototype.askFor = function askFor() {
     message : "Which plugins would you like to include?",
     choices : [
       { name: "assemble-contrib-anchors", checked: true },
-      { name: "permalinks", checked: true },
+      { name: "assemble-contrib-permalinks", checked: true },
       { name: "assemble-contrib-sitemap", checked: true },
       { name: "assemble-contrib-toc", checked: true },
       { name: "assemble-markdown-data" },
