@@ -26,18 +26,6 @@ yo assemble
 
   Skips app welcome message.
 
-### Generate Plugin
-
-```bash
-yo assemble:plugin
-```
-
-If needed, you can specify a name and location too:
-
-```bash
-yo assemble:plugin <name> <path>
-```
-
 ## Alternative
 
  * [grunt-init-assemble](https://github.com/assemble/grunt-init-assemble)
