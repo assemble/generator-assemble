@@ -1,1 +1,1 @@
-<%= pkg.author.name %> (https://github.com/<%= authorLogin %>)
+<%= authorName %> (https://github.com/<%= authorLogin %>)
