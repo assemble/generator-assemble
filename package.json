@@ -1,6 +1,6 @@
 {
   "name": "generator-assemble",
-  "version": "0.4.5",
+  "version": "0.4.6",
   "description": "The scaffolding for Assemble",
   "keywords": [
     "yeoman-generator",
@@ -23,10 +23,10 @@
     "test": "mocha --reporter spec"
   },
   "dependencies": {
-    "yeoman-generator": "~0.15.0"
+    "yeoman-generator": "~0.16.0"
   },
   "devDependencies": {
-    "mocha": "~1.16.2"
+    "mocha": "*"
   },
   "peerDependencies": {
     "yo": ">=1.0.4"

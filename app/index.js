@@ -12,6 +12,19 @@ var AssembleGenerator = module.exports = function AssembleGenerator(args, option
 
   yeoman.generators.Base.apply(this, arguments);
 
+  this.description = 'Creates a default Assemble boilerplate';
+
+  // Not required but need to show when user command `yo assemble -h`
+  this.option('init', {
+    alias: 'i',
+    desc: 'Force to prompt question and re-initialize of .yo-rc.json',
+    type: String,
+    defaults: false,
+    required: false
+  });
+
+  this.init = options['init'] || options['i'] || false;
+
   this.on('end', function () {
     this.installDependencies({
       skipInstall: options['skip-install'] || options['s'],
@@ -56,7 +69,8 @@ AssembleGenerator.prototype.askFor = function askFor() {
   var done = this.async();
 
   var force = false;
-  if (!this.config.existed) {
+
+  if (!this.config.existed || this.init) {
     force = true;
   }
 
@@ -71,6 +85,13 @@ AssembleGenerator.prototype.askFor = function askFor() {
     name    : "projectName",
     message : "Your project name",
     default : this.appname
+  });
+
+  (!this.config.get("projectDesc") || force) && questions.push({
+    type    : "input",
+    name    : "projectDesc",
+    message : "Your project description",
+    default : this.config.get("projectDesc")
   });
 
   (!this.config.get("githubUser") || force) && questions.push({
@@ -107,6 +128,7 @@ AssembleGenerator.prototype.askFor = function askFor() {
   this.prompt(questions, function (answers) {
 
     this.projectName = answers.projectName || this.config.get("projectName");
+    this.projectDesc = answers.projectDesc || this.config.get("projectDesc");
     this.authorLogin = answers.githubUser || this.config.get("githubUser");
     this.plugin = answers.plugin;
     this.authorName = this.config.get("author").name;
