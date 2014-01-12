@@ -1,6 +1,6 @@
 # <%= _.slugify(projectName) %>
 
-> My awesome static page generator.
+> <%= _.capitalize(projectDesc) %>.
 
 ## [Assemble](http://assemble.io/)
 

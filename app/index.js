@@ -73,6 +73,13 @@ AssembleGenerator.prototype.askFor = function askFor() {
     default : this.appname
   });
 
+  (!this.config.get("projectDesc") || force) && questions.push({
+    type    : "input",
+    name    : "projectDesc",
+    message : "Your project description",
+    default : this.config.get("projectDesc")
+  });
+
   (!this.config.get("githubUser") || force) && questions.push({
     type    : "input",
     name    : "githubUser",
@@ -107,6 +114,7 @@ AssembleGenerator.prototype.askFor = function askFor() {
   this.prompt(questions, function (answers) {
 
     this.projectName = answers.projectName || this.config.get("projectName");
+    this.projectDesc = answers.projectDesc || this.config.get("projectDesc");
     this.authorLogin = answers.githubUser || this.config.get("githubUser");
     this.plugin = answers.plugin;
     this.authorName = this.config.get("author").name;
