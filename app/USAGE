@@ -1,10 +1,3 @@
-Description:
-    Creates a default Assemble app
-
-Options:
-    --skip-install: Skips the automatic execution of `bower` and `npm`
-      after scaffolding has finished.
-    --s: alias --skip-install
-
 Example:
-    yo assemble [--skip-install] [--silent]
+    yo assemble --init --skip-install --skip-welcome-message
+    yo assemble -i -s -w (alias)

@@ -12,6 +12,19 @@ var AssembleGenerator = module.exports = function AssembleGenerator(args, option
 
   yeoman.generators.Base.apply(this, arguments);
 
+  this.description = 'Creates a default Assemble boilerplate';
+
+  // Not required but need to show when user command `yo assemble -h`
+  this.option('init', {
+    alias: 'i',
+    desc: 'Force to prompt question and re-initialize of .yo-rc.json',
+    type: String,
+    defaults: false,
+    required: false
+  });
+
+  this.init = options['init'] || options['i'] || false;
+
   this.on('end', function () {
     this.installDependencies({
       skipInstall: options['skip-install'] || options['s'],
@@ -56,7 +69,8 @@ AssembleGenerator.prototype.askFor = function askFor() {
   var done = this.async();
 
   var force = false;
-  if (!this.config.existed) {
+
+  if (!this.config.existed || this.init) {
     force = true;
   }
 
