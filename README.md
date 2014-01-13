@@ -30,6 +30,39 @@ yo assemble
 
   Skips app welcome message.
 
+## Boilerplate
+The following directory structure do you get after run `yo assemble`:
+
+    .
+    ├── .editorconfig
+    ├── .gitignore
+    ├── .yo-rc.json
+    ├── AUTHORS
+    ├── CHANGELOG
+    ├── Gruntfile.js
+    ├── LICENSE-MIT
+    ├── package.json
+    ├── README.md
+    ├── dist
+    │   ├── assets
+    │   │   ├── assemble.css
+    │   │   ├── github.css
+    │   │   └── highlight.js
+    ├── src
+    │   ├── content
+    │   │   └── markdown.md
+    │   ├── data
+    │   │   └── site.yml
+    │   └── templates
+    │       ├── layouts
+    │       │   └── default.md
+    │       ├── pages
+    │       │   ├── index.hbs
+    │       │   └── blog.hbs
+    │       └── partials
+    │           └── navbar-fixed-top.hbs
+    └── node_modules
+
 ## Alternative
 
  * [grunt-init-assemble](https://github.com/assemble/grunt-init-assemble)
