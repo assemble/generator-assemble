@@ -18,6 +18,10 @@ yo assemble
 
 #### Options
 
+* `-i` alias `--init`
+
+  Force to prompt question and re-initialize `.yo-rc.json`.
+
 * `-s` alias `--skip-install`
 
   Skips the automatic execution of `bower` and `npm` after scaffolding has finished.
