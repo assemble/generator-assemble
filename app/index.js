@@ -28,7 +28,10 @@ var AssembleGenerator = module.exports = function AssembleGenerator(args, option
   this.on('end', function () {
     this.installDependencies({
       skipInstall: options['skip-install'] || options['s'],
-      skipMessage: options['skip-welcome-message'] || options['w']
+      skipMessage: options['skip-welcome-message'] || options['w'],
+      callback: function () {
+        this.spawnCommand('grunt', ['build']);
+      }.bind(this) // only run grunt build after succesful npm/bower install
     });
   });
 
@@ -130,7 +133,7 @@ AssembleGenerator.prototype.askFor = function askFor() {
     this.projectName = answers.projectName || this.config.get("projectName");
     this.projectDesc = answers.projectDesc || this.config.get("projectDesc");
     this.authorLogin = answers.githubUser || this.config.get("githubUser");
-    this.plugins     = answers.plugins;
+    this.plugins     = answers.plugins || this.config.get("plugins");
     this.authorName  = this.config.get("author").name;
     this.authorEmail = this.config.get("author").email;
 
