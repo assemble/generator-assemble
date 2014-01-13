@@ -69,9 +69,9 @@ module.exports = function(grunt) {
           assets: '<%%= config.dist %>/assets',
           layout: '<%%= config.src %>/templates/layouts/default.hbs',
           data: '<%%= config.src %>/data/*.{json,yml}',
-          partials: '<%%= config.src %>/templates/partials/*.hbs'<% if(plugin && plugin.length > 0){ %>,
-          plugins: [<% if(typeof plugin === 'object'){ _.each(plugin, function(name, i) { %>'<%= name %>'<% if(i < (plugin.length - 1)) { %>,<% } }); } else { %>'<%= name %>'<%} %>],<%}
-          _.each(plugin, function(name, i) { if(name == 'permalinks') { %>
+          partials: '<%%= config.src %>/templates/partials/*.hbs'<% if(plugins && plugins.length > 0){ %>,
+          plugins: [<% if(typeof plugins === 'object'){ _.each(plugins, function(name, i) { %>'<%= name %>'<% if(i < (plugins.length - 1)) { %>,<% } }); } else { %>'<%= name %>'<%} %>],<%}
+          _.each(plugins, function(name, i) { if(name == 'permalinks') { %>
           permalinks: {
             preset: 'pretty'
           },<% }

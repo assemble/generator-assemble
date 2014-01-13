@@ -109,7 +109,7 @@ AssembleGenerator.prototype.askFor = function askFor() {
   });
 
   questions.push({
-    name    : "plugin",
+    name    : "plugins",
     type    : "checkbox",
     message : "Which plugins would you like to include?",
     choices : [
@@ -130,8 +130,8 @@ AssembleGenerator.prototype.askFor = function askFor() {
     this.projectName = answers.projectName || this.config.get("projectName");
     this.projectDesc = answers.projectDesc || this.config.get("projectDesc");
     this.authorLogin = answers.githubUser || this.config.get("githubUser");
-    this.plugin = answers.plugin;
-    this.authorName = this.config.get("author").name;
+    this.plugins     = answers.plugins;
+    this.authorName  = this.config.get("author").name;
     this.authorEmail = this.config.get("author").email;
 
     //save config to .yo-rc.json
