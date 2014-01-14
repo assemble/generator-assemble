@@ -9,7 +9,7 @@
 
 ## Usage
 
-### Assemble app scaffolds.
+Creates an Assemble boilerplate projects.
 
 ```bash
 mkdir project && cd $_

@@ -12,7 +12,8 @@ var AssembleGenerator = module.exports = function AssembleGenerator(args, option
 
   yeoman.generators.Base.apply(this, arguments);
 
-  this.description = 'Creates a default Assemble boilerplate';
+  this.pkg = JSON.parse(this.readFileAsString(path.join(__dirname, '../package.json')));
+  this.description = this.pkg.description;
 
   // Not required but need to show when user command `yo assemble -h`
   this.option('init', {
@@ -36,8 +37,6 @@ var AssembleGenerator = module.exports = function AssembleGenerator(args, option
   });
 
   this.files = this.expandFiles('**/*', { cwd: this.sourceRoot(), dot: true });
-
-  this.pkg = JSON.parse(this.readFileAsString(path.join(__dirname, '../package.json')));
 
   this.dotFiles = [
     'gitignore',
