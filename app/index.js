@@ -47,8 +47,18 @@ var AssembleGenerator = module.exports = function AssembleGenerator(args, option
 
   this.pkgFiles = ['_package.json'];
 
+  this.defaultPlugins = {
+      "assemble-contrib-anchors": true,
+      "assemble-contrib-permalinks": true,
+      "assemble-contrib-sitemap": true,
+      "assemble-contrib-toc": true,
+      "assemble-markdown-data": false,
+      "assemble-related-pages": false
+    };
+
   this.config.defaults({
     projectName   : "",
+    projectDesc   : "The best project ever.",
     githubUser    : "assemble",
     installPlugin : true,
     author: {
@@ -110,18 +120,43 @@ AssembleGenerator.prototype.askFor = function askFor() {
     default : this.config.get("installPlugin")
   });
 
+  // for first time/re-init, make new list of defaultPlugins
+  if(!this.config.get("installPlugin") || force) {
+
+    var plugins = this.config.get("plugins");
+
+    // if we have previous plugin choice
+    if (plugins instanceof Array) {
+      var defaultPlugins = {};
+
+      // convert it to object and assign checked
+      plugins.forEach(function(plugin) {
+        defaultPlugins[plugin] = true;
+      });
+
+      // concat with defautPlugins
+      for (var key in defaultPlugins) {
+        this.defaultPlugins[key] = defaultPlugins[key];
+      }
+    }
+
+  }
+
+  var choices = [];
+  var pluginObj = this.defaultPlugins;
+
+  // make choice more dynamic and checked from previous choice
+  for (var plugin in pluginObj) {
+    if(pluginObj.hasOwnProperty(plugin)){
+      choices.push({ name: plugin, checked: pluginObj[plugin] });
+    }
+  }
+
   questions.push({
     name    : "plugins",
     type    : "checkbox",
     message : "Which plugins would you like to include?",
-    choices : [
-      { name: "assemble-contrib-anchors", checked: true },
-      { name: "assemble-contrib-permalinks", checked: true },
-      { name: "assemble-contrib-sitemap", checked: true },
-      { name: "assemble-contrib-toc", checked: true },
-      { name: "assemble-markdown-data" },
-      { name: "assemble-related-pages" },
-    ],
+    choices : choices,
     when: function( answers ) {
       return answers.installPlugin;
     }
