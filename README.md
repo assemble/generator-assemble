@@ -30,8 +30,16 @@ yo assemble
 
   Skips app welcome message.
 
+
+## Include in boilerplate
+* time-grunt
+* grunt-contrib-clean
+* grunt-contrib-connect
+* grunt-contrib-watch
+
+
 ## Boilerplate
-The following directory structure do you get after run `yo assemble`:
+The following directory structure generated after run `yo assemble`:
 
     .
     ├── .editorconfig
