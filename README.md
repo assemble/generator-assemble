@@ -73,8 +73,8 @@ The following directory structure generated after run `yo assemble`:
 
 ## Related
 
- * [Helper generator for Assemble](https://github.com/assemble/generator-helper).
- * [Plugin generator for Assemble](https://github.com/assemble/generator-plugin)
+ * [Assemble Helper generator](https://github.com/assemble/generator-helper)
+ * [Assemble Plugin generator](https://github.com/assemble/generator-plugin)
  * [grunt-init-assemble](https://github.com/assemble/grunt-init-assemble)
 
 
