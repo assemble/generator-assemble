@@ -1,3 +1,4 @@
 Example:
-    yo assemble --init --skip-install --skip-welcome-message
-    yo assemble -i -s -w (alias)
+    yo assemble
+    yo assemble [--init] [--skip-install] [--skip-welcome-message]
+    yo assemble [-i] [-s] [-w]

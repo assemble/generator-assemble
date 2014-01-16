@@ -1,7 +1,7 @@
 {
   "name": "generator-assemble",
   "version": "0.4.6",
-  "description": "Yeoman generator for Assemble, the static site generator built on Grunt.js. Kickstart new Assemble projects in just a few seconds, including templates, data, layouts, and a theme.",
+  "description": "Creates an Assemble boilerplate projects.",
   "keywords": [
     "yeoman-generator",
     "assemble",
@@ -11,8 +11,7 @@
   "bugs": "https://github.com/assemble/generator-assemble/issues",
   "author": {
     "name": "Hariadi Hinta",
-    "email": "diperakui@yahoo.com",
-    "url": "http://hariadi.org"
+    "email": "diperakui@yahoo.com"
   },
   "main": "app/index.js",
   "repository": {
@@ -29,10 +28,10 @@
     "mocha": "*"
   },
   "peerDependencies": {
-    "yo": ">=1.0.4"
+    "yo": ">=1.0.0"
   },
   "engines": {
-    "node": ">=0.8.0",
+    "node": ">=0.10.0",
     "npm": ">=1.2.10"
   },
   "licenses": [
