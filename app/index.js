@@ -76,7 +76,6 @@ util.inherits(AssembleGenerator, yeoman.generators.Base);
  * Command prompt questions
  * Extend defaults and options based on user answers
  */
-
 AssembleGenerator.prototype.askFor = function askFor() {
   var done = this.async();
 
@@ -122,30 +121,26 @@ AssembleGenerator.prototype.askFor = function askFor() {
 
   // for first time/re-init, make new list of defaultPlugins
   if(!this.config.get("installPlugin") || force) {
-
     var plugins = this.config.get("plugins");
-
     // if we have previous plugin choice
-    if (plugins instanceof Array) {
+    if (this._.isArray(plugins)) {
       var defaultPlugins = {};
-
       // convert it to object and assign checked
       plugins.forEach(function(plugin) {
         defaultPlugins[plugin] = true;
       });
-
       // concat with defautPlugins
       for (var key in defaultPlugins) {
         this.defaultPlugins[key] = defaultPlugins[key];
       }
     }
-
   }
 
   var choices = [];
   var pluginObj = this.defaultPlugins;
 
   // make choice more dynamic and checked from previous choice
+  // TODO: fetch from npm with "assembleplugin" keyword
   for (var plugin in pluginObj) {
     if(pluginObj.hasOwnProperty(plugin)){
       choices.push({ name: plugin, checked: pluginObj[plugin] });
@@ -182,7 +177,6 @@ AssembleGenerator.prototype.askFor = function askFor() {
  * TODO: Separate file generated with their own function. See test-creation.js
  * Copy boilerplate main code
  */
-
 AssembleGenerator.prototype.app = function app() {
   var files = this.files;
 
@@ -205,7 +199,6 @@ AssembleGenerator.prototype.app = function app() {
 /**
  * Stringify an object and normalize whitespace with project preferences.
  */
-
 AssembleGenerator.prototype.normalizeJSON = function() {
   var pkgFile = path.join(this.destinationRoot(process.cwd()), 'package.json');
   var pkgObj = this.read(pkgFile);
