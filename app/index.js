@@ -12,7 +12,8 @@ var AssembleGenerator = module.exports = function AssembleGenerator(args, option
 
   yeoman.generators.Base.apply(this, arguments);
 
-  this.description = 'Creates a default Assemble boilerplate';
+  this.pkg = JSON.parse(this.readFileAsString(path.join(__dirname, '../package.json')));
+  this.description = this.pkg.description;
 
   // Not required but need to show when user command `yo assemble -h`
   this.option('init', {
@@ -28,13 +29,14 @@ var AssembleGenerator = module.exports = function AssembleGenerator(args, option
   this.on('end', function () {
     this.installDependencies({
       skipInstall: options['skip-install'] || options['s'],
-      skipMessage: options['skip-welcome-message'] || options['w']
+      skipMessage: options['skip-welcome-message'] || options['w'],
+      callback: function () {
+        this.spawnCommand('grunt', ['build']);
+      }.bind(this) // only run grunt build after succesful npm/bower install
     });
   });
 
   this.files = this.expandFiles('**/*', { cwd: this.sourceRoot(), dot: true });
-
-  this.pkg = JSON.parse(this.readFileAsString(path.join(__dirname, '../package.json')));
 
   this.dotFiles = [
     'gitignore',
@@ -45,8 +47,18 @@ var AssembleGenerator = module.exports = function AssembleGenerator(args, option
 
   this.pkgFiles = ['_package.json'];
 
+  this.defaultPlugins = {
+      "assemble-contrib-anchors": true,
+      "assemble-contrib-permalinks": true,
+      "assemble-contrib-sitemap": true,
+      "assemble-contrib-toc": true,
+      "assemble-markdown-data": false,
+      "assemble-related-pages": false
+    };
+
   this.config.defaults({
     projectName   : "",
+    projectDesc   : "The best project ever.",
     githubUser    : "assemble",
     installPlugin : true,
     author: {
@@ -64,7 +76,6 @@ util.inherits(AssembleGenerator, yeoman.generators.Base);
  * Command prompt questions
  * Extend defaults and options based on user answers
  */
-
 AssembleGenerator.prototype.askFor = function askFor() {
   var done = this.async();
 
@@ -108,18 +119,39 @@ AssembleGenerator.prototype.askFor = function askFor() {
     default : this.config.get("installPlugin")
   });
 
+  // for first time/re-init, make new list of defaultPlugins
+  if(!this.config.get("installPlugin") || force) {
+    var plugins = this.config.get("plugins");
+    // if we have previous plugin choice
+    if (this._.isArray(plugins)) {
+      var defaultPlugins = {};
+      // convert it to object and assign checked
+      plugins.forEach(function(plugin) {
+        defaultPlugins[plugin] = true;
+      });
+      // concat with defautPlugins
+      for (var key in defaultPlugins) {
+        this.defaultPlugins[key] = defaultPlugins[key];
+      }
+    }
+  }
+
+  var choices = [];
+  var pluginObj = this.defaultPlugins;
+
+  // make choice more dynamic and checked from previous choice
+  // TODO: fetch from npm with "assembleplugin" keyword
+  for (var plugin in pluginObj) {
+    if(pluginObj.hasOwnProperty(plugin)){
+      choices.push({ name: plugin, checked: pluginObj[plugin] });
+    }
+  }
+
   questions.push({
-    name    : "plugin",
+    name    : "plugins",
     type    : "checkbox",
     message : "Which plugins would you like to include?",
-    choices : [
-      { name: "assemble-contrib-anchors", checked: true },
-      { name: "assemble-contrib-permalinks", checked: true },
-      { name: "assemble-contrib-sitemap", checked: true },
-      { name: "assemble-contrib-toc", checked: true },
-      { name: "assemble-markdown-data" },
-      { name: "assemble-related-pages" },
-    ],
+    choices : choices,
     when: function( answers ) {
       return answers.installPlugin;
     }
@@ -130,8 +162,8 @@ AssembleGenerator.prototype.askFor = function askFor() {
     this.projectName = answers.projectName || this.config.get("projectName");
     this.projectDesc = answers.projectDesc || this.config.get("projectDesc");
     this.authorLogin = answers.githubUser || this.config.get("githubUser");
-    this.plugin = answers.plugin;
-    this.authorName = this.config.get("author").name;
+    this.plugins     = answers.plugins || this.config.get("plugins");
+    this.authorName  = this.config.get("author").name;
     this.authorEmail = this.config.get("author").email;
 
     //save config to .yo-rc.json
@@ -145,7 +177,6 @@ AssembleGenerator.prototype.askFor = function askFor() {
  * TODO: Separate file generated with their own function. See test-creation.js
  * Copy boilerplate main code
  */
-
 AssembleGenerator.prototype.app = function app() {
   var files = this.files;
 
@@ -168,7 +199,6 @@ AssembleGenerator.prototype.app = function app() {
 /**
  * Stringify an object and normalize whitespace with project preferences.
  */
-
 AssembleGenerator.prototype.normalizeJSON = function() {
   var pkgFile = path.join(this.destinationRoot(process.cwd()), 'package.json');
   var pkgObj = this.read(pkgFile);

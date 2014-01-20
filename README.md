@@ -9,7 +9,7 @@
 
 ## Usage
 
-### Assemble app scaffolds.
+Creates an Assemble boilerplate projects.
 
 ```bash
 mkdir project && cd $_
@@ -17,6 +17,10 @@ yo assemble
 ```
 
 #### Options
+
+* `-i` alias `--init`
+
+  Force to prompt question and re-initialize `.yo-rc.json`.
 
 * `-s` alias `--skip-install`
 
@@ -26,8 +30,51 @@ yo assemble
 
   Skips app welcome message.
 
-## Alternative
 
+## Include in boilerplate
+* time-grunt
+* grunt-contrib-clean
+* grunt-contrib-connect
+* grunt-contrib-watch
+
+
+## Boilerplate
+The following directory structure generated after run `yo assemble`:
+
+    .
+    ├── .editorconfig
+    ├── .gitignore
+    ├── .yo-rc.json
+    ├── AUTHORS
+    ├── CHANGELOG
+    ├── Gruntfile.js
+    ├── LICENSE-MIT
+    ├── package.json
+    ├── README.md
+    ├── dist
+    │   ├── assets
+    │   │   ├── assemble.css
+    │   │   ├── github.css
+    │   │   └── highlight.js
+    ├── src
+    │   ├── content
+    │   │   └── markdown.md
+    │   ├── data
+    │   │   └── site.yml
+    │   └── templates
+    │       ├── layouts
+    │       │   └── default.md
+    │       ├── pages
+    │       │   ├── index.hbs
+    │       │   └── blog.hbs
+    │       └── partials
+    │           └── navbar-fixed-top.hbs
+    └── node_modules
+
+## Related
+
+ * [Assemble Helper generator](https://github.com/assemble/generator-helper)
+ * [Assemble Plugin generator](https://github.com/assemble/generator-plugin)
  * [grunt-init-assemble](https://github.com/assemble/grunt-init-assemble)
 
 
