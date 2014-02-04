@@ -14,7 +14,6 @@ var AssembleGenerator = yeoman.generators.Base.extend({
     this.pkg = yeoman.file.readJSON(path.join(__dirname, '../package.json'));
     this.description = this.pkg.description;
 
-    // Not required but need to show when user command `yo assemble -h`
     this.option('init', {
       alias: 'i',
       desc: 'Force to prompt question and re-initialize of .yo-rc.json',
@@ -42,10 +41,10 @@ var AssembleGenerator = yeoman.generators.Base.extend({
     });
 
     this.defaultPlugins = {
-        "assemble-contrib-anchors": true,
+        "assemble-contrib-anchors": false,
         "assemble-contrib-permalinks": true,
         "assemble-contrib-sitemap": true,
-        "assemble-contrib-toc": true,
+        "assemble-contrib-toc": false,
         "assemble-markdown-data": false,
         "assemble-related-pages": false
       };
@@ -176,9 +175,8 @@ var AssembleGenerator = yeoman.generators.Base.extend({
     this.copy('gitattributes', '.gitattributes');
   },
 
-  dist: function () {
-    this.mkdir('dist/assets/css');
-    this.copy('assemble.css', 'dist/assets/css/assemble.css');
+  assets: function () {
+    this.directory('bootstrap', 'dist/assets');
   },
 
   src: function () {
