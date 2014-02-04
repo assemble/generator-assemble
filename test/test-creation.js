@@ -31,9 +31,6 @@ describe('Assemble generator', function () {
       'LICENSE-MIT',
       'README.md',
       'package.json',
-      'dist/assets/assemble.css',
-      'dist/assets/github.css',
-      'dist/assets/highlight.js',
       '.gitignore',
       '.editorconfig',
       'src/content/markdown.md',
@@ -41,7 +38,15 @@ describe('Assemble generator', function () {
       'src/templates/layouts/default.hbs',
       'src/templates/pages/blog.hbs',
       'src/templates/pages/index.hbs',
-      'src/templates/partials/navbar-fixed-top.hbs'
+      'src/templates/partials/navbar-fixed-top.hbs',
+      'dist/assets/js/bootstrap.min.js',
+      'dist/assets/css/theme.css',
+      'dist/assets/css/bootstrap.min.css',
+      'dist/assets/css/bootstrap-theme.min.css',
+      'dist/assets/fonts/glyphicons-halflings-regular.eot',
+      'dist/assets/fonts/glyphicons-halflings-regular.svg',
+      'dist/assets/fonts/glyphicons-halflings-regular.ttf',
+      'dist/assets/fonts/glyphicons-halflings-regular.woff'
     ];
 
     helpers.mockPrompt(this.app, {

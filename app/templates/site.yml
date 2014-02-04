@@ -1,0 +1,1 @@
+title: <%= _.capitalize(projectName) %>
