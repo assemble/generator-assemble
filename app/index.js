@@ -25,12 +25,6 @@ var AssembleGenerator = yeoman.generators.Base.extend({
     this.init = this.options['init'] || this.options['i'] || false;
 
     this.on('end', function () {
-      if (!this.options['skip-install']) {
-        this.npmInstall();
-      }
-    });
-
-    this.on('end', function () {
       this.installDependencies({
         skipInstall: this.options['skip-install'] || this.options['s'],
         skipMessage: this.options['skip-welcome-message'] || this.options['w'],
