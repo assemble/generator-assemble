@@ -52,10 +52,18 @@ The following directory structure generated after run `yo assemble`:
     ├── package.json
     ├── README.md
     ├── dist
-    │   ├── assets
-    │   │   ├── assemble.css
-    │   │   ├── github.css
-    │   │   └── highlight.js
+    │   └── assets
+    │       ├── css
+    │       │   ├── bootstrap.css
+    │       │   ├── bootstrap.min.css
+    │       │   └── theme.css
+    │       ├── js
+    │       │   └── bootstrap.min.js
+    │       └── fonts
+    │           ├── glyphicons-halflings-regular.eot
+    │           ├── glyphicons-halflings-regular.svg
+    │           ├── glyphicons-halflings-regular.ttf
+    │           └── glyphicons-halflings-regular.woff
     ├── src
     │   ├── content
     │   │   └── markdown.md

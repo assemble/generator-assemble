@@ -1,5 +1,4 @@
 'use strict';
-var util = require('util');
 var path = require('path');
 var yeoman = require('yeoman-generator');
 
@@ -11,7 +10,7 @@ var yeoman = require('yeoman-generator');
 var AssembleGenerator = yeoman.generators.Base.extend({
 
   init: function () {
-    this.pkg = yeoman.file.readJSON(path.join(__dirname, '../package.json'));
+    this.pkg = require('../package.json');
     this.description = this.pkg.description;
 
     this.option('init', {
@@ -23,12 +22,6 @@ var AssembleGenerator = yeoman.generators.Base.extend({
     });
 
     this.init = this.options['init'] || this.options['i'] || false;
-
-    this.on('end', function () {
-      if (!this.options['skip-install']) {
-        this.npmInstall();
-      }
-    });
 
     this.on('end', function () {
       this.installDependencies({
