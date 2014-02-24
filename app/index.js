@@ -34,13 +34,11 @@ var AssembleGenerator = yeoman.generators.Base.extend({
     });
 
     this.defaultPlugins = {
-        "assemble-contrib-anchors": false,
-        "assemble-contrib-permalinks": true,
-        "assemble-contrib-sitemap": true,
-        "assemble-contrib-toc": false,
-        "assemble-markdown-data": false,
-        "assemble-related-pages": false
-      };
+      "assemble-contrib-anchors": false,
+      "assemble-contrib-permalinks": true,
+      "assemble-contrib-sitemap": true,
+      "assemble-contrib-toc": false,
+    };
 
     this.config.defaults({
       projectName   : "",

@@ -1,23 +1,27 @@
 {
   "name": "generator-assemble",
   "version": "0.4.9",
-  "description": "Creates an Assemble boilerplate projects.",
-  "keywords": [
-    "yeoman-generator",
-    "assemble",
-    "grunt"
-  ],
-  "homepage": "https://github.com/assemble/generator-assemble",
-  "bugs": "https://github.com/assemble/generator-assemble/issues",
+  "description": "Create new Assemble projects.",
   "author": {
     "name": "Hariadi Hinta",
+    "url": "https://github.com/hariadi",
     "email": "diperakui@yahoo.com"
   },
-  "main": "app/index.js",
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/assemble/assemble/blob/master/LICENSE-MIT"
+    }
+  ],
+  "homepage": "https://github.com/assemble/generator-assemble",
   "repository": {
     "type": "git",
     "url": "https://github.com/assemble/generator-assemble.git"
   },
+  "bugs": {
+    "url": "https://github.com/assemble/generator-assemble/issues"
+  },
+  "main": "app/index.js",
   "scripts": {
     "test": "mocha --reporter spec"
   },
@@ -34,10 +38,11 @@
     "node": ">=0.10.0",
     "npm": ">=1.2.10"
   },
-  "licenses": [
-    {
-      "type": "MIT",
-      "url": "https://github.com/assemble/assemble/blob/master/LICENSE-MIT"
-    }
+  "keywords": [
+    "yeoman-generator",
+    "assemble",
+    "generator",
+    "boilerplate",
+    "grunt"
   ]
 }
