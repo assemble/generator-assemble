@@ -3,20 +3,22 @@
 > [Yeoman][yeoman] generator for [Assemble][assemble].
 
 ## Getting started
-- Install the generator:
-    `npm install -g generator-assemble`
 
+Install the generator from [npm](npmjs.org):
+
+``` bash
+npm i -g generator-assemble
+```
 
 ## Usage
 
-Creates an Assemble boilerplate projects.
+Generate a new Assemble project:
 
 ```bash
-mkdir project && cd $_
 yo assemble
 ```
 
-#### Options
+#### Generator options
 
 * `-i` alias `--init`
 
@@ -31,15 +33,17 @@ yo assemble
   Skips app welcome message.
 
 
-## Include in boilerplate
-* time-grunt
+## Included Grunt tasks
+
 * grunt-contrib-clean
 * grunt-contrib-connect
 * grunt-contrib-watch
+* time-grunt
 
 
 ## Boilerplate
-The following directory structure generated after run `yo assemble`:
+
+The following directory structure is generated after running `yo assemble`:
 
     .
     ├── .editorconfig
@@ -79,12 +83,11 @@ The following directory structure generated after run `yo assemble`:
     │           └── navbar-fixed-top.hbs
     └── node_modules
 
+
 ## Related
 
  * [Assemble Helper generator](https://github.com/assemble/generator-helper)
  * [Assemble Plugin generator](https://github.com/assemble/generator-plugin)
- * [grunt-init-assemble](https://github.com/assemble/grunt-init-assemble)
-
 
 ## License
 [MIT License](http://en.wikipedia.org/wiki/MIT_License)
