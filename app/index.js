@@ -43,7 +43,7 @@ var AssembleGenerator = yeoman.generators.Base.extend({
     this.config.defaults({
       projectName   : "",
       projectDesc   : "The best project ever.",
-      githubUser    : "assemble",
+      authorLogin   : "assemble",
       installPlugin : true,
       author: {
         name        : this.user.git.username || process.env.user || process.env.username,
@@ -73,7 +73,7 @@ var AssembleGenerator = yeoman.generators.Base.extend({
       type    : "input",
       name    : "projectName",
       message : "Your project name",
-      default : this.appname
+      default : this.appname || this.config.get("projectName")
     });
 
     (!this.config.get("projectDesc") || force) && questions.push({
@@ -83,14 +83,14 @@ var AssembleGenerator = yeoman.generators.Base.extend({
       default : this.config.get("projectDesc")
     });
 
-    (!this.config.get("githubUser") || force) && questions.push({
+    (!this.config.get("author").login || !this.config.get("authorLogin") || force) && questions.push({
       type    : "input",
-      name    : "githubUser",
+      name    : "authorLogin",
       message : "Would you mind telling me your username on Github?",
-      default : this.config.get("githubUser")
+      default : this.config.get("author").login || this.config.get("authorLogin")
     });
 
-    (!this.config.get("installPlugin") || force) && questions.push({
+    questions.push({
       type    : "confirm",
       name    : "installPlugin",
       message : "Do you want to install Assemble plugins?",
@@ -139,8 +139,8 @@ var AssembleGenerator = yeoman.generators.Base.extend({
 
       this.projectName = answers.projectName || this.config.get("projectName");
       this.projectDesc = answers.projectDesc || this.config.get("projectDesc");
-      this.authorLogin = answers.githubUser || this.config.get("githubUser");
-      this.plugins     = answers.plugins || this.config.get("plugins");
+      this.authorLogin = answers.authorLogin || this.config.get("authorLogin");
+      this.plugins     = answers.plugins;
       this.authorName  = this.config.get("author").name;
       this.authorEmail = this.config.get("author").email;
 
@@ -182,14 +182,7 @@ var AssembleGenerator = yeoman.generators.Base.extend({
     this.copy('index.hbs', 'src/templates/pages/index.hbs');
     this.copy('layout.hbs', 'src/templates/layouts/default.hbs');
     this.copy('inc-navbar-fixed-top.hbs', 'src/templates/partials/navbar-fixed-top.hbs');
-  },
-
-  normalizePackage: function() {
-    var pkgFile = path.join(this.destinationRoot(process.cwd()), 'package.json');
-    var pkgObj = this.read(pkgFile);
-    this.conflicter.force = true;
-    this.write('package.json', JSON.stringify(JSON.parse(pkgObj), null, 2));
-  },
+  }
 
 });
 
