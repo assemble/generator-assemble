@@ -11,36 +11,37 @@
 
 // # Globbing
 // for performance reasons we're only matching one level down:
-// '<%%= config.src %>/templates/pages/{,*/}*.hbs'
+// '<%%= site.templates %%>/pages/{,*/}*.hbs'
 // use this if you want to match all subfolders:
-// '<%%= config.src %>/templates/pages/**/*.hbs'
+// '<%%= site.templates %%>/pages/**/*.hbs'
 
 module.exports = function(grunt) {
 
   require('time-grunt')(grunt);
 
-  // Project configuration.
+  // Project siteuration.
   grunt.initConfig({
 
-    config: {
-      src: 'src',
-      dist: 'dist'
-    },
+    site: grunt.file.readYAML('.assemblerc.yml'),
 
     watch: {
       assemble: {
-        files: ['<%%= config.src %>/{content,data,templates}/{,*/}*.{md,hbs,yml}'],
-        tasks: ['assemble']
+        tasks: ['assemble'],
+        files: [
+          '<%%= site.templates %%>/{,*/}*.hbs',
+          '<%%= site.content %%>/{,*/}*.md',
+          '<%%= site.data %%>/{,*/}*.{yml,json}',
+        ]
       },
       livereload: {
         options: {
-          livereload: '<%%= connect.options.livereload %>'
+          livereload: '<%%= connect.options.livereload %%>'
         },
         files: [
-          '<%%= config.dist %>/{,*/}*.html',
-          '<%%= config.dist %>/assets/{,*/}*.css',
-          '<%%= config.dist %>/assets/{,*/}*.js',
-          '<%%= config.dist %>/assets/{,*/}*.{png,jpg,jpeg,gif,webp,svg}'
+          '<%%= site.dest %%>/{,*/}*.html',
+          '<%%= site.assets %%>/{,*/}*.css',
+          '<%%= site.assets %%>/{,*/}*.js',
+          '<%%= site.assets %%>/{,*/}*.{png,jpg,jpeg,gif,webp,svg}'
         ]
       }
     },
@@ -55,41 +56,50 @@ module.exports = function(grunt) {
       livereload: {
         options: {
           open: true,
-          base: [
-            '<%%= config.dist %>'
-          ]
+          base: ['<%%= site.dest %%>']
         }
       }
     },
 
     assemble: {
-      pages: {
-        options: {
-          flatten: true,
-          assets: '<%%= config.dist %>/assets',
-          layout: '<%%= config.src %>/templates/layouts/default.hbs',
-          data: '<%%= config.src %>/data/*.{json,yml}',
-          partials: '<%%= config.src %>/templates/partials/*.hbs'<% if(plugins && plugins.length > 0){ %>,
-          plugins: [<% if(typeof plugins === 'object'){ _.each(plugins, function(name, i) { %>'<%= name %>'<% if(i < (plugins.length - 1)) { %>,<% } }); } else { %>'<%= name %>'<%} %>],<%}
-          _.each(plugins, function(name, i) { if(name == 'permalinks') { %>
-          permalinks: {
-            preset: 'pretty'
-          },<% }
-          if(name == 'assemble-contrib-contextual') { %>
-          contextual: {
-            dest: 'tmp/'
-          },<% }
-          }); %>
-        },
+      options: {
+        flatten: true,
+        assets: '<%%= site.dest %%>/assets',
+
+        // Metadata
+        site: '<%%= site %%>',
+        data: '<%%= site.data %%>/*.{json,yml}',
+
+        // Templates
+        partials: ['<%%= site.includes %%>/*.hbs']<% if(plugins && plugins.length > 0){ %>,
+        layoutdir: '<%%= site.layouts %%>',
+        layoutext: '<%%= site.layoutext %%>',
+        layout: '<%%= site.layout %%>',
+
+        // Extensions
+        plugins: [<% if(typeof plugins === 'object'){ _.each(plugins, function(name, i) { %>'<%= name %>'<% if(i < (plugins.length - 1)) { %>,<% } }); } else { %>'<%= name %>'<%} %>],<%}
+        _.each(plugins, function(name, i) { if(name == 'permalinks') { %>
+        permalinks: {
+          preset: 'pretty'
+        },<% }
+        if(name == 'assemble-contrib-contextual') { %>
+        contextual: {
+          dest: 'tmp/'
+        },<% }
+        }); %>
+      },
+
+      // Build site
+      site: {
         files: {
-          '<%%= config.dist %>/': ['<%%= config.src %>/templates/pages/*.hbs']
+          '<%%= site.dest %%>/': ['<%%= site.pages %%>/*.hbs']
         }
       }
     },
 
     // Before generating any new files,
     // remove any previously-created files.
-    clean: ['<%%= config.dist %>/**/*.{html,xml}']
+    clean: ['<%%= site.dest %%>/**/*.{html,xml}']
 
   });
 

@@ -1,11 +1,10 @@
 {
   "name": "generator-assemble",
   "version": "0.4.9",
-  "description": "Create new Assemble projects.",
+  "description": "Static site generator for Grunt.js, Yeoman and Node.js.",
   "author": {
     "name": "Hariadi Hinta",
-    "url": "https://github.com/hariadi",
-    "email": "diperakui@yahoo.com"
+    "url": "https://github.com/hariadi"
   },
   "licenses": [
     {

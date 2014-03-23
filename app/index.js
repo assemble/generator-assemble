@@ -1,4 +1,12 @@
+/*
+ * generator-assemble <https://github.com/assemble/generator-assemble>
+ *
+ * Copyright (c) 2014 Hariadi Hinta
+ * Licensed under the MIT license.
+ */
+
 'use strict';
+
 var path = require('path');
 var yeoman = require('yeoman-generator');
 
@@ -21,7 +29,7 @@ var AssembleGenerator = yeoman.generators.Base.extend({
       required: false
     });
 
-    this.init = this.options['init'] || this.options['i'] || false;
+    // this.init = this.options['init'] || this.options['i'] || false;
 
     this.on('end', function () {
       this.installDependencies({
@@ -171,17 +179,17 @@ var AssembleGenerator = yeoman.generators.Base.extend({
   },
 
   src: function () {
-    this.mkdir('src/data');
-    this.mkdir('src/content');
-    this.mkdir('src/templates/pages');
-    this.mkdir('src/templates/layouts');
-    this.mkdir('src/templates/partials');
-    this.copy('site.yml', 'src/data/site.yml');
-    this.copy('markdown.md', 'src/content/markdown.md');
-    this.copy('blog.hbs', 'src/templates/pages/blog.hbs');
-    this.copy('index.hbs', 'src/templates/pages/index.hbs');
-    this.copy('layout.hbs', 'src/templates/layouts/default.hbs');
-    this.copy('inc-navbar-fixed-top.hbs', 'src/templates/partials/navbar-fixed-top.hbs');
+    this.mkdir('data');
+    this.mkdir('content');
+    this.mkdir('templates/pages');
+    this.mkdir('templates/layouts');
+    this.mkdir('templates/includes');
+    this.copy('site.yml', 'data/site.yml');
+    this.copy('markdown.md', 'content/markdown.md');
+    this.copy('blog.hbs', 'templates/pages/blog.hbs');
+    this.copy('index.hbs', 'templates/pages/index.hbs');
+    this.copy('layout.hbs', 'templates/layouts/default.hbs');
+    this.copy('navbar.hbs', 'templates/includes/navbar.hbs');
   },
 
   normalizePackage: function() {
