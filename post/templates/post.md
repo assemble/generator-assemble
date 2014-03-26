@@ -1,8 +1,8 @@
 ---
-title: Blog post
-date: "<%= (new Date).toISOString().split('T')[0] %>"
+title: <%= _.titleize(name) %>
+date: <%= (new Date).toISOString().split('T')[0] %>
 excerpt: >
-  This is the excerpt for my blog post.
+  <%= excerpt %>
 ---
 
 > {{excerpt}}

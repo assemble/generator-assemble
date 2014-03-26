@@ -9,7 +9,6 @@
 
 var path = require('path');
 var util = require('util');
-var verb = require('verb');
 var yeoman = require('yeoman-generator');
 
 /**
@@ -24,6 +23,6 @@ util.inherits(AssembleGenerator, yeoman.generators.NamedBase);
 
 AssembleGenerator.prototype.files = function files() {
   if(this.name === 'changelog') {
-    this.copy('CHANGELOG', '_changelog.yml');
+    this.copy('changelog.yml', 'CHANGELOG');
   }
 };

@@ -17,7 +17,8 @@ var yeoman = require('yeoman-generator');
 
 var AssembleGenerator = module.exports = function AssembleGenerator(args, options, config) {
   if (args.length === 0) {
-    args[0] = '.';
+    // args[0] === '.';
+    self.log.writeln('Please supply a `user/repo` and `directory`.');
   }
 
   yeoman.generators.NamedBase.apply(this, arguments);
@@ -43,7 +44,7 @@ AssembleGenerator.prototype.files = function files() {
   } else if (this.args.length === 2) {
     var repo = this.args[0].split('/');
     var dir = this.args[1];
-
+    console.log(dir);
     this.remote(repo[0], repo[1], function (err, remote) {
       if (err) {
         return cb(err);
@@ -54,7 +55,7 @@ AssembleGenerator.prototype.files = function files() {
       cb();
     });
   } else {
-    self.log.writeln('Please supply a `user/repo` and directory.');
+    self.log.writeln('Please supply a `user/repo` and `directory`.');
   }
 };
 

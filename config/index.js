@@ -16,7 +16,7 @@ var yeoman = require('yeoman-generator');
 
 var AssembleGenerator = module.exports = function AssembleGenerator(args, options, config) {
   if (args.length === 0) {
-    args[0] = 'yaml';
+    args[0] = 'assemblerc';
   }
   yeoman.generators.NamedBase.apply(this, arguments);
 };
@@ -30,16 +30,8 @@ AssembleGenerator.prototype.files = function files() {
    * Assemble runtime config
    */
 
-  if(this.name === 'yaml') {
-    this.copy(app('_assemblerc.yml'), '.assemblerc.yml');
-  }
-
-  if(this.name === 'json') {
-    this.copy('_assemblerc', '.assemblerc');
-  }
-
-  if(this.name === 'vf' || this.name === 'assemblefile') {
-    this.copy('_assemblefile.js', 'assemblefile.js');
+  if(this.name === 'assemblerc') {
+    this.copy(app('assemblerc.yml'), '.assemblerc.yml');
   }
 
   /**
@@ -63,6 +55,6 @@ AssembleGenerator.prototype.files = function files() {
   }
 
   if(this.name === 'travis') {
-    this.copy('_travis.yml', '.travis.yml');
+    this.copy('travis.yml', '.travis.yml');
   }
 };

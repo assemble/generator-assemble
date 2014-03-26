@@ -1,0 +1,19 @@
+---
+title: Blog
+posts: ['README.md', 'LICENSE-MIT']
+---
+
+<h1>{{title}}</h1>
+
+{{#markdown}}
+## Posts
+
+> This is just a basic example of how to do an `each` loop with Handlebars.
+
+The `md` helper adds each file in the loop (like includes), and converts any markdown in each file to HTML.
+
+{{#each posts}}
+  {{md this}}
+{{/each}}
+
+{{/markdown}}

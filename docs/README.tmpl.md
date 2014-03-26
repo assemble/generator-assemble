@@ -6,10 +6,13 @@ We're always trying to improve, **please feel free to do a pull request** if you
 
 ## Getting Started
 
+## Install
+{%= docs("usage") %}
+
 ## Usage
 {%= docs("usage") %}
 
-## Sub-generators
+## Generators
 {%= docs("sub-generators") %}
 
 ## CLI Options

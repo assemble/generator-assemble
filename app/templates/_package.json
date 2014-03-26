@@ -1,18 +1,18 @@
 {
-  "name": "<%= _.slugify(projectName) %>",
-  "description": "<%= _.capitalize(projectDesc) %>.",
-  "version": "0.1.0",
-  "homepage": "https://github.com/<%= authorLogin %>/<%= _.slugify(projectName) %>",
+  "name": "<%= _.slugify(projectname) %>",
+  "description": "<%= projectdesc %>",
+  "version": "0.0.1",
+  "homepage": "https://github.com/<%= username %>/<%= _.slugify(projectname) %>",
   "author": {
-    "name": "<%= authorName %>",
-    "url": "http://github.com/<%= authorLogin %>/"
+    "name": "<%= authorname %>",
+    "url": "http://github.com/<%= username %>/"
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/<%= authorLogin %>/<%= _.slugify(projectName) %>.git"
+    "url": "git://github.com/<%= username %>/<%= _.slugify(projectname) %>.git"
   },
   "bugs": {
-    "url": "https://github.com/<%= authorLogin %>/<%= _.slugify(projectName) %>/issues"
+    "url": "https://github.com/<%= username %>/<%= _.slugify(projectname) %>/issues"
   },
   "engines": {
     "node": ">=0.8"
@@ -22,26 +22,44 @@
   },
   "devDependencies": {
     "assemble": "~0.4.37",
+    "assemble-contrib-anchors": "~0.1.2",
+    "assemble-contrib-permalinks": "~0.3.6",
+    "assemble-less": "~0.7.0",
     "grunt": "~0.4.4",
     "grunt-contrib-clean": "~0.5.0",
     "grunt-contrib-connect": "~0.7.1",
+    "grunt-contrib-copy": "~0.5.0",
+    "grunt-contrib-csslint": "~0.2.0",
+    "grunt-contrib-jshint": "~0.8.0",
+    "grunt-contrib-uglify": "~0.4.0",
     "grunt-contrib-watch": "~0.6.1",
+    "grunt-prettify": "~0.3.4",
+    "grunt-uncss": "~0.3.0",
+    "handlebars-helper-rel": "~0.1.2",
     "load-grunt-tasks": "~0.4.0",
-    "time-grunt": "~0.3.1"<% if(plugins && plugins.length > 0){ %>,<% if(typeof plugins === 'object'){ _.each(plugins, function(name, i) { %>
-    "<%= name %>": "*"<% if(i < (plugins.length - 1)) { %>,<% } %><% }); } else { %>"<%= plugins %>": "*"<%} } %>
+    "time-grunt": "~0.3.1",
+    "verb": "~0.1.22"
   },
   "licenses": [
     {
       "type": "MIT",
-      "url": "https://github.com/<%= authorLogin %>/<%= _.slugify(projectName) %>/blob/master/LICENSE-MIT"
+      "url": "https://github.com/<%= username %>/<%= _.slugify(projectname) %>/blob/master/LICENSE-MIT"
     }
   ],
   "keywords": [
+    "handlebars-helper-rel",
+
     "assemble",
-    "templates",
+    "blog",
+    "build",
+    "builder",
+    "component",
+    "generator",
+    "grunt",
     "handlebars",
-    "site generator",
-    "site builder",
-    "grunt"
+    "site",
+    "static",
+    "static site generator",
+    "template"
   ]
 }

@@ -1,1 +1,0 @@
-<%= authorName %> (https://github.com/<%= authorLogin %>)

@@ -1,6 +1,16 @@
 > Sub-generators allow you to add a specific file or files to an existing project.
 
-## Config files
+## yo assemble
+
+This is the default generator. Running `yo assemble` will generate the following files to create a complete Assemble project:
+
+* `docs/README.tmpl.md`: a readme template
+* `.assemblerc.yml`: a runtime config file for Assemble
+* `package.json`: with minimal properties defined. However, if this exists already `assemble` will be added to `devDependencies`.
+
+
+
+## Config
 
 ### yo assemble:config
 
@@ -13,12 +23,11 @@ yo assemble:config
 To add a config file that is geared towards usage with Grunt, run `yo assemble:config grunt`
 
 
-
 ## Templates
 
 > Add a Handlebars template to your project, ready to use with Assemble.
 
-## yo assemble:page
+### yo assemble:page
 
 Add a page template to `templates/pages` with:
 
@@ -33,7 +42,7 @@ Where `foo` is the name of the file you want to add.
 * `yo assemble:page foo/bar` results in `templates/pages/foo/bar.hbs`
 
 
-## yo assemble:layout
+### yo assemble:layout
 
 Add a layout template to `templates/layouts` with:
 
@@ -47,7 +56,7 @@ Where `foo` is the name of the file you want to add.
 * `yo assemble:layout base` results in `templates/layouts/base.hbs`
 
 
-## yo assemble:include
+### yo assemble:include
 
 Add a include template to `templates/includes` with:
 
@@ -62,7 +71,7 @@ Where `foo` is the name of the file you want to add.
 
 
 
-## yo assemble:data
+### yo assemble:data
 
 Assemble processes templates using data from your project's package.json. You can extend the data available to your
 templates with any JSON or YAML files specified in `.assemblerc.yml` or in `options.data`.
@@ -73,7 +82,7 @@ Add a data file to your project with:
 
 
 
-## yo assemble:doc
+### yo assemble:doc
 
 Add a starter markdown file for general content to `content/` with:
 
@@ -85,7 +94,7 @@ Where `foo.md` is the name of the file you want to add.
 
 
 
-## yo assemble:post
+### yo assemble:post
 
 Add a starter markdown file for a blog post to `content/posts/` with:
 
@@ -96,7 +105,7 @@ Where `foo` is the name of the blog post you want to add. Blog posts also includ
 
 
 
-## yo assemble:helper
+### yo assemble:helper
 
 Add a starter Handlebars helper to `templates/_helpers` with:
 
@@ -111,7 +120,7 @@ Where `foo` is the name of the file you want to add.
 
 
 
-## yo assemble:plugin
+### yo assemble:plugin
 
 Add a starter Assemble plugin to `templates/_plugins` with:
 
@@ -126,7 +135,7 @@ Where `foo` is the name of the file you want to add.
 
 
 
-## yo assemble:component
+### yo assemble:component
 
 Add a UI component consisting of:
 
@@ -145,7 +154,7 @@ If the name _doesn't match_ a valid file in [upstage-components](https://github.
 
 
 
-## yo assemble:boilerplate
+### yo assemble:boilerplate
 
 Use a boilerplate to kickstart documentation for a project. Boilerplates include a `README.tmpl.md` template and a few includes, such as `install.md`, `options.md` etc.
 
@@ -168,7 +177,11 @@ _(TODO)_
 Visit the docs for [adding custom boilerplates](./docs/custom-boilerplates.md).
 
 
-## yo assemble:remote
+
+
+## Misc
+
+### yo assemble:remote
 
 Adds files from the specified GitHub repository.
 

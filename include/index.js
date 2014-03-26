@@ -16,10 +16,14 @@ var yeoman = require('yeoman-generator');
  */
 
 var AssembleGenerator = module.exports = function AssembleGenerator(args, options, config) {
+  if (args.length === 0) {
+    args[0] = 'button';
+  }
   yeoman.generators.NamedBase.apply(this, arguments);
 };
 util.inherits(AssembleGenerator, yeoman.generators.NamedBase);
 
 AssembleGenerator.prototype.files = function files() {
-  this.copy(this.name+'.hbs', path.join('templates/includes', this.name+'.hbs'));
+  var template = (this.name === 'button') ? 'button.hbs' : 'include.hbs';
+  this.copy(template, path.join('templates/includes', this.name+'.hbs'));
 };

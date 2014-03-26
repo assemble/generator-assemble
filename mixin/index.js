@@ -12,30 +12,25 @@ var util = require('util');
 var yeoman = require('yeoman-generator');
 
 /**
- * `assemble:post` > add a markdown blog post
+ * Add a config file
  */
 
 var AssembleGenerator = module.exports = function AssembleGenerator(args, options, config) {
   if (args.length === 0) {
-    args[0] = 'post';
+    args[0] = 'mixin';
   }
   yeoman.generators.NamedBase.apply(this, arguments);
 };
+
 util.inherits(AssembleGenerator, yeoman.generators.NamedBase);
 
-
 AssembleGenerator.prototype.files = function files() {
-  if(this.args.length === 2) {
-    this.excerpt = this.args[1];
+  var template = this.name;
+
+  if (this.name !== 'basic' || this.name !== 'mixin') {
+    template = 'mixin';
   }
 
-  var today = new Date();
-
-  var prefix = today.getUTCMonth() + 1;
-  prefix += '-' + today.getDate();
-  prefix += '-' + today.getFullYear();
-  this.date = prefix;
-
-  var filename = this.date + '-' + this._.slugify(this.name) + '.md';
-  this.copy('post.md', 'content/posts/' + filename, '# ' + this.name);
+  this.template('test/mixin.js', path.join('test/mixins', this.name + '_test.js'));
+  this.template(template + '.js', path.join('data/_mixins', this.name + '.js'));
 };
