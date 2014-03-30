@@ -50,6 +50,11 @@ var AssembleGenerator = module.exports = function AssembleGenerator(args, option
     args: args
   });
 
+  this.hookFor('verb:doc', {
+    args: args,
+    as: 'verb:doc'
+  });
+
   this.on('end', function () {
     this.installDependencies({
       skipInstall: this.options['skip-install'] || this.options['s'],
