@@ -6,12 +6,16 @@ var path = require('path');
 var spawn = require('child_process').spawn;
 var changeCase = require('change-case');
 var Configstore = require('configstore');
+var normalize = require('normalize-pkg');
 var log = require('verbalize');
 var yeoman = require('yeoman-generator');
 var mixins = require('../_lib/mixins');
 
 log.runner = 'generator-assemble';
+
+// Present the user with values used on the previous run.
 var assembleConfig = new Configstore('generator-assemble');
+
 assembleConfig.set('author', {name: '', url: ''});
 assembleConfig.set('username', '');
 
@@ -27,10 +31,24 @@ var AssembleGenerator = module.exports = function AssembleGenerator(args, option
   this._.mixin(changeCase);
   this._.mixin(mixins);
 
+  this.appname = changeCase.paramCase(this.appname);
+
   this.readJSON = function() {
     var filepath = path.join.apply(path, arguments);
     return JSON.parse(self.readFileAsString(filepath));
   };
+
+  this.hookFor('assemble:config', {
+    args: args
+  });
+
+  this.hookFor('assemble:content', {
+    args: args
+  });
+
+  this.hookFor('assemble:include', {
+    args: args
+  });
 
   this.on('end', function () {
     this.installDependencies({
@@ -112,15 +130,47 @@ AssembleGenerator.prototype.askFor = function askFor() {
   }.bind(this));
 };
 
+AssembleGenerator.prototype.app = function app() {
 
-AssembleGenerator.prototype.templates = function templates() {
-  this.copy('layout.hbs', 'templates/layouts/default.hbs');
-  this.copy('includes/head.hbs', 'templates/includes/head.hbs');
-  this.copy('includes/navbar.hbs', 'templates/includes/navbar.hbs');
-  this.copy('includes/javascripts.hbs', 'templates/includes/javascripts.hbs');
-  this.copy('pages/about.hbs', 'templates/pages/about.hbs');
-  this.copy('pages/blog.hbs', 'templates/pages/blog.hbs');
-  this.copy('pages/index.hbs', 'templates/pages/index.hbs');
+  // Assets
+  this.mkdir('assets');
+  this.mkdir('assets/ico');
+  this.mkdir('assets/fonts');
+  this.mkdir('assets/img');
+  this.mkdir('content');
+  this.mkdir('data');
+  this.mkdir('scripts');
+  this.mkdir('styles');
+
+  // Templates
+  this.mkdir('templates/pages');
+  this.mkdir('templates/layouts');
+
+  if (this.coffee) {
+    this.write(
+      'scripts/index.coffee',
+      'console.log "foo"'
+    );
+  }
+  else {
+    this.write('scripts/index.js', 'console.log("bar");');
+  }
+};
+
+AssembleGenerator.prototype.data = function data() {
+  this.directory('data', 'data', true);
+};
+
+AssembleGenerator.prototype.styles = function styles() {
+  this.directory('styles', 'styles', true);
+};
+
+AssembleGenerator.prototype.pages = function pages() {
+  this.directory('templates/pages', 'templates/pages', true);
+};
+
+AssembleGenerator.prototype.layouts = function layouts() {
+  this.copy('templates/layouts/layout.hbs', 'templates/layouts/default.hbs');
 };
 
 AssembleGenerator.prototype.config = function config() {
@@ -157,42 +207,10 @@ AssembleGenerator.prototype.packageJSON = function packageJSON() {
   this.template('_package.json', 'package.json');
 };
 
-AssembleGenerator.prototype.readme = function readme() {
-  this.template('README.md');
-  this.copy('README.tmpl.md', 'docs/README.tmpl.md');
-};
-
-
-AssembleGenerator.prototype.app = function app() {
-
-  // Site root
-  this.mkdir('_gh_pages');
-
-  // Assets
-  this.mkdir('assets');
-  this.mkdir('assets/ico');
-  this.mkdir('assets/fonts');
-  this.mkdir('assets/img');
-  this.mkdir('content');
-  this.mkdir('data');
-  this.mkdir('scripts');
-  this.mkdir('styles');
-
-  // Templates
-  this.mkdir('templates/pages');
-  this.mkdir('templates/layouts');
-  this.mkdir('templates/includes');
-
-
-  if (this.coffee) {
-    this.write(
-      'scripts/index.coffee',
-      'console.log "foo"'
-    );
-  }
-  else {
-    this.write('scripts/index.js', 'console.log("bar");');
-  }
+AssembleGenerator.prototype.docs = function docs() {
+  this.copy('docs/options.md', 'docs/options.md');
+  this.copy('docs/usage.md', 'docs/usage.md');
+  this.copy('docs/README.tmpl.md', 'docs/README.tmpl.md');
 };
 
 AssembleGenerator.prototype.install = function () {
@@ -200,13 +218,10 @@ AssembleGenerator.prototype.install = function () {
     return;
   }
 
-  this.bowerInstall([
-    'bootstrap',
-  ], {
-    save: true
-  });
-
   var done = this.async();
+
+  this.bowerInstall(['bootstrap'], {save: true});
+
   this.installDependencies({
     skipMessage: this.options['skip-install-message'],
     skipInstall: this.options['skip-install'],

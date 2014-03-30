@@ -7,6 +7,27 @@
     "name": "<%= authorname %>",
     "url": "http://github.com/<%= username %>/"
   },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/<%= username %>/<%= _.slugify(projectname) %>/blob/master/LICENSE-MIT"
+    }
+  ],
+  "keywords": [
+    "handlebars-helper-rel",
+    "assemble",
+    "blog",
+    "build",
+    "builder",
+    "component",
+    "generator",
+    "grunt",
+    "handlebars",
+    "site",
+    "static",
+    "static site generator",
+    "template"
+  ],
   "repository": {
     "type": "git",
     "url": "git://github.com/<%= username %>/<%= _.slugify(projectname) %>.git"
@@ -34,32 +55,10 @@
     "grunt-contrib-uglify": "~0.4.0",
     "grunt-contrib-watch": "~0.6.1",
     "grunt-prettify": "~0.3.4",
+    "grunt-verb": "~0.1.0",
     "grunt-uncss": "~0.3.0",
     "handlebars-helper-rel": "~0.1.2",
     "load-grunt-tasks": "~0.4.0",
-    "time-grunt": "~0.3.1",
-    "verb": "~0.1.22"
-  },
-  "licenses": [
-    {
-      "type": "MIT",
-      "url": "https://github.com/<%= username %>/<%= _.slugify(projectname) %>/blob/master/LICENSE-MIT"
-    }
-  ],
-  "keywords": [
-    "handlebars-helper-rel",
-
-    "assemble",
-    "blog",
-    "build",
-    "builder",
-    "component",
-    "generator",
-    "grunt",
-    "handlebars",
-    "site",
-    "static",
-    "static site generator",
-    "template"
-  ]
+    "time-grunt": "~0.3.1"
+  }
 }

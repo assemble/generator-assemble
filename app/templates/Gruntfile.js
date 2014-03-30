@@ -45,6 +45,7 @@ module.exports = function(grunt) {
     // Alias for Bootstrap's javascript
     bootstrap: {
       js: '<%%= vendor %>/bootstrap/dist/js',
+      less: '<%%= vendor %>/bootstrap/less'
     },
 
 
@@ -205,7 +206,7 @@ module.exports = function(grunt) {
 
     copy: {
       // Copy Bootstrap's js to local `scripts`
-      vendor: {
+      bootstrap: {
         src: '<%%= bootstrap.js %>/bootstrap.js',
         dest: '<%%= site.scripts %>/vendor/bootstrap.js'
       },
@@ -243,4 +244,20 @@ module.exports = function(grunt) {
     'build'
   ]);
 
+  grunt.registerTask('setup', 'First run. Delete this after initial setup.', function() {
+    grunt.config('copy', {
+      setup_javascript: {
+        src: '<%%= bootstrap.js %>/bootstrap.js',
+        dest: '<%%= site.scripts %>/vendor/bootstrap.js'
+      },
+      setup_less: {
+        files: [
+          {expand: true, flatten: true, src: ['<%%= bootstrap.less %>/*.less'], dest: '<%%= site.styles %>/bootstrap/'},
+          {src: ['<%%= bootstrap.less %>/utilities.less'], dest: '<%%= site.styles %>/utilities/utilities.less'},
+          {src: ['<%%= bootstrap.less %>/variables.less'], dest: '<%%= site.styles %>/variables.less'}
+        ]
+      },
+    });
+    grunt.task.run('copy');
+  });
 };

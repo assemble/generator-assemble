@@ -16,7 +16,7 @@ var yeoman = require('yeoman-generator');
 
 var AssembleGenerator = module.exports = function AssembleGenerator(args, options, config) {
   if (args.length === 0) {
-    args[0] = 'assemblerc';
+    args[0] = 'travis';
   }
   yeoman.generators.NamedBase.apply(this, arguments);
 };

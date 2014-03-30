@@ -55,16 +55,17 @@ author:
 license:
   type:        <%%= pkg.licenses.type %>
 
+verb:
 
 # Site URLs
 url:
 
   # Repo
-  homepage:         <%%= pkg.homepage %>
-  repo:             <%%= pkg.repository.url %>
-  issues:           <%%= pkg.bugs.url %>?state=open
+  homepage:    <%%= pkg.homepage %>
+  repo:        <%%= pkg.repository.url %>
+  issues:      <%%= pkg.bugs.url %>?state=open
 
   # Site
-  public:           http://assemble.io # replace with your domain
-  about:            <%%= site.url.public %>/about/
-  blog:             <%%= site.url.public %>/blog/
+  public:      http://assemble.io # replace with your domain
+  about:       <%%= site.url.public %>/about/
+  blog:        <%%= site.url.public %>/blog/

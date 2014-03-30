@@ -23,7 +23,15 @@ var AssembleGenerator = module.exports = function AssembleGenerator(args, option
 };
 util.inherits(AssembleGenerator, yeoman.generators.NamedBase);
 
+AssembleGenerator.prototype.includes = function includes() {
+  this.mkdir('templates/includes');
+
+  this.directory('includes', 'templates/includes', true);
+};
+
 AssembleGenerator.prototype.files = function files() {
+  this.mkdir('templates/includes');
+
   var template = (this.name === 'button') ? 'button.hbs' : 'include.hbs';
-  this.copy(template, path.join('templates/includes', this.name+'.hbs'));
+  this.copy(template, path.join('templates/includes', this.name + '.hbs'));
 };

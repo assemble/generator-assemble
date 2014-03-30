@@ -1,7 +1,7 @@
-Install `generator-assemble` globally:
+Install `{%= name %}` globally:
 
 ```
-npm install -g generator-assemble
+npm install -g {%= name %}
 ```
 
 Make a new directory, and `cd` into it:
@@ -10,10 +10,10 @@ Make a new directory, and `cd` into it:
 mkdir my-new-project && cd $_
 ```
 
-Run `yo assemble`, optionally passing a sub-generator name:
+Run `yo {%= shortname(name) %}`, optionally passing a sub-generator name:
 
 ```
-yo assemble [name]
+yo {%= shortname(name) %}:[name]
 ```
 
 Run `grunt` to build the project!

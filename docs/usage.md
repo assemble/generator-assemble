@@ -3,8 +3,6 @@ Once installed globally, simply run:
 
 ## Generators
 
-
-
 * `yo assemble` to to start a new project
 * `yo assemble:boilerplate [foo]` to use a [specific boilerplate](https://github.com/assemble/assemble-boilerplates). Assemble boilerplates are just sets of documents.
 * `yo assemble:doc [foo]` to add a [specific document](https://github.com/assemble/assemble-readme-includes) or 'include'.

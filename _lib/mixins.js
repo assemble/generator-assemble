@@ -1,14 +1,15 @@
 var path = require('path');
 var _ = require('lodash');
 
-
-
 var prefixes = [
   'assemble',
   'assemble-contrib',
   'assemble-plugin',
+  'filter',
   'generator',
   'grunt',
+  'gulp',
+  'handlebars-helper',
   'helper',
   'mixin',
   'plugin',

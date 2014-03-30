@@ -2,18 +2,13 @@
 
 > {%= description %}
 
-We're always trying to improve, **please feel free to do a pull request** if you know how to improve this generator!
-
 ## Getting Started
-{%= install("install") %}
+{%= include("install", {save: '--save-dev'}) %}
 
 ## Usage
 {%= docs("usage") %}
 
-## Generators
-{%= docs("sub-generators") %}
-
-## CLI Options
+## Options
 {%= docs("options") %}
 
 ## License

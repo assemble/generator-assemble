@@ -1,4 +1,4 @@
-> Want to know more about my background? Yes? That's great! You came to the right place.
+> Want to know more about our project? Well that's great, you came to the right place!
 
 Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
 
