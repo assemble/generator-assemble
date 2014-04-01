@@ -3,39 +3,19 @@
 // --------------------------------------------------
 // Feel free to go crazy with your own styles!
 
+
 // Core variables and mixins
 @import "variables.less";
 @import "mixins.less";
 
 
-// Vendor
-// ----------------------------------------
-
-@import "bootstrap.less";
-
-
-
 // Components
-// ----------------------------------------
-
-@import "components/btn-social.less";
-@import "components/banner.less";
-@import "components/team.less";
-@import "components/signin.less";
-@import "components/footer.less";
-
+@import "components/anchor.less";
 
 
 // Theme
-// ----------------------------------------
-
-@import "themes/base.less";
-@import "themes/docs.less";
+@import "themes/@{theme}.less";
 
 
-
-// Utilities
-// ----------------------------------------
-// Utilities must be last!
-
+// Utilities (must be last!)
 @import "utilities.less";

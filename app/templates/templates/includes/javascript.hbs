@@ -2,7 +2,7 @@
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-<script src="{{assets}}/js/index.min.js"></script>
+<script src="{{assets}}/js/{{site.title}}.min.js"></script>
 
 {{#if production}}
 <script>
@@ -13,19 +13,9 @@
     return window.twttr || (t = { _e: [], ready: function(f){ t._e.push(f) } });
   }(document, "script", "twitter-wjs"));
 </script>
+{{/if}}
 
 <!-- Analytics
 ================================================== -->
-<script>
-  var _gauges = _gauges || [];
-  (function() {
-    var t   = document.createElement('script');
-    t.async = true;
-    t.id    = 'gauges-tracker';
-    t.setAttribute('data-site-id', '{{google.siteid}}');
-    t.src = '//secure.gaug.es/track.js';
-    var s = document.getElementsByTagName('script')[0];
-    s.parentNode.insertBefore(t, s);
-  })();
-</script>
-{{/if}}
+{{! setup your google analytics info in .assemblerc.yml }}
+{{analytics site.google.analytics 'footer'}}

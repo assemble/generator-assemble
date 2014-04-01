@@ -2,6 +2,7 @@
 layout: base
 title: Blog
 lead: Welcome to my blog!
+modifier: blog
 ---
 
 <div class="container">
@@ -15,9 +16,17 @@ lead: Welcome to my blog!
 
     <div class="col-sm-8 blog-main">
 
-      <div class="blog-post">
+      <div class="blog-post wordcount">
         <h2 class="blog-post-title">Sample blog post</h2>
         <p class="blog-post-meta">January 1, 2014 by <a href="#">Mark</a></p>
+
+        {{! wordcount plugin }}
+        <p class="blog-post-meta">
+          {{! NOTE: for the wordcount plugin to work, the `.wordcount` class must be on the
+          element wrapping the words you want to count. See the `.blog-post` class above }}
+          {{> wordcount }}
+        </p>
+        {{! /wordcount plugin }}
 
         <p>This blog post shows a few different types of content that's supported and styled with Bootstrap. Basic typography, images, and code are all supported.</p>
         <hr>

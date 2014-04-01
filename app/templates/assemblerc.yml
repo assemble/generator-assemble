@@ -3,10 +3,10 @@
 # =============================================
 
 root:         _gh_pages
-dest:         <%%= site.root %>
+dest:         <%= site.root %>
 
 # Dest assets
-public:       <%%= site.dest %>/public
+public:       <%= site.dest %>/public
 
 # =============================================
 # SOURCE CONFIG
@@ -17,8 +17,8 @@ data:         data
 
 # Assets > fonts, icons, images etc.
 assets:       assets
-images:       <%%= site.assets %>/images
-fonts:        <%%= site.assets %>/fonts
+images:       <%= site.assets %>/images
+fonts:        <%= site.assets %>/fonts
 
 # Styles
 styles:       styles
@@ -31,9 +31,9 @@ content:      content
 
 # Templates
 templates:    templates
-pages:        <%%= site.templates %>/pages
-includes:     <%%= site.templates %>/includes
-layouts:      <%%= site.templates %>/layouts
+pages:        <%= site.templates %>/pages
+includes:     <%= site.templates %>/includes
+layouts:      <%= site.templates %>/layouts
 layoutext:    .hbs
 layout:       default
 
@@ -43,23 +43,37 @@ layout:       default
 # =============================================
 
 
-helpers:      templates/extensions/_helpers
+helpers:      templates/_extensions/helpers
 plugins:
   - assemble-contrib-navigation
   - assemble-contrib-permalinks
+  - assemble-contrib-wordcount
+
+
+# =============================================
+# WEBFONTS
+# =============================================
+
+webfonts:
+  # Headings
+  - 'Open+Sans+Condensed:300,700:latin'
+  # Body text
+  - 'Open+Sans:400,300,600,700:latin'
+  # Blog
+  - 'Lora:400,700,400italic,700italic'
 
 
 # =============================================
 # PROJECT METADATA
 # =============================================
 
-title:        <%%= pkg.name %>
-version:      <%%= pkg.version %>
-homepage:     <%%= pkg.homepage %>
+title:        <%= pkg.name %>
+version:      <%= pkg.version %>
+homepage:     <%= pkg.homepage %>
 author:
-  name:       <%%= pkg.author.name %>
+  name:       <%= pkg.author.name %>
 license:
-  type:       <%%= pkg.licenses.type %>
+  type:       <%= pkg.licenses.type %>
 
 verb:
 
@@ -67,14 +81,14 @@ verb:
 url:
 
   # Repo
-  homepage:   <%%= pkg.homepage %>
-  repo:       <%%= pkg.repository.url %>
-  issues:     <%%= pkg.bugs.url %>?state=open
+  homepage:   <%= pkg.homepage %>
+  repo:       <%= pkg.repository.url %>
+  issues:     <%= pkg.bugs.url %>?state=open
 
   # Site
   public:     http://assemble.io # replace with your domain
-  about:      <%%= site.url.public %>/about/
-  blog:       <%%= site.url.public %>/blog/
+  about:      <%= site.url.public %>/about/
+  blog:       <%= site.url.public %>/blog/
 
 
 # =============================================

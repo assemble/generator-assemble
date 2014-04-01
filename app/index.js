@@ -42,12 +42,17 @@ var AssembleGenerator = module.exports = function AssembleGenerator(args, option
   // Run hooks
   this.hookFor('assemble:config',  {args: args });
   this.hookFor('assemble:content', {args: args });
-  this.hookFor('assemble:include', {args: args });
 
   this.on('end', function () {
     this.installDependencies({
       skipInstall: this.options['skip-install'] || this.options['s'],
-      skipMessage: this.options['skip-welcome-message'] || this.options['w']
+      skipMessage: this.options['skip-welcome-message'] || this.options['w'],
+
+      // If all was successful, run `grunt setup`
+      callback: function () {
+        this.spawnCommand('grunt', ['setup']);
+        this.log.ok('  Great! You\'re all set!');
+      }.bind(this)
     });
   });
 
@@ -128,7 +133,6 @@ AssembleGenerator.prototype.askFor = function askFor() {
 
 AssembleGenerator.prototype.app = function app() {
 
-  // Assets
   this.mkdir('assets');
   this.mkdir('assets/ico');
   this.mkdir('assets/fonts');
@@ -137,8 +141,6 @@ AssembleGenerator.prototype.app = function app() {
   this.mkdir('data');
   this.mkdir('scripts');
   this.mkdir('styles');
-
-  // Templates
   this.mkdir('templates/pages');
   this.mkdir('templates/layouts');
 
@@ -161,12 +163,8 @@ AssembleGenerator.prototype.styles = function styles() {
   this.directory('styles', 'styles', true);
 };
 
-AssembleGenerator.prototype.pages = function pages() {
-  this.directory('templates/pages', 'templates/pages', true);
-};
-
-AssembleGenerator.prototype.layouts = function layouts() {
-  this.copy('templates/layouts/layout.hbs', 'templates/layouts/default.hbs');
+AssembleGenerator.prototype.templates = function templates() {
+  this.directory('templates', 'templates');
 };
 
 AssembleGenerator.prototype.config = function config() {
@@ -209,12 +207,15 @@ AssembleGenerator.prototype.docs = function docs() {
   this.copy('docs/README.tmpl.md', 'docs/README.tmpl.md');
 };
 
+AssembleGenerator.prototype.tasks = function tasks() {
+  this.directory('tasks', 'tasks');
+};
+
 
 AssembleGenerator.prototype.bootstrap = function bootstrap() {
   var done = this.async();
 
-  console.log('  Cloning bootstrap. This will take a few seconds...');
-  var npm = ' && cd vendor/bootstrap && npm i';
+  this.log.write('\n   Cloning bootstrap. This will take a few seconds...');
   exec('git clone https://github.com/twbs/bootstrap.git "vendor/bootstrap"', function (err) {
     if (err) {
       this.log.error(err);
@@ -227,10 +228,8 @@ AssembleGenerator.prototype.install = function () {
   if (this.options['skip-install']) {
     return;
   }
-
   var done = this.async();
 
-  // this.bowerInstall(['bootstrap'], {save: true});
 
   this.installDependencies({
     skipMessage: this.options['skip-install-message'],

@@ -3,7 +3,7 @@
   <head>
     {{> head }}
   </head>
-  <body{{#is title 'Home'}} class="bs-docs-home"{{/is}}>
+  <body{{#modifier}} class="{{.}}"{{/modifier}}>
     <a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
     <!-- sitewide navigation -->
     {{> navbar }}

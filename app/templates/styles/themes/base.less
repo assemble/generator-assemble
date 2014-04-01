@@ -1,30 +1,21 @@
 //
-// Base styles
+// Base theme
 // --------------------------------------------------
 
+// Vendor
+@import "bootstrap.less";
+@import "docs.less";
 
-// Theme scaffolding
-// ------------------------------------------
+// Components (these are not theme-specific)
+@import "components/btn-social.less";
+@import "components/form-signin.less";
+@import "components/team.less";
+@import "components/banner.less";
+@import "components/footer.less";
+@import "components/footer.less";
 
-body {
-  background: #fff;
-}
 
-
-
-
-// Theme components
-// ------------------------------------------
-
-// Increase navbar height slightly
-@navbar-height: 60px;
-
-// Add a subtle box-shadow under the navbar
-.main-nav:extend(.navbar all, .bs-docs-nav all) {
-  .box-shadow(0 1px 5px rgba(0,0,0,.15));
-
-  .navbar-brand,
-  .navbar-nav > li > a {
-      color: @gray;
-  }
-}
+// Theme styles
+@import "base/subhead.less";
+@import "base/scaffolding.less";
+@import "base/main-nav.less";

@@ -35,7 +35,7 @@ module.exports = function(grunt) {
       year: '<%%= grunt.template.today("yyyy") %>',
       banner: [
         '/*!',
-        ' * <%%= site.name %> v<%%= site.version %> <<%%= site.homepage %>>',
+        ' * <%%= site.title %> v<%%= site.version %> <<%%= site.homepage %>>',
         ' * Copyright 2013-<%%= metadata.year %>, <%%= site.author.name %>.',
         ' * Released under the <%%= site.license.type %> license.',
         ' */\n\n'
@@ -71,7 +71,7 @@ module.exports = function(grunt) {
         layout: '<%%= site.layout %>',
 
         // Extensions
-        helpers: '<%%= site.helpers %>/*.js',
+        helpers: ['<%%= site.helpers %>/*.js'],
         plugins: '<%%= site.plugins %>'
       },
 
@@ -105,6 +105,7 @@ module.exports = function(grunt) {
     // Compile Less to CSS
     less: {
       options: {
+        process: true,
         paths: [
           '<%%= site.styles %>',
           '<%%= site.styles %>/bootstrap',
@@ -112,8 +113,18 @@ module.exports = function(grunt) {
         ]
       },
       site: {
+        options: {
+          globalVars: {theme: 'base'}
+        },
         src: ['<%%= site.styles %>/index.less'],
-        dest: '<%%= assemble.options.assets %>/css/index.css'
+        dest: '<%%= assemble.options.assets %>/css/<%%= site.title %>.css'
+      },
+      blog: {
+        options: {
+          globalVars: {theme: 'blog'}
+        },
+        src: ['<%%= site.styles %>/index.less'],
+        dest: '<%%= assemble.options.assets %>/css/blog.css'
       }
     },
 
@@ -159,7 +170,7 @@ module.exports = function(grunt) {
       options: {banner: '<%%= metadata.banner %>'},
       site: {
         src: ['<%%= site.scripts %>/{,*/}*.js'],
-        dest: '<%%= site.public %>/js/index.min.js'
+        dest: '<%%= site.public %>/js/<%%= site.title %>.min.js'
       }
     },
 
@@ -230,6 +241,9 @@ module.exports = function(grunt) {
 
   });
 
+  // Setup task only. You can delete after first run.
+  grunt.loadTasks('tasks');
+
   // As of Assemble v0.5, this will be `grunt-assemble`
   grunt.loadNpmTasks('assemble');
   grunt.loadNpmTasks('assemble-less');
@@ -249,59 +263,4 @@ module.exports = function(grunt) {
     'prettify',
     'uglify'
   ]);
-
-
-  /**
-   * First run. Delete this task after initial setup.
-   */
-
-  grunt.registerTask('setup', 'First run. Delete this task after initial setup.', function() {
-    grunt.config('copy', {
-
-      // Copy and re-organize Bootstrap's javascript, .less files, fonts, icons and images.
-      bootstrap: {
-        files: [
-          {src: '<%%= bootstrap.js %>/bootstrap.js', dest: '<%%= site.scripts %>/vendor/bootstrap.js'},
-          {src: '<%%= bootstrap.docs %>/assets/css/_src/docs.css', dest: '<%%= site.styles %>/themes/docs.less'},
-          {src: '<%%= bootstrap.docs %>/assets/js/_vendor/holder.js', dest: '<%%= site.scripts %>/vendor/holder.js'},
-          {expand: true, cwd: '<%%= bootstrap.docs %>/assets/', src: ['{ico,img}/**'], dest: '<%%= site.assets %>/'},
-          {expand: true, cwd: '<%%= bootstrap.fonts %>', src: ['**'], dest: '<%%= site.assets %>/fonts/'},
-          {expand: true, cwd: '<%%= bootstrap.less %>', src: ['**'], dest: '<%%= site.styles %>/bootstrap/'},
-          {expand: true, cwd: '<%%= bootstrap.less %>/mixins', src: ['**'], dest: '<%%= site.styles %>/mixins/'},
-          {src: ['<%%= bootstrap.docs %>/examples/blog/blog.css'], dest: '<%%= site.styles %>/themes/blog.less'},
-          {src: ['<%%= bootstrap.less %>/mixins.less'], dest: '<%%= site.styles %>/mixins.less'},
-          {src: ['<%%= bootstrap.less %>/utilities.less'], dest: '<%%= site.styles %>/utilities/utilities.less'},
-          {src: ['<%%= bootstrap.less %>/variables.less'], dest: '<%%= site.styles %>/variables.less'},
-        ]
-      },
-
-      // Strip variables.less and mixins.less from bootstrap.less
-      customize_bootstrap: {
-        src: '<%%= bootstrap.less %>/bootstrap.less',
-        dest: '<%%= site.styles %>/bootstrap/bootstrap.less',
-        options: {
-          process: function (content, src) {
-            return content.replace(/^[\s\S]+ Reset/gm, '// Reset');
-          }
-        }
-      }
-    });
-
-    // Remove duplicates of files that were copied elsewhere.
-    grunt.config('clean', {
-      bootstrap: [
-        '<%%= site.styles %>/bootstrap/variables.less',
-        '<%%= site.styles %>/bootstrap/utilities.less',
-        '<%%= site.styles %>/bootstrap/mixins.less'
-      ]
-    });
-
-    grunt.task.run('copy:bootstrap');
-    grunt.task.run('copy:customize_bootstrap');
-    grunt.task.run('clean:bootstrap');
-
-    // End setup task.
-  });
-
-
 };

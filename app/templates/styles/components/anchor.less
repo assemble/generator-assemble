@@ -1,0 +1,26 @@
+//
+// Anchors
+// -------------------------------------------------------
+// Visible when hovering over headings
+
+
+.page-header {
+  position: relative;
+
+  .anchor {
+    visibility: hidden;
+    position: absolute;
+    left: -40px;
+    top: -5px;
+    font-size: 20px;
+    padding: 15px;
+  }
+
+  &:hover {
+    .anchor,
+    .anchor:hover {
+      visibility: visible;
+      text-decoration: none;
+    }
+  }
+}
