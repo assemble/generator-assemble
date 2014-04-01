@@ -10,6 +10,7 @@
 var path = require('path');
 var util = require('util');
 var yeoman = require('yeoman-generator');
+var app = require('../_lib/utils').app;
 
 /**
  * Add a layout template to your Assemble project
@@ -24,5 +25,5 @@ var AssembleGenerator = module.exports = function AssembleGenerator(args, option
 util.inherits(AssembleGenerator, yeoman.generators.NamedBase);
 
 AssembleGenerator.prototype.files = function files() {
-  this.copy(this.name+'.hbs', path.join('templates/layouts', this.name+'.hbs'));
+  this.copy(app('templates/layouts/' + this.name + '.hbs'), path.join('templates/layouts', this.name + '.hbs'));
 };

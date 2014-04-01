@@ -2,42 +2,48 @@
 # DEST CONFIG
 # =============================================
 
-root:          _gh_pages
-dest:          <%%= site.root %>
+root:         _gh_pages
+dest:         <%%= site.root %>
 
 # Dest assets
-public:        <%%= site.dest %>/public
+public:       <%%= site.dest %>/public
 
 # =============================================
 # SOURCE CONFIG
 # =============================================
 
 # Data
-data:          data
+data:         data
 
 # Assets > fonts, icons, images etc.
-assets:        assets
-images:        <%%= site.assets %>/images
-fonts:         <%%= site.assets %>/fonts
+assets:       assets
+images:       <%%= site.assets %>/images
+fonts:        <%%= site.assets %>/fonts
 
 # Styles
-styles:        styles
+styles:       styles
 
 # Scripts
-scripts:       scripts
+scripts:      scripts
 
 # Content
-content:       content
+content:      content
 
 # Templates
-templates:     templates
-pages:         <%%= site.templates %>/pages
-includes:      <%%= site.templates %>/includes
-layouts:       <%%= site.templates %>/layouts
-layoutext:     .hbs
-layout:        default
+templates:    templates
+pages:        <%%= site.templates %>/pages
+includes:     <%%= site.templates %>/includes
+layouts:      <%%= site.templates %>/layouts
+layoutext:    .hbs
+layout:       default
 
-## Extensions
+
+# =============================================
+# EXTENSIONS
+# =============================================
+
+
+helpers:      templates/extensions/_helpers
 plugins:
   - assemble-contrib-navigation
   - assemble-contrib-permalinks
@@ -47,13 +53,13 @@ plugins:
 # PROJECT METADATA
 # =============================================
 
-title:         <%%= pkg.name %>
-version:       <%%= pkg.version %>
-homepage:      <%%= pkg.homepage %>
+title:        <%%= pkg.name %>
+version:      <%%= pkg.version %>
+homepage:     <%%= pkg.homepage %>
 author:
-  name:        <%%= pkg.author.name %>
+  name:       <%%= pkg.author.name %>
 license:
-  type:        <%%= pkg.licenses.type %>
+  type:       <%%= pkg.licenses.type %>
 
 verb:
 
@@ -61,11 +67,67 @@ verb:
 url:
 
   # Repo
-  homepage:    <%%= pkg.homepage %>
-  repo:        <%%= pkg.repository.url %>
-  issues:      <%%= pkg.bugs.url %>?state=open
+  homepage:   <%%= pkg.homepage %>
+  repo:       <%%= pkg.repository.url %>
+  issues:     <%%= pkg.bugs.url %>?state=open
 
   # Site
-  public:      http://assemble.io # replace with your domain
-  about:       <%%= site.url.public %>/about/
-  blog:        <%%= site.url.public %>/blog/
+  public:     http://assemble.io # replace with your domain
+  about:      <%%= site.url.public %>/about/
+  blog:       <%%= site.url.public %>/blog/
+
+
+# =============================================
+# SEO / SEM
+# =============================================
+
+# Most of these are not enabled. You will need
+# to setup accounts with the services you want
+# to use and add the templates.
+
+alexa:        false
+
+google:
+  analytics:
+    enabled:  false
+    account:  UA-XXXXXXXX-YY
+    siteid:   false
+    domain:   <%= site.domain %>
+
+    # Google Tags
+    # see: https://www.google.com/tagmanager
+    tags:
+
+
+# =============================================
+# SOCIAL / SHARING
+# =============================================
+
+# Like SEO/SEM, Most of these are not enabled.
+# You will need to setup accounts with the
+# services you want to use and add the templates.
+
+# Comments
+disqus:
+  enabled:    false
+  shortname:  <%= pkg.name %>
+
+# Social
+social:
+  twitter:
+    via:      jonschlinkert
+    username: assemblejs
+    related:  jonschlinkert:Assemble core team.
+  facebook:   false
+  linkedin:   false
+  gplus:      false
+  hn:         false
+  google:     false
+
+# Sharing
+sharing:
+  twitter:    false
+  facebook:   false
+  gplus:      false
+  hn:         false
+  google:     false

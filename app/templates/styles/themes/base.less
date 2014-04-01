@@ -1,5 +1,30 @@
 //
-// Base theme
+// Base styles
 // --------------------------------------------------
 
 
+// Theme scaffolding
+// ------------------------------------------
+
+body {
+  background: #fff;
+}
+
+
+
+
+// Theme components
+// ------------------------------------------
+
+// Increase navbar height slightly
+@navbar-height: 60px;
+
+// Add a subtle box-shadow under the navbar
+.main-nav:extend(.navbar all, .bs-docs-nav all) {
+  .box-shadow(0 1px 5px rgba(0,0,0,.15));
+
+  .navbar-brand,
+  .navbar-nav > li > a {
+      color: @gray;
+  }
+}

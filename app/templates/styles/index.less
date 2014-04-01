@@ -1,19 +1,28 @@
 //
 // <%= projectname %> styles
 // --------------------------------------------------
+// Feel free to go crazy with your own styles!
 
 // Core variables and mixins
 @import "variables.less";
+@import "mixins.less";
+
+
+// Vendor
+// ----------------------------------------
+
 @import "bootstrap.less";
-@import "docs.less";
 
 
 
 // Components
 // ----------------------------------------
 
+@import "components/btn-social.less";
 @import "components/banner.less";
 @import "components/team.less";
+@import "components/signin.less";
+@import "components/footer.less";
 
 
 
@@ -21,11 +30,12 @@
 // ----------------------------------------
 
 @import "themes/base.less";
+@import "themes/docs.less";
 
 
 
 // Utilities
 // ----------------------------------------
-// Make sure utilities are last!
+// Utilities must be last!
 
-@import "utilities/utilities.less";
+@import "utilities.less";

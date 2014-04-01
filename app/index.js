@@ -4,6 +4,7 @@ var fs = require('fs');
 var util = require('util');
 var path = require('path');
 var spawn = require('child_process').spawn;
+var exec = require('child_process').exec;
 var changeCase = require('change-case');
 var Configstore = require('configstore');
 var normalize = require('normalize-pkg');
@@ -38,22 +39,10 @@ var AssembleGenerator = module.exports = function AssembleGenerator(args, option
     return JSON.parse(self.readFileAsString(filepath));
   };
 
-  this.hookFor('assemble:config', {
-    args: args
-  });
-
-  this.hookFor('assemble:content', {
-    args: args
-  });
-
-  this.hookFor('assemble:include', {
-    args: args
-  });
-
-  this.hookFor('verb:doc', {
-    args: args,
-    as: 'verb:doc'
-  });
+  // Run hooks
+  this.hookFor('assemble:config',  {args: args });
+  this.hookFor('assemble:content', {args: args });
+  this.hookFor('assemble:include', {args: args });
 
   this.on('end', function () {
     this.installDependencies({
@@ -80,6 +69,8 @@ AssembleGenerator.prototype.askFor = function askFor() {
   if (!this.options['skip-welcome-message']) {
     console.log(this.yeoman);
   }
+
+  var author = assembleConfig.get('author') || {};
 
   var name, url, username;
   if ((assembleConfig.get('author').name).length) {
@@ -154,11 +145,11 @@ AssembleGenerator.prototype.app = function app() {
   if (this.coffee) {
     this.write(
       'scripts/index.coffee',
-      'console.log "foo"'
+      '# Application scripts'
     );
   }
   else {
-    this.write('scripts/index.js', 'console.log("bar");');
+    this.write('scripts/index.js', '// Application scripts');
   }
 };
 
@@ -208,7 +199,7 @@ AssembleGenerator.prototype.license = function license() {
   this.template('LICENSE-MIT');
 };
 
-AssembleGenerator.prototype.packageJSON = function packageJSON() {
+AssembleGenerator.prototype.pkg = function pkg() {
   this.template('_package.json', 'package.json');
 };
 
@@ -218,6 +209,20 @@ AssembleGenerator.prototype.docs = function docs() {
   this.copy('docs/README.tmpl.md', 'docs/README.tmpl.md');
 };
 
+
+AssembleGenerator.prototype.bootstrap = function bootstrap() {
+  var done = this.async();
+
+  console.log('  Cloning bootstrap. This will take a few seconds...');
+  var npm = ' && cd vendor/bootstrap && npm i';
+  exec('git clone https://github.com/twbs/bootstrap.git "vendor/bootstrap"', function (err) {
+    if (err) {
+      this.log.error(err);
+    }
+    done();
+  }.bind(this));
+};
+
 AssembleGenerator.prototype.install = function () {
   if (this.options['skip-install']) {
     return;
@@ -225,7 +230,7 @@ AssembleGenerator.prototype.install = function () {
 
   var done = this.async();
 
-  this.bowerInstall(['bootstrap'], {save: true});
+  // this.bowerInstall(['bootstrap'], {save: true});
 
   this.installDependencies({
     skipMessage: this.options['skip-install-message'],

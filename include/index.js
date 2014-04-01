@@ -10,6 +10,7 @@
 var path = require('path');
 var util = require('util');
 var yeoman = require('yeoman-generator');
+var app = require('../_lib/utils').app;
 
 /**
  * Add an include template to your Assemble project
@@ -25,13 +26,10 @@ util.inherits(AssembleGenerator, yeoman.generators.NamedBase);
 
 AssembleGenerator.prototype.includes = function includes() {
   this.mkdir('templates/includes');
-
-  this.directory('includes', 'templates/includes', true);
+  this.directory(app('templates/includes'), 'templates/includes', true);
 };
 
 AssembleGenerator.prototype.files = function files() {
-  this.mkdir('templates/includes');
-
   var template = (this.name === 'button') ? 'button.hbs' : 'include.hbs';
-  this.copy(template, path.join('templates/includes', this.name + '.hbs'));
+  this.copy(app(path.join('templates/includes', template)), path.join('templates/includes', this.name + '.hbs'));
 };
