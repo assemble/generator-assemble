@@ -159,6 +159,10 @@ AssembleGenerator.prototype.data = function data() {
   this.directory('data', 'data', true);
 };
 
+AssembleGenerator.prototype.scripts = function scripts() {
+  this.copy('scripts/jshintrc', 'scripts/.jshintrc');
+};
+
 AssembleGenerator.prototype.styles = function styles() {
   this.directory('styles', 'styles', true);
 };

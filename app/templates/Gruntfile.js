@@ -6,6 +6,7 @@
  * Licensed under the MIT license.
  */
 
+
 module.exports = function(grunt) {
 
   'use strict';
@@ -18,7 +19,6 @@ module.exports = function(grunt) {
 
   // Report the execution time of each task.
   require('time-grunt')(grunt);
-
 
   /**
    * Initialize Grunt configuration
@@ -44,16 +44,17 @@ module.exports = function(grunt) {
 
     // Alias for Bootstrap's javascript
     bootstrap: {
-      docs: '<%%= vendor %>/bootstrap/docs',
+      docs:  '<%%= vendor %>/bootstrap/docs',
       fonts: '<%%= vendor %>/bootstrap/fonts',
-      js: '<%%= vendor %>/bootstrap/dist/js',
-      less: '<%%= vendor %>/bootstrap/less'
+      js:    '<%%= vendor %>/bootstrap/dist/js',
+      less:  '<%%= vendor %>/bootstrap/less'
     },
 
     /**
      * HTML tasks
      */
 
+    // Build HTML from templates and data
     assemble: {
       options: {
         flatten: true,
@@ -194,13 +195,20 @@ module.exports = function(grunt) {
       }
     },
 
+    // Watch certain files, rebuild when changes are saved.
     watch: {
-      assemble: {
+      html: {
         tasks: ['assemble'],
         files: [
           '<%%= site.templates %>/{,*/}*.hbs',
           '<%%= site.content %>/{,*/}*.md',
-          '<%%= site.data %>/{,*/}*.{yml,json}',
+          '<%%= site.data %>/{,*/}*.{yml,json}'
+        ]
+      },
+      css: {
+        tasks: ['less'],
+        files: [
+          '<%%= site.styles %>/{,*/}*.less'
         ]
       },
       livereload: {
@@ -241,26 +249,61 @@ module.exports = function(grunt) {
 
   });
 
-  // Setup task only. You can delete after first run.
+
+  // Setup task only. Delete this line after first run, unless
+  // you plan on adding your own custom tasks locally.
   grunt.loadTasks('tasks');
 
-  // As of Assemble v0.5, this will be `grunt-assemble`
+
   grunt.loadNpmTasks('assemble');
   grunt.loadNpmTasks('assemble-less');
+  grunt.loadNpmTasks('grunt-verb');
 
-  grunt.registerTask('server', [
+  /**
+   * Tasks to be run
+   */
+
+  // First things first.
+  grunt.registerTask('prep', [
     'clean',
+    'copy',
+  ]);
+
+  // Compile CSS, HTML, etc.
+  grunt.registerTask('compile', [
+    'less',
+    'assemble'
+  ]);
+
+  // Lint and runt tests.
+  grunt.registerTask('lint', [
+    'jshint',
+    'csslint'
+  ]);
+
+  // Lint and runt tests.
+  grunt.registerTask('document', [
+    'verb'
+  ]);
+
+
+  /**
+   * Tasks to be run
+   */
+
+  grunt.registerTask('design', [
     'assemble',
     'connect:livereload',
     'watch'
   ]);
 
+  // Default tasks to run with the `grunt` command.
   grunt.registerTask('default', [
-    'clean',
-    'copy',
-    'less',
-    'assemble',
+    'prep',
+    'lint',
+    'compile',
     'prettify',
-    'uglify'
+    'uglify',
+    'document'
   ]);
 };
