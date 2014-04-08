@@ -1,0 +1,48 @@
+//
+// Subhead
+// --------------------------------------------------
+
+.subhead {
+  position: relative;
+  padding: 30px 15px;
+  text-align: center;
+  text-shadow: 0 1px 0 rgba(0,0,0,.1);
+  #gradient > .vertical(@start-color: #ccc; @end-color: #bbb);
+  margin-bottom: 40px;
+  font-size: 20px;
+}
+
+.subhead h1 {
+  margin-top: 0;
+  color: #fff;
+}
+
+.subhead p {
+  margin-bottom: 0;
+  font-weight: 300;
+  line-height: 1.4;
+}
+.subhead .container {
+  position: relative;
+}
+
+@media (min-width: 768px) {
+  .subhead {
+    padding-top: 60px;
+    padding-bottom: 40px;
+    font-size: 24px;
+    text-align: left;
+  }
+  .subhead h1 {
+    font-size: 60px;
+    line-height: 1;
+  }
+}
+
+@media (min-width: 992px) {
+  .subhead h1,
+  .subhead p {
+    margin-right: 380px;
+  }
+}
+

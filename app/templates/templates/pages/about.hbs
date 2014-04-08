@@ -1,0 +1,55 @@
+---
+title: About
+---
+
+{{!-- History
+================================================== --}}
+<div class="docs-section">
+  <div class="page-header">
+    <h1 id="background">Background</h1>
+  </div>
+  <p class="lead">The sections on this page are designed to be easy to update and maintain. "Core Team" is a great place to list any team members or project collaborators, just modify <code>data/team.yml</code> when you need to make changes.</p>
+
+  <!-- from `content/backgound.md` -->
+  {{md 'background'}}
+</div>
+
+
+{{!-- Team
+================================================== --}}
+<div class="docs-section">
+  <div class="page-header">
+    <h1 id="team">Core team</h1>
+  </div>
+  <p class="lead">{{titleize site.title}} is maintained by a group of invaluable core contributors, with the massive support and involvement of our community. No one person is in charge and everyone has their own areas and donates the time they can afford. In alphabetical order:</p>
+  <div class="list-group team">
+
+    {{!-- from data/team.yml --}}
+    {{#each team}}
+    <div class="list-group-item">
+      <iframe class="github-btn" src="{{{follow}}}"></iframe>
+      <a class="team-member" href="https://github.com/{{{username}}}">
+        <img src="{{{gravatar}}}" alt="@{{{username}}}">
+        <strong>{{{name}}}</strong> <small>@{{{username}}}</small>
+      </a>
+    </div>
+    {{/each}}
+
+  </div>
+  <p>Get involved with {{titleize site.name}} development by <a href="{{ site.url.issues }}/new">opening an issue</a> or submitting a pull request (if it's a feature request, please open an issue to discuss before doing a pr). </p>
+  <p>Please read our <a href="{{ site.url.repo }}/CONTRIBUTING.md">contributing guidelines</a> and the <a href="#">developing section</a> of our usage page.</p>
+</div>
+
+
+{{!-- Community
+================================================== --}}
+<div class="docs-section">
+  <div class="page-header">
+    <h1 id="community">Community</h1>
+  </div>
+  <p class="lead">Stay up to date on the development of {{titleize site.name}} and reach out to the community with these helpful resources.</p>
+  <ul>
+    <li>Read and subscribe to <a href="{{ site.url.blog }}">The Official {{titleize site.name}} Blog</a>.</li>
+    <li>Have a feature request or bug report? <a href="{{ site.url.issues }}">Let us know on our GitHub Issues</a>.</li>
+  </ul>
+</div>

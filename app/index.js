@@ -1,189 +1,243 @@
 'use strict';
+
+var fs = require('fs');
+var util = require('util');
 var path = require('path');
+var spawn = require('child_process').spawn;
+var exec = require('child_process').exec;
+var changeCase = require('change-case');
+var Configstore = require('configstore');
+var normalize = require('normalize-pkg');
+var log = require('verbalize');
 var yeoman = require('yeoman-generator');
+var mixins = require('../_lib/mixins');
 
-/**
- * Module exports Assemble Generator constructor
- * Extend Yeoman base generator
- */
+log.runner = 'generator-assemble';
 
-var AssembleGenerator = yeoman.generators.Base.extend({
+// Present the user with values used on the previous run.
+var assembleConfig = new Configstore('generator-assemble');
 
-  init: function () {
-    this.pkg = require('../package.json');
-    this.description = this.pkg.description;
+assembleConfig.set('author', {name: '', url: ''});
+assembleConfig.set('username', '');
 
-    this.option('init', {
-      alias: 'i',
-      desc: 'Force to prompt question and re-initialize of .yo-rc.json',
-      type: String,
-      defaults: false,
-      required: false
+var userPkg = {};
+userPkg.author = userPkg.author || {};
+
+
+var AssembleGenerator = module.exports = function AssembleGenerator(args, options, config) {
+  yeoman.generators.Base.apply(this, arguments);
+  var self = this;
+
+  // Mixins
+  this._.mixin(changeCase);
+  this._.mixin(mixins);
+
+  this.appname = changeCase.paramCase(this.appname);
+
+  this.readJSON = function() {
+    var filepath = path.join.apply(path, arguments);
+    return JSON.parse(self.readFileAsString(filepath));
+  };
+
+  // Run hooks
+  this.hookFor('assemble:config',  {args: args });
+  this.hookFor('assemble:content', {args: args });
+
+  this.on('end', function () {
+    this.installDependencies({
+      skipInstall: this.options['skip-install'] || this.options['s'],
+      skipMessage: this.options['skip-welcome-message'] || this.options['w'],
+
+      // If all was successful, run `grunt setup`
+      callback: function () {
+        this.spawnCommand('grunt', ['setup']);
+        this.log.ok('  Great! You\'re all set!');
+      }.bind(this)
     });
+  });
 
-    this.init = this.options['init'] || this.options['i'] || false;
+  this.pkg = this.readJSON(__dirname, '../package.json');
+  this.username = this.user.git.username || process.env.user || process.env.username || null;
 
-    this.on('end', function () {
-      this.installDependencies({
-        skipInstall: this.options['skip-install'] || this.options['s'],
-        skipMessage: this.options['skip-welcome-message'] || this.options['w'],
-        callback: function () {
-          this.spawnCommand('grunt', ['build']);
-        }.bind(this)
-      });
-    });
+  if (fs.existsSync('package.json')) {
+    userPkg = normalize.all(this.readJSON('package.json'));
+  }
+};
+util.inherits(AssembleGenerator, yeoman.generators.Base);
 
-    this.defaultPlugins = {
-      "assemble-contrib-anchors": false,
-      "assemble-contrib-permalinks": true,
-      "assemble-contrib-sitemap": true,
-      "assemble-contrib-toc": false,
-    };
 
-    this.config.defaults({
-      projectName   : "",
-      projectDesc   : "The best project ever.",
-      authorLogin   : "assemble",
-      installPlugin : true,
-      author: {
-        name        : this.user.git.username || process.env.user || process.env.username,
-        login       : "assemble",
-        email       : this.user.git.email
-      }
-    });
+AssembleGenerator.prototype.askFor = function askFor() {
+  var cb = this.async();
+  var prompts = [];
 
-  }, // init
-
-  askFor: function () {
-    var done = this.async();
-
-    var force = false;
-
-    if (!this.config.existed || this.init) {
-      force = true;
-    }
-
-    if (!this.options['skip-welcome-message']) {
-      console.log(this.yeoman);
-    }
-
-    var questions = [];
-
-    (!this.config.get("projectName") || force) && questions.push({
-      type    : "input",
-      name    : "projectName",
-      message : "Your project name",
-      default : this.appname || this.config.get("projectName")
-    });
-
-    (!this.config.get("projectDesc") || force) && questions.push({
-      type    : "input",
-      name    : "projectDesc",
-      message : "Your project description",
-      default : this.config.get("projectDesc")
-    });
-
-    (!this.config.get("author").login || !this.config.get("authorLogin") || force) && questions.push({
-      type    : "input",
-      name    : "authorLogin",
-      message : "Would you mind telling me your username on Github?",
-      default : this.config.get("author").login || this.config.get("authorLogin")
-    });
-
-    questions.push({
-      type    : "confirm",
-      name    : "installPlugin",
-      message : "Do you want to install Assemble plugins?",
-      default : this.config.get("installPlugin")
-    });
-
-    // for first time/re-init, make new list of defaultPlugins
-    if(!this.config.get("installPlugin") || force) {
-      var plugins = this.config.get("plugins");
-      // if we have previous plugin choice
-      if (this._.isArray(plugins)) {
-        var defaultPlugins = {};
-        // convert it to object and assign checked
-        plugins.forEach(function(plugin) {
-          defaultPlugins[plugin] = true;
-        });
-        // concat with defautPlugins
-        for (var key in defaultPlugins) {
-          this.defaultPlugins[key] = defaultPlugins[key];
-        }
-      }
-    }
-
-    var choices = [];
-    var pluginObj = this.defaultPlugins;
-
-    // make choice more dynamic and checked from previous choice
-    // TODO: fetch from npm with "assembleplugin" keyword
-    for (var plugin in pluginObj) {
-      if(pluginObj.hasOwnProperty(plugin)){
-        choices.push({ name: plugin, checked: pluginObj[plugin] });
-      }
-    }
-
-    questions.push({
-      name    : "plugins",
-      type    : "checkbox",
-      message : "Which plugins would you like to include?",
-      choices : choices,
-      when: function( answers ) {
-        return answers.installPlugin;
-      }
-    });
-
-    this.prompt(questions, function (answers) {
-
-      this.projectName = answers.projectName || this.config.get("projectName");
-      this.projectDesc = answers.projectDesc || this.config.get("projectDesc");
-      this.authorLogin = answers.authorLogin || this.config.get("authorLogin");
-      this.plugins     = answers.plugins;
-      this.authorName  = this.config.get("author").name;
-      this.authorEmail = this.config.get("author").email;
-
-      //save config to .yo-rc.json
-      this.config.set(answers);
-
-      done();
-    }.bind(this));
-  }, // askFor
-
-  projectfiles: function () {
-    this.template('AUTHORS');
-    this.template('CHANGELOG');
-    this.template('LICENSE-MIT');
-    this.template('Gruntfile.js');
-    this.template('_package.json', 'package.json');
-    this.template('editorconfig', '.editorconfig');
-    this.template('README.md');
-  },
-
-  gitfiles: function () {
-    this.copy('gitignore', '.gitignore');
-    this.copy('gitattributes', '.gitattributes');
-  },
-
-  assets: function () {
-    this.directory('bootstrap', 'dist/assets');
-  },
-
-  src: function () {
-    this.mkdir('src/data');
-    this.mkdir('src/content');
-    this.mkdir('src/templates/pages');
-    this.mkdir('src/templates/layouts');
-    this.mkdir('src/templates/partials');
-    this.copy('site.yml', 'src/data/site.yml');
-    this.copy('markdown.md', 'src/content/markdown.md');
-    this.copy('blog.hbs', 'src/templates/pages/blog.hbs');
-    this.copy('index.hbs', 'src/templates/pages/index.hbs');
-    this.copy('layout.hbs', 'src/templates/layouts/default.hbs');
-    this.copy('inc-navbar-fixed-top.hbs', 'src/templates/partials/navbar-fixed-top.hbs');
+  // have Yeoman greet the user, unless skipped
+  if (!this.options['skip-welcome-message']) {
+    console.log(this.yeoman);
   }
 
-});
+  var author = assembleConfig.get('author') || {};
 
-module.exports = AssembleGenerator;
+  var name, url, username;
+  if ((assembleConfig.get('author').name).length) {
+    name = assembleConfig.get('author').name;
+  }
+
+  prompts.push({
+    name: 'projectname',
+    message: 'What is the name of the project?',
+    default: userPkg.name ? userPkg.name : this.appname
+  });
+
+  prompts.push({
+    name: 'projectdesc',
+    message: 'Want to add a description?',
+    default: userPkg.description || 'The most interesting project in the world > Assemble'
+  });
+
+  prompts.push({
+    name: 'authorname',
+    message: 'What is the author\'s name?',
+    default:  name || (userPkg.author.name ? userPkg.author.name : this.username)
+  });
+
+  prompts.push({
+    name: 'authorurl',
+    message: 'What is the author\'s URL?',
+    default: assembleConfig.get('author').url || (userPkg.author.url ? userPkg.author.url : ('https://github.com/' + this.username))
+  });
+
+  prompts.push({
+    name: 'username',
+    message: 'If pushed to GitHub, what username/org will the repo use?',
+    default: assembleConfig.get('username') || this.username
+  });
+
+  this.prompt(prompts, function (props) {
+
+    assembleConfig.set('username', props.username);
+    assembleConfig.set('author', {
+      name: props.authorname,
+      url: props.authorurl
+    });
+
+    this.authorname = assembleConfig.get('author').name;
+    this.authorurl = assembleConfig.get('author').url;
+    this.username = assembleConfig.get('username');
+
+    this.projectname = props.projectname;
+    this.projectdesc = props.projectdesc;
+
+    cb();
+  }.bind(this));
+};
+
+AssembleGenerator.prototype.app = function app() {
+
+  this.mkdir('assets');
+  this.mkdir('assets/ico');
+  this.mkdir('assets/fonts');
+  this.mkdir('assets/img');
+  this.mkdir('content');
+  this.mkdir('data');
+  this.mkdir('scripts');
+  this.mkdir('styles');
+  this.mkdir('templates/pages');
+  this.mkdir('templates/layouts');
+
+  if (this.coffee) {
+    this.write(
+      'scripts/index.coffee',
+      '# Application scripts'
+    );
+  }
+  else {
+    this.write('scripts/index.js', '// Application scripts');
+  }
+};
+
+AssembleGenerator.prototype.data = function data() {
+  this.directory('data', 'data', true);
+};
+
+AssembleGenerator.prototype.scripts = function scripts() {
+  this.copy('scripts/jshintrc', 'scripts/.jshintrc');
+};
+
+AssembleGenerator.prototype.styles = function styles() {
+  this.directory('styles', 'styles', true);
+};
+
+AssembleGenerator.prototype.templates = function templates() {
+  this.directory('templates', 'templates');
+};
+
+AssembleGenerator.prototype.config = function config() {
+  this.copy('assemblerc.yml', '.assemblerc.yml');
+};
+
+AssembleGenerator.prototype.bower = function bower() {
+  this.copy('_bowerrc', '.bowerrc');
+  this.copy('_bower.json', 'bower.json');
+};
+
+AssembleGenerator.prototype.git = function git() {
+  this.copy('gitattributes', '.gitattributes');
+  this.copy('gitignore', '.gitignore');
+};
+
+AssembleGenerator.prototype.jshint = function jshint() {
+  this.copy('jshintrc', '.jshintrc');
+};
+
+AssembleGenerator.prototype.github = function githut() {
+  this.copy('nojekyll', '.nojekyll');
+};
+
+AssembleGenerator.prototype.gruntfile = function gruntfile() {
+  this.template('Gruntfile.js');
+};
+
+AssembleGenerator.prototype.license = function license() {
+  this.template('LICENSE-MIT');
+};
+
+AssembleGenerator.prototype.pkg = function pkg() {
+  this.template('_package.json', 'package.json');
+};
+
+AssembleGenerator.prototype.docs = function docs() {
+  this.copy('docs/options.md', 'docs/options.md');
+  this.copy('docs/usage.md', 'docs/usage.md');
+  this.copy('docs/README.tmpl.md', 'docs/README.tmpl.md');
+};
+
+AssembleGenerator.prototype.tasks = function tasks() {
+  this.directory('tasks', 'tasks');
+};
+
+
+AssembleGenerator.prototype.bootstrap = function bootstrap() {
+  var done = this.async();
+
+  this.log.write('\n   Cloning bootstrap. This will take a few seconds...');
+  exec('git clone https://github.com/twbs/bootstrap.git "vendor/bootstrap"', function (err) {
+    if (err) {
+      this.log.error(err);
+    }
+    done();
+  }.bind(this));
+};
+
+AssembleGenerator.prototype.install = function () {
+  if (this.options['skip-install']) {
+    return;
+  }
+  var done = this.async();
+
+
+  this.installDependencies({
+    skipMessage: this.options['skip-install-message'],
+    skipInstall: this.options['skip-install'],
+    callback: done
+  });
+};

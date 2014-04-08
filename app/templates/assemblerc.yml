@@ -1,0 +1,147 @@
+# =============================================
+# DEST CONFIG
+# =============================================
+
+root:         _gh_pages
+dest:         <%= site.root %>
+
+# Dest assets
+public:       <%= site.dest %>/public
+
+# =============================================
+# SOURCE CONFIG
+# =============================================
+
+# Data
+data:         data
+
+# Assets > fonts, icons, images etc.
+assets:       assets
+images:       <%= site.assets %>/images
+fonts:        <%= site.assets %>/fonts
+
+# Styles
+styles:       styles
+
+# Scripts
+scripts:      scripts
+
+# Content
+content:      content
+
+# Templates
+templates:    templates
+pages:        <%= site.templates %>/pages
+includes:     <%= site.templates %>/includes
+layouts:      <%= site.templates %>/layouts
+layoutext:    .hbs
+layout:       default
+
+
+# =============================================
+# EXTENSIONS
+# =============================================
+
+
+helpers:      templates/_extensions/helpers
+plugins:
+  - assemble-contrib-navigation
+  - assemble-contrib-permalinks
+  - assemble-contrib-wordcount
+
+
+# =============================================
+# WEBFONTS
+# =============================================
+
+webfonts:
+  # Headings
+  - 'Open+Sans+Condensed:300,700:latin'
+  # Body text
+  - 'Open+Sans:400,300,600,700:latin'
+  # Blog
+  - 'Lora:400,700,400italic,700italic'
+
+
+# =============================================
+# PROJECT METADATA
+# =============================================
+
+title:        <%= pkg.name %>
+version:      <%= pkg.version %>
+homepage:     <%= pkg.homepage %>
+author:
+  name:       <%= pkg.author.name %>
+license:
+  type:       <%= pkg.licenses.type %>
+
+verb:
+
+# Site URLs
+url:
+
+  # Repo
+  homepage:   <%= pkg.homepage %>
+  repo:       <%= pkg.repository.url %>
+  issues:     <%= pkg.bugs.url %>?state=open
+
+  # Site
+  public:     http://assemble.io # replace with your domain
+  about:      <%= site.url.public %>/about/
+  blog:       <%= site.url.public %>/blog/
+
+
+# =============================================
+# SEO / SEM
+# =============================================
+
+# Most of these are not enabled. You will need
+# to setup accounts with the services you want
+# to use and add the templates.
+
+alexa:        false
+
+google:
+  analytics:
+    enabled:  false
+    account:  UA-XXXXXXXX-YY
+    siteid:   false
+    domain:   <%= site.domain %>
+
+    # Google Tags
+    # see: https://www.google.com/tagmanager
+    tags:
+
+
+# =============================================
+# SOCIAL / SHARING
+# =============================================
+
+# Like SEO/SEM, Most of these are not enabled.
+# You will need to setup accounts with the
+# services you want to use and add the templates.
+
+# Comments
+disqus:
+  enabled:    false
+  shortname:  <%= pkg.name %>
+
+# Social
+social:
+  twitter:
+    via:      jonschlinkert
+    username: assemblejs
+    related:  jonschlinkert:Assemble core team.
+  facebook:   false
+  linkedin:   false
+  gplus:      false
+  hn:         false
+  google:     false
+
+# Sharing
+sharing:
+  twitter:    false
+  facebook:   false
+  gplus:      false
+  hn:         false
+  google:     false

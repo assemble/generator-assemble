@@ -1,0 +1,18 @@
+# =============================================
+# Team: alphabetical order
+# =============================================
+
+- name:     Brian Woodward
+  username: doowb
+  follow:   "http://ghbtns.com/github-btn.html?user=doowb&type=follow"
+  gravatar: "https://avatars.githubusercontent.com/u/995160"
+
+- name:     Hariadi Hinta
+  username: hariadi
+  follow:   "http://ghbtns.com/github-btn.html?user=hariadi&type=follow"
+  gravatar: "https://avatars.githubusercontent.com/u/376635"
+
+- name:     Jon Schlinkert
+  username: jonschlinkert
+  follow:   "http://ghbtns.com/github-btn.html?user=jonschlinkert&type=follow"
+  gravatar: "https://avatars.githubusercontent.com/u/383994"

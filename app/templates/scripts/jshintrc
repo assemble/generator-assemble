@@ -1,0 +1,31 @@
+{
+  "asi": true,
+  "boss": true,
+  "browser": true,
+  "curly": true,
+  "debug": true,
+  "devel": true,
+  "eqeqeq": true,
+  "eqnull": true,
+  "esnext": true,
+  "expr": true,
+  "immed": true,
+  "indent": 2,
+  "latedef": true,
+  "laxbreak": true,
+  "newcap": true,
+  "noarg": true,
+  "node": true,
+  "sub": true,
+  "undef": true,
+  "unused": true,
+  "validthis": true,
+  "jquery": true,
+  "globals": {
+    "define": true,
+    "before": true,
+    "after": true,
+    "describe": true,
+    "it": true
+  }
+}

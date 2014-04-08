@@ -1,11 +1,10 @@
 {
   "name": "generator-assemble",
-  "version": "0.4.11",
-  "description": "Create new Assemble projects.",
+  "version": "0.5.0",
+  "description": "Generate new Assemble projects using best practices and sensible defaults.",
   "author": {
     "name": "Hariadi Hinta",
-    "url": "https://github.com/hariadi",
-    "email": "diperakui@yahoo.com"
+    "url": "https://github.com/hariadi"
   },
   "licenses": [
     {
@@ -23,10 +22,17 @@
   },
   "main": "app/index.js",
   "scripts": {
-    "test": "mocha --reporter spec"
+    "test": "mocha -R spec"
   },
   "dependencies": {
-    "yeoman-generator": "~0.16.0"
+    "yeoman-generator": "~0.16.0",
+    "change-case": "~2.0.1",
+    "configstore": "~0.2.3",
+    "fs-utils": "~0.3.9",
+    "lodash": "~2.4.1",
+    "verb-readme-includes": "~0.1.1",
+    "verb-boilerplates": "0.0.1",
+    "normalize-pkg": "~0.1.2"
   },
   "devDependencies": {
     "mocha": "*"
@@ -39,10 +45,19 @@
     "npm": ">=1.2.10"
   },
   "keywords": [
-    "yeoman-generator",
     "assemble",
-    "generator",
+    "blog",
     "boilerplate",
-    "grunt"
+    "build",
+    "builder",
+    "component",
+    "generator",
+    "grunt",
+    "handlebars",
+    "site",
+    "static site generator",
+    "static",
+    "template",
+    "yeoman-generator"
   ]
 }

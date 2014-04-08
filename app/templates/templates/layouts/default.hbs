@@ -1,0 +1,20 @@
+---
+# This 2-column layout extends the `base` layout and is used by most pages of the site
+layout: base
+---
+{{> subhead }}
+
+
+<!-- 2-column layout -->
+<div class="container bs-docs-container">
+  <div class="row">
+    <div class="col-md-9" role="main">
+      {{> body }}
+    </div>
+    <div class="col-md-3">
+      <div class="bs-docs-sidebar hidden-print" role="complementary">
+        {{> sidenav }}
+      </div>
+    </div>
+  </div>
+</div>

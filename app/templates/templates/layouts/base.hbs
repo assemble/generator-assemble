@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    {{> head }}
+  </head>
+  <body{{#modifier}} class="{{.}}"{{/modifier}}>
+    <a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+    <!-- sitewide navigation -->
+    {{> navbar }}
+
+    <!-- page content -->
+    {{> body }}
+
+    <!-- footer, used everywhere but blog -->
+    {{#isnt title 'Blog'}}
+      {{> footer }}
+    {{/isnt}}
+
+    <!-- sitewide javascripts -->
+    {{> javascript }}
+  </body>
+</html>

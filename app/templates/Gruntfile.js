@@ -1,49 +1,184 @@
-/*
+/**
+ * <%= pkg.name %> v<%= pkg.version %> <<%= pkg.homepage %>>
  * Generated on <%= (new Date).toISOString().split('T')[0] %>
- * <%= pkg.name %> v<%= pkg.version %>
- * <%= pkg.homepage %>
  *
- * Copyright (c) <%= (new Date).getFullYear() %> <%= pkg.author.name %>
+ * Copyright (c) <%= (new Date).getFullYear() %> <%= pkg.author.name %>, contributors
  * Licensed under the MIT license.
  */
 
-'use strict';
-
-// # Globbing
-// for performance reasons we're only matching one level down:
-// '<%%= config.src %>/templates/pages/{,*/}*.hbs'
-// use this if you want to match all subfolders:
-// '<%%= config.src %>/templates/pages/**/*.hbs'
 
 module.exports = function(grunt) {
 
+  'use strict';
+
+  // Force unix-style newlines
+  grunt.util.linefeed = '\n';
+
+  // Load grunt tasks automatically
+  require('load-grunt-tasks')(grunt);
+
+  // Report the execution time of each task.
   require('time-grunt')(grunt);
 
-  // Project configuration.
+  /**
+   * Initialize Grunt configuration
+   */
+
   grunt.initConfig({
 
-    config: {
-      src: 'src',
-      dist: 'dist'
+    // Project Metadata
+    site:   grunt.file.readYAML('.assemblerc.yml'),
+    pkg:    grunt.file.readJSON('package.json'),
+    vendor: grunt.file.readJSON('.bowerrc').directory,
+
+    metadata: {
+      year: '<%%= grunt.template.today("yyyy") %>',
+      banner: [
+        '/*!',
+        ' * <%%= site.title %> v<%%= site.version %> <<%%= site.homepage %>>',
+        ' * Copyright 2013-<%%= metadata.year %>, <%%= site.author.name %>.',
+        ' * Released under the <%%= site.license.type %> license.',
+        ' */\n\n'
+      ].join('\n')
     },
 
-    watch: {
-      assemble: {
-        files: ['<%%= config.src %>/{content,data,templates}/{,*/}*.{md,hbs,yml}'],
-        tasks: ['assemble']
+    // Alias for Bootstrap's javascript
+    bootstrap: {
+      docs:  '<%%= vendor %>/bootstrap/docs',
+      fonts: '<%%= vendor %>/bootstrap/fonts',
+      js:    '<%%= vendor %>/bootstrap/dist/js',
+      less:  '<%%= vendor %>/bootstrap/less'
+    },
+
+    /**
+     * HTML tasks
+     */
+
+    // Build HTML from templates and data
+    assemble: {
+      options: {
+        flatten: true,
+        assets: '<%%= site.public %>',
+
+        // Metadata
+        pkg: '<%%= pkg %>',
+        site: '<%%= site %>',
+        data: '<%%= site.data %>/*.{json,yml}',
+
+        // Templates
+        partials: ['<%%= site.includes %>/*.hbs'],
+        layoutdir: '<%%= site.layouts %>',
+        layoutext: '<%%= site.layoutext %>',
+        layout: '<%%= site.layout %>',
+
+        // Extensions
+        helpers: ['<%%= site.helpers %>/*.js'],
+        plugins: '<%%= site.plugins %>'
       },
-      livereload: {
+
+      // Build site
+      site: {
         options: {
-          livereload: '<%%= connect.options.livereload %>'
+          permalinks: {preset: 'pretty'}
         },
+        src: ['<%%= site.pages %>/*.hbs'],
+        dest: '<%%= site.dest %>/'
+      }
+    },
+
+    // Prettify HTML
+    prettify: {
+      options: {
+        indent_scripts: 'keep'
+      },
+      site: {
         files: [
-          '<%%= config.dist %>/{,*/}*.html',
-          '<%%= config.dist %>/assets/{,*/}*.css',
-          '<%%= config.dist %>/assets/{,*/}*.js',
-          '<%%= config.dist %>/assets/{,*/}*.{png,jpg,jpeg,gif,webp,svg}'
+          {expand: true, cwd: '<%%= site.dest %>', src: '{,*/}*.html', dest: '<%%= site.dest %>/', ext: '.html'}
         ]
       }
     },
+
+
+    /**
+     * CSS tasks
+     */
+
+    // Compile Less to CSS
+    less: {
+      options: {
+        process: true,
+        paths: [
+          '<%%= site.styles %>',
+          '<%%= site.styles %>/bootstrap',
+          '<%%= site.styles %>/utilities'
+        ]
+      },
+      site: {
+        options: {
+          globalVars: {theme: 'base'}
+        },
+        src: ['<%%= site.styles %>/index.less'],
+        dest: '<%%= assemble.options.assets %>/css/<%%= site.title %>.css'
+      },
+      blog: {
+        options: {
+          globalVars: {theme: 'blog'}
+        },
+        src: ['<%%= site.styles %>/index.less'],
+        dest: '<%%= assemble.options.assets %>/css/blog.css'
+      }
+    },
+
+    // Lint CSS
+    csslint: {
+      strict: {
+        options: {
+          csslintrc: '<%%= site.styles %>/.csslintrc'
+        },
+        src: ['<%%= less.site.dest %>']
+      }
+    },
+
+    // Remove unused CSS from output.
+    uncss: {
+      options: {
+        ignore: ['#webfonts', '.active']
+      },
+      site: {
+        src: ['<%%= site.dest %>/{,*/}.html'],
+        dest: '<%%= less.site.dest %>'
+      }
+    },
+
+
+    /**
+     * JavaScript tasks
+     */
+
+    // Lint JavaScripts
+    jshint: {
+      options: {
+        jshintrc: '<%%= site.scripts %>/.jshintrc'
+      },
+      all: [
+        'Gruntfile.js',
+        '<%%= site.scripts %>/{,*/}.js'
+      ]
+    },
+
+    // Minify JavaScripts
+    uglify: {
+      options: {banner: '<%%= metadata.banner %>'},
+      site: {
+        src: ['<%%= site.scripts %>/{,*/}*.js'],
+        dest: '<%%= site.public %>/js/<%%= site.title %>.min.js'
+      }
+    },
+
+
+    /**
+     * Design and production
+     */
 
     connect: {
       options: {
@@ -55,63 +190,120 @@ module.exports = function(grunt) {
       livereload: {
         options: {
           open: true,
-          base: [
-            '<%%= config.dist %>'
-          ]
+          base: ['<%%= site.dest %>']
         }
       }
     },
 
-    assemble: {
-      pages: {
+    // Watch certain files, rebuild when changes are saved.
+    watch: {
+      html: {
+        tasks: ['assemble'],
+        files: [
+          '<%%= site.templates %>/{,*/}*.hbs',
+          '<%%= site.content %>/{,*/}*.md',
+          '<%%= site.data %>/{,*/}*.{yml,json}'
+        ]
+      },
+      css: {
+        tasks: ['less'],
+        files: [
+          '<%%= site.styles %>/{,*/}*.less'
+        ]
+      },
+      livereload: {
         options: {
-          flatten: true,
-          assets: '<%%= config.dist %>/assets',
-          layout: '<%%= config.src %>/templates/layouts/default.hbs',
-          data: '<%%= config.src %>/data/*.{json,yml}',
-          partials: '<%%= config.src %>/templates/partials/*.hbs'<% if(plugins && plugins.length > 0){ %>,
-          plugins: [<% if(typeof plugins === 'object'){ _.each(plugins, function(name, i) { %>'<%= name %>'<% if(i < (plugins.length - 1)) { %>,<% } }); } else { %>'<%= name %>'<%} %>],<%}
-          _.each(plugins, function(name, i) { if(name == 'permalinks') { %>
-          permalinks: {
-            preset: 'pretty'
-          },<% }
-          if(name == 'assemble-contrib-contextual') { %>
-          contextual: {
-            dest: 'tmp/'
-          },<% }
-          }); %>
+          livereload: '<%%= connect.options.livereload %>'
         },
-        files: {
-          '<%%= config.dist %>/': ['<%%= config.src %>/templates/pages/*.hbs']
-        }
+        files: [
+          '<%%= site.dest %>/{,*/}*.html',
+          '<%%= site.assets %>/{,*/}*.css',
+          '<%%= site.assets %>/{,*/}*.js',
+          '<%%= site.assets %>/{,*/}*.{png,jpg,jpeg,gif,webp,svg}'
+        ]
       }
     },
 
-    // Before generating any new files,
-    // remove any previously-created files.
-    clean: ['<%%= config.dist %>/**/*.{html,xml}']
+    /**
+     * "setup" tasks
+     */
+
+    copy: {
+      // Copy Bootstrap's js to local `scripts`
+      bootstrap: {
+        src: '<%%= bootstrap.js %>/bootstrap.js',
+        dest: '<%%= site.scripts %>/vendor/bootstrap.js'
+      },
+      // Copy local `assets` to `public` dir
+      assets: {
+        files: [
+          {expand: true, cwd: '<%%= site.assets %>', src: '**', dest: '<%%= site.public %>/'}
+        ]
+      }
+    },
+
+    // Clean files from previous build
+    clean: {
+      example: ['<%%= site.dest %>/{,*/}*.{html,css,js}']
+    }
 
   });
 
-  grunt.loadNpmTasks('assemble');
-  grunt.loadNpmTasks('grunt-contrib-clean');
-  grunt.loadNpmTasks('grunt-contrib-connect');
-  grunt.loadNpmTasks('grunt-contrib-watch');
 
-  grunt.registerTask('server', [
+  // Setup task only. Delete this line after first run, unless
+  // you plan on adding your own custom tasks locally.
+  grunt.loadTasks('tasks');
+
+
+  grunt.loadNpmTasks('assemble');
+  grunt.loadNpmTasks('assemble-less');
+  grunt.loadNpmTasks('grunt-verb');
+
+  /**
+   * Tasks to be run
+   */
+
+  // First things first.
+  grunt.registerTask('prep', [
     'clean',
+    'copy',
+  ]);
+
+  // Compile CSS, HTML, etc.
+  grunt.registerTask('compile', [
+    'less',
+    'assemble'
+  ]);
+
+  // Lint and runt tests.
+  grunt.registerTask('lint', [
+    'jshint',
+    'csslint'
+  ]);
+
+  // Lint and runt tests.
+  grunt.registerTask('document', [
+    'verb'
+  ]);
+
+
+  /**
+   * Tasks to be run
+   */
+
+  grunt.registerTask('design', [
     'assemble',
     'connect:livereload',
     'watch'
   ]);
 
-  grunt.registerTask('build', [
-    'clean',
-    'assemble'
-  ]);
-
+  // Default tasks to run with the `grunt` command.
   grunt.registerTask('default', [
-    'build'
+    'prep',
+    'lint',
+    'compile',
+    'prettify',
+    'uglify',
+    'document'
   ]);
-
 };
