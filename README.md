@@ -1,4 +1,4 @@
-# Assemble generator [![Build Status](https://travis-ci.org/assemble/generator-assemble.png)](https://travis-ci.org/assemble/generator-assemble)
+# Assemble generator [![Build Status](https://travis-ci.org/assemble/generator-assemble.svg)](https://travis-ci.org/assemble/generator-assemble)
 
 > [Yeoman][yeoman] generator for [Assemble][assemble].
 
