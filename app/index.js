@@ -86,7 +86,7 @@ var AssembleGenerator = yeoman.generators.Base.extend({
     (!this.config.get("author").login || !this.config.get("authorLogin") || force) && questions.push({
       type    : "input",
       name    : "authorLogin",
-      message : "Would you mind telling me your username on Github?",
+      message : "Would you mind telling me your username on GitHub?",
       default : this.config.get("author").login || this.config.get("authorLogin")
     });
 
@@ -164,6 +164,11 @@ var AssembleGenerator = yeoman.generators.Base.extend({
   gitfiles: function () {
     this.copy('gitignore', '.gitignore');
     this.copy('gitattributes', '.gitattributes');
+  },
+
+  bower: function() {
+    this.template('_bower.json', 'bower.json');
+    this.copy('bowerrc', '.bowerrc');
   },
 
   assets: function () {
