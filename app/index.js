@@ -166,6 +166,11 @@ var AssembleGenerator = yeoman.generators.Base.extend({
     this.copy('gitattributes', '.gitattributes');
   },
 
+  bower: function() {
+    this.template('_bower.json', 'bower.json');
+    this.copy('bowerrc', '.bowerrc');
+  },
+
   assets: function () {
     this.directory('bootstrap', 'dist/assets');
   },
