@@ -19,8 +19,6 @@ module.exports = function(grunt) {
 
   require('time-grunt')(grunt);
 
-  require('load-grunt-tasks')(grunt);
-
   // Project configuration.
   grunt.initConfig({
 
@@ -94,6 +92,11 @@ module.exports = function(grunt) {
     clean: ['<%%= config.dist %>/**/*.{html,xml}']
 
   });
+
+  grunt.loadNpmTasks('assemble');
+  grunt.loadNpmTasks('grunt-contrib-clean');
+  grunt.loadNpmTasks('grunt-contrib-connect');
+  grunt.loadNpmTasks('grunt-contrib-watch');
 
   grunt.registerTask('server', [
     'clean',
