@@ -86,7 +86,7 @@ var AssembleGenerator = yeoman.generators.Base.extend({
     (!this.config.get("author").login || !this.config.get("authorLogin") || force) && questions.push({
       type    : "input",
       name    : "authorLogin",
-      message : "Would you mind telling me your username on Github?",
+      message : "Would you mind telling me your username on GitHub?",
       default : this.config.get("author").login || this.config.get("authorLogin")
     });
 
