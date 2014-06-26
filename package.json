@@ -25,14 +25,15 @@
     "test": "mocha -R spec"
   },
   "dependencies": {
-    "yeoman-generator": "~0.16.0",
     "change-case": "~2.0.1",
     "configstore": "~0.2.3",
     "fs-utils": "~0.3.9",
     "lodash": "~2.4.1",
-    "verb-readme-includes": "~0.1.1",
+    "normalize-pkg": "~0.1.2",
     "verb-boilerplates": "0.0.1",
-    "normalize-pkg": "~0.1.2"
+    "verb-readme-includes": "~0.1.1",
+    "verbalize": "~0.1.2",
+    "yeoman-generator": "~0.16.0"
   },
   "devDependencies": {
     "mocha": "*"
