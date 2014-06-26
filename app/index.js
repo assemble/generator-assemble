@@ -9,7 +9,7 @@ var yeoman = require('yeoman-generator');
 
 var AssembleGenerator = yeoman.generators.Base.extend({
 
-  init: function () {
+  initializing: function () {
     this.pkg = require('../package.json');
     this.description = this.pkg.description;
 
@@ -22,16 +22,6 @@ var AssembleGenerator = yeoman.generators.Base.extend({
     });
 
     this.init = this.options['init'] || this.options['i'] || false;
-
-    this.on('end', function () {
-      this.installDependencies({
-        skipInstall: this.options['skip-install'] || this.options['s'],
-        skipMessage: this.options['skip-welcome-message'] || this.options['w'],
-        callback: function () {
-          this.spawnCommand('grunt', ['build']);
-        }.bind(this)
-      });
-    });
 
     this.defaultPlugins = {
       "assemble-contrib-anchors": false,
@@ -52,9 +42,9 @@ var AssembleGenerator = yeoman.generators.Base.extend({
       }
     });
 
-  }, // init
+  }, // initializing
 
-  askFor: function () {
+  prompting: function () {
     var done = this.async();
 
     var force = false;
@@ -149,40 +139,50 @@ var AssembleGenerator = yeoman.generators.Base.extend({
 
       done();
     }.bind(this));
-  }, // askFor
+  }, // prompting
 
-  projectfiles: function () {
-    this.template('AUTHORS');
-    this.template('CHANGELOG');
-    this.template('LICENSE-MIT');
-    this.template('Gruntfile.js');
-    this.template('_package.json', 'package.json');
-    this.template('editorconfig', '.editorconfig');
-    this.template('README.md');
-  },
+  writing: {
 
-  gitfiles: function () {
-    this.copy('gitignore', '.gitignore');
-    this.copy('gitattributes', '.gitattributes');
-  },
+    projectfiles: function () {
+      this.template('AUTHORS');
+      this.template('CHANGELOG');
+      this.template('LICENSE-MIT');
+      this.template('Gruntfile.js');
+      this.template('_package.json', 'package.json');
+      this.template('editorconfig', '.editorconfig');
+      this.template('README.md');
+    },
 
-  assets: function () {
-    this.directory('bootstrap', 'dist/assets');
-  },
+    gitfiles: function () {
+      this.copy('gitignore', '.gitignore');
+      this.copy('gitattributes', '.gitattributes');
+    },
 
-  src: function () {
-    this.mkdir('src/data');
-    this.mkdir('src/content');
-    this.mkdir('src/templates/pages');
-    this.mkdir('src/templates/layouts');
-    this.mkdir('src/templates/partials');
-    this.copy('site.yml', 'src/data/site.yml');
-    this.copy('markdown.md', 'src/content/markdown.md');
-    this.copy('blog.hbs', 'src/templates/pages/blog.hbs');
-    this.copy('index.hbs', 'src/templates/pages/index.hbs');
-    this.copy('layout.hbs', 'src/templates/layouts/default.hbs');
-    this.copy('inc-navbar-fixed-top.hbs', 'src/templates/partials/navbar-fixed-top.hbs');
-  }
+    assets: function () {
+      this.directory('bootstrap', 'dist/assets');
+    },
+
+    src: function () {
+      this.mkdir('src/data');
+      this.mkdir('src/content');
+      this.mkdir('src/templates/pages');
+      this.mkdir('src/templates/layouts');
+      this.mkdir('src/templates/partials');
+      this.copy('site.yml', 'src/data/site.yml');
+      this.copy('markdown.md', 'src/content/markdown.md');
+      this.copy('blog.hbs', 'src/templates/pages/blog.hbs');
+      this.copy('index.hbs', 'src/templates/pages/index.hbs');
+      this.copy('layout.hbs', 'src/templates/layouts/default.hbs');
+      this.copy('inc-navbar-fixed-top.hbs', 'src/templates/partials/navbar-fixed-top.hbs');
+    }
+  }, // writing
+
+  install: function() {
+    this.installDependencies({
+      skipInstall: this.options['skip-install'] || this.options['s'],
+      skipMessage: this.options['skip-welcome-message'] || this.options['w']
+    });
+  }, // install
 
 });
 
