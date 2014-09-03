@@ -1,6 +1,6 @@
 {
   "name": "<%= _.slugify(projectName) %>",
- "description": "<%= _.capitalize(projectDesc) %>.",
+  "description": "<%= _.capitalize(projectDesc) %>.",
   "version": "0.1.0",
   "homepage": "https://github.com/<%= authorLogin %>/<%= _.slugify(projectName) %>",
   "author": {
@@ -26,6 +26,7 @@
     "grunt-contrib-clean": "^0.6.0",
     "grunt-contrib-connect": "^0.8.0",
     "grunt-contrib-watch": "^0.6.1",
+    "grunt-contrib-copy": "^0.5.0",
     "load-grunt-tasks": "^0.6.0",
     "time-grunt": "^1.0.0"<% if(plugins && plugins.length > 0){ %>,<% if(typeof plugins === 'object'){ _.each(plugins, function(name, i) { %>
     "<%= name %>": "*"<% if(i < (plugins.length - 1)) { %>,<% } %><% }); } else { %>"<%= plugins %>": "*"<%} } %>

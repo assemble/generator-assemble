@@ -19,7 +19,9 @@ describe('Assemble generator', function () {
         projectName: 'assemble',
         projectDesc: 'assemble',
         authorLogin: 'assemble',
-        plugins: ['assemble-contrib-permalinks', 'assemble-contrib-sitemap']
+        plugins: [
+          'assemble-contrib-permalinks',
+          'assemble-contrib-sitemap']
       })
       .on('end', done);
   });
@@ -40,14 +42,7 @@ describe('Assemble generator', function () {
       'src/templates/pages/blog.hbs',
       'src/templates/pages/index.hbs',
       'src/templates/partials/navbar-fixed-top.hbs',
-      'dist/assets/js/bootstrap.min.js',
-      'dist/assets/css/theme.css',
-      'dist/assets/css/bootstrap.min.css',
-      'dist/assets/css/bootstrap-theme.min.css',
-      'dist/assets/fonts/glyphicons-halflings-regular.eot',
-      'dist/assets/fonts/glyphicons-halflings-regular.svg',
-      'dist/assets/fonts/glyphicons-halflings-regular.ttf',
-      'dist/assets/fonts/glyphicons-halflings-regular.woff'
+      'src/assets/theme.css'
     ]);
   });
 });

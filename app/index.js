@@ -158,17 +158,19 @@ var AssembleGenerator = yeoman.generators.Base.extend({
       this.copy('gitattributes', '.gitattributes');
     },
 
-    assets: function () {
-      this.directory('bootstrap', 'dist/assets');
+    bower: function () {
+      this.template('_bower.json', 'bower.json');
     },
 
     src: function () {
       this.mkdir('src/data');
       this.mkdir('src/content');
       this.mkdir('src/templates/pages');
+      this.mkdir('src/templates/assets');
       this.mkdir('src/templates/layouts');
       this.mkdir('src/templates/partials');
       this.copy('site.yml', 'src/data/site.yml');
+      this.copy('theme.css', 'src/assets/theme.css');
       this.copy('markdown.md', 'src/content/markdown.md');
       this.copy('blog.hbs', 'src/templates/pages/blog.hbs');
       this.copy('index.hbs', 'src/templates/pages/index.hbs');

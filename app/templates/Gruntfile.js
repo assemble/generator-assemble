@@ -88,6 +88,21 @@ module.exports = function(grunt) {
       }
     },
 
+    copy: {
+      bootstrap: {
+        expand: true,
+        cwd: 'bower_components/bootstrap/dist/',
+        src: '**',
+        dest: '<%%= config.dist %>/assets/'
+      },
+      theme: {
+        expand: true,
+        cwd: 'src/assets/',
+        src: '**',
+        dest: '<%%= config.dist %>/assets/css/'
+      }
+    },
+
     // Before generating any new files,
     // remove any previously-created files.
     clean: ['<%%= config.dist %>/**/*.{html,xml}']
@@ -97,14 +112,14 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('assemble');
 
   grunt.registerTask('server', [
-    'clean',
-    'assemble',
+    'build',
     'connect:livereload',
     'watch'
   ]);
 
   grunt.registerTask('build', [
     'clean',
+    'copy',
     'assemble'
   ]);
 
