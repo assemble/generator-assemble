@@ -1,30 +1,31 @@
 /*global describe, beforeEach, it*/
 'use strict';
 
-var path    = require('path');
+var path = require('path');
+var assert = require('yeoman-generator').assert;
 var helpers = require('yeoman-generator').test;
 
 describe('Assemble generator', function () {
-
-  beforeEach(function (done) {
-    helpers.testDirectory(path.join(__dirname, 'temp'), function (err) {
-      if (err) {
-        return done(err);
-      }
-
-      this.app = helpers.createGenerator('assemble:app', [
-        '../../app'
-      ]);
-
-      this.app.options['skip-install'] = true;
-
-      done();
-    }.bind(this));
+  before(function (done) {
+    helpers.run(path.join(__dirname, '../app'))
+      .inDir(path.join(__dirname, './temp'))
+      .withOptions({
+        'skip-install-message': true,
+        'skip-install': true,
+        'skip-welcome-message': true,
+        'skip-message': true
+      })
+      .withPrompt({
+        projectName: 'assemble',
+        projectDesc: 'assemble',
+        authorLogin: 'assemble',
+        plugins: ['assemble-contrib-permalinks', 'assemble-contrib-sitemap']
+      })
+      .on('end', done);
   });
 
-  it('creates expected files with all option' , function (done) {
-    var expected = [
-      // add files you expect to exist here.
+  it('creates files', function () {
+    assert.file([
       'AUTHORS',
       'CHANGELOG',
       'Gruntfile.js',
@@ -47,19 +48,6 @@ describe('Assemble generator', function () {
       'dist/assets/fonts/glyphicons-halflings-regular.svg',
       'dist/assets/fonts/glyphicons-halflings-regular.ttf',
       'dist/assets/fonts/glyphicons-halflings-regular.woff'
-    ];
-
-    helpers.mockPrompt(this.app, {
-      projectName: 'assemble',
-      projectDesc: 'assemble',
-      authorLogin: 'assemble',
-      plugins: ['assemble-contrib-permalinks', 'assemble-contrib-sitemap']
-    });
-
-    this.app.run({}, function () {
-      helpers.assertFile(expected);
-      done();
-    });
+    ]);
   });
-
 });
