@@ -21,13 +21,13 @@
     "test": "grunt assemble"
   },
   "devDependencies": {
-    "assemble": "~0.4.41",
-    "grunt": "~0.4.4",
-    "grunt-contrib-clean": "~0.5.0",
-    "grunt-contrib-connect": "~0.8.0",
-    "grunt-contrib-watch": "~0.6.1",
-    "load-grunt-tasks": "~0.6.0",
-    "time-grunt": "~0.3.2"<% if(plugins && plugins.length > 0){ %>,<% if(typeof plugins === 'object'){ _.each(plugins, function(name, i) { %>
+    "assemble": "^0.4.42",
+    "grunt": "^0.4.5",
+    "grunt-contrib-clean": "^0.6.0",
+    "grunt-contrib-connect": "^0.8.0",
+    "grunt-contrib-watch": "^0.6.1",
+    "load-grunt-tasks": "^0.6.0",
+    "time-grunt": "^1.0.0"<% if(plugins && plugins.length > 0){ %>,<% if(typeof plugins === 'object'){ _.each(plugins, function(name, i) { %>
     "<%= name %>": "*"<% if(i < (plugins.length - 1)) { %>,<% } %><% }); } else { %>"<%= plugins %>": "*"<%} } %>
   },
   "licenses": [
