@@ -36,9 +36,9 @@ var AssembleGenerator = yeoman.generators.Base.extend({
       authorLogin   : "assemble",
       installPlugin : true,
       author: {
-        name        : this.user.git.username || process.env.user || process.env.username,
+        name        : this.user.git.name() || process.env.user || process.env.username,
         login       : "assemble",
-        email       : this.user.git.email
+        email       : this.user.git.email()
       }
     });
 
