@@ -18,6 +18,7 @@
 module.exports = function(grunt) {
 
   require('time-grunt')(grunt);
+  require('load-grunt-tasks')(grunt);
 
   // Project configuration.
   grunt.initConfig({
@@ -87,6 +88,21 @@ module.exports = function(grunt) {
       }
     },
 
+    copy: {
+      bootstrap: {
+        expand: true,
+        cwd: 'bower_components/bootstrap/dist/',
+        src: '**',
+        dest: '<%%= config.dist %>/assets/'
+      },
+      theme: {
+        expand: true,
+        cwd: 'src/assets/',
+        src: '**',
+        dest: '<%%= config.dist %>/assets/css/'
+      }
+    },
+
     // Before generating any new files,
     // remove any previously-created files.
     clean: ['<%%= config.dist %>/**/*.{html,xml}']
@@ -94,19 +110,16 @@ module.exports = function(grunt) {
   });
 
   grunt.loadNpmTasks('assemble');
-  grunt.loadNpmTasks('grunt-contrib-clean');
-  grunt.loadNpmTasks('grunt-contrib-connect');
-  grunt.loadNpmTasks('grunt-contrib-watch');
 
   grunt.registerTask('server', [
-    'clean',
-    'assemble',
+    'build',
     'connect:livereload',
     'watch'
   ]);
 
   grunt.registerTask('build', [
     'clean',
+    'copy',
     'assemble'
   ]);
 

@@ -18,6 +18,8 @@ Generate a new Assemble project:
 yo assemble
 ```
 
+_Do not initialize your project in a sub folder next to `.yo-rc.json` because your files will land here and not in your subfolder from where you are initializing project._
+
 #### Generator options
 
 * `-i` alias `--init`
