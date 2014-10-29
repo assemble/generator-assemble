@@ -24,10 +24,10 @@ var AssembleGenerator = yeoman.generators.Base.extend({
     this.init = this.options['init'] || this.options['i'] || false;
 
     this.defaultPlugins = {
-      "assemble-contrib-anchors": false,
-      "assemble-contrib-permalinks": true,
-      "assemble-contrib-sitemap": true,
-      "assemble-contrib-toc": false,
+      "assemble-middleware-anchors": false,
+      "assemble-middleware-permalinks": true,
+      "assemble-middleware-sitemap": true,
+      "assemble-middleware-toc": false,
     };
 
     this.config.defaults({
